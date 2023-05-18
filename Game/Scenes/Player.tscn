@@ -4,22 +4,25 @@
 [ext_resource type="Script" path="res://Game/Scripts/Player.gd" id="1_524vg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyd0y"]
-size = Vector2(20, 22)
+size = Vector2(63, 62)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m7r61"]
 size = Vector2(64, 64)
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(573, 391)
 script = ExtResource("1_524vg")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(39.5, 40)
 shape = SubResource("RectangleShape2D_kyd0y")
+
+[node name="TestSprite" type="Sprite2D" parent="."]
+position = Vector2(40, 40)
+texture = SubResource("PlaceholderTexture2D_m7r61")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 visible = false
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_1vrnp")
-
-[node name="TestSprite" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_m7r61")

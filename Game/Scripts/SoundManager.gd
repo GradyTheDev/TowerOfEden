@@ -26,21 +26,31 @@ func pauseSound(key: int):
 	get_child(key).stop()
 	return elapsed
 
+# Switch the audio bus of the given sound.
 func switchBus(key: int, bus: String):
 	get_child(key).bus = bus as StringName
 
-func addBus(bus: String, pos: int = -1):
+# Adds a new audio bus to the list of audio buses.
+func addBus(bus: String, pos: int):
 	AudioServer.add_bus(pos)
 	AudioServer.set_bus_name(pos, bus)
 
+# Removes the given bus.
 func removeBus(bus: String):
 	AudioServer.remove_bus(AudioServer.get_bus_index(bus))
 
-func addEffectToBus(bus: String, effect: AudioEffect, pos: int = -1):
+# Adds an audio effect to the given bus.
+func addEffectToBus(bus: String, effect: AudioEffect, pos: int):
 	AudioServer.add_bus_effect(AudioServer.get_bus_index(bus), effect, pos)
 
-func removeEffectFromBus(bus: String, effect_pos: int = -1):
-	AudioServer.remove_bus_effect(AudioServer.get_bus_index(bus), effect_pos)
+# Removes an audio effect from the given bus.
+func removeEffectFromBus(bus: String, pos: int):
+	AudioServer.remove_bus_effect(AudioServer.get_bus_index(bus), pos)
 
-func changeEffectProp(bus: String, prop: String, val: Object, effect_idx: int = -1):
-	AudioServer.get_bus_effect_instance(AudioServer.get_bus_index(bus), effect_idx).set(prop, val)
+# Changes a property of the given effect.
+func changeEffectProp(bus: String, pos: int, prop: String, val: Object):
+	AudioServer.get_bus_effect_instance(AudioServer.get_bus_index(bus), pos).set(prop, val)
+
+# Alias for timeout function
+func wait(time: float):
+	await get_tree().create_timer(time).timeout

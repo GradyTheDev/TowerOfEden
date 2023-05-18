@@ -18,4 +18,3 @@
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_e5v3i")
-soundPaths = Array[String](["Music/main-menu.ogg"])

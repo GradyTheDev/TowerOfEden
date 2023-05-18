@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0uw1v8m1s5t4"]
+[gd_scene load_steps=4 format=3 uid="uid://d0uw1v8m1s5t4"]
 
+[ext_resource type="Script" path="res://Game/Scripts/CityFloor.gd" id="1_0skf2"]
 [ext_resource type="PackedScene" uid="uid://diux0cajthk3y" path="res://Game/Scenes/Player.tscn" id="1_1jnwn"]
+[ext_resource type="Script" path="res://Game/Scripts/SoundManager.gd" id="3_q6qcm"]
 
 [node name="Floor" type="Node2D"]
+script = ExtResource("1_0skf2")
 
 [node name="Player" parent="." instance=ExtResource("1_1jnwn")]
+move_speed = 300.0
+jump_height = 100.0
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.5
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("3_q6qcm")
+soundPaths = Array[String](["Music/main-menu.ogg"])
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(300, 597, 404, 667, 591, 663, 689, 714, 832, 656, 971, 548, 953, 360, 864, 234, 689, 231, 736, 141, 1004, 141, 1088, 389, 1292, 604, 1228, 714, 913, 776, 711, 812, 445, 777, 188, 790)
