@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dipmeiqbm1hag"]
+
+[ext_resource type="Script" path="res://Game/Scripts/SoundManager.gd" id="1_e5v3i"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="ParallaxBG" type="ParallaxBackground" parent="."]
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer3" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer4" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer5" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("1_e5v3i")
+soundPaths = Array[String](["Music/main-menu.ogg"])

@@ -1,14 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://diux0cajthk3y"]
+[gd_scene load_steps=5 format=3 uid="uid://diux0cajthk3y"]
 
 [ext_resource type="Script" path="res://Game/Scripts/SoundManager.gd" id="1_1vrnp"]
+[ext_resource type="Script" path="res://Game/Scripts/Player.gd" id="1_524vg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyd0y"]
+size = Vector2(20, 22)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m7r61"]
+size = Vector2(64, 64)
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_524vg")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kyd0y")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+visible = false
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_1vrnp")
-soundPaths = Array[StringName]([&"Music/main-menu-concept.ogg"])
+
+[node name="TestSprite" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_m7r61")

@@ -16,7 +16,7 @@ func _ready():
 		add_child(currSoundNode)
 		cnt += 1
 
-# Starts the given sound. Whe the time argument is given, it will start the sound from that position.
+# Starts the given sound. When the time argument is given, it will start the sound from that position.
 func playSound(key: int, time: float = 0.0):
 	get_child(key).play(time)
 
@@ -29,8 +29,18 @@ func pauseSound(key: int):
 func switchBus(key: int, bus: String):
 	get_child(key).bus = bus as StringName
 
+func addBus(bus: String, pos: int = -1):
+	AudioServer.add_bus(pos)
+	AudioServer.set_bus_name(pos, bus)
+
+func removeBus(bus: String):
+	AudioServer.remove_bus(AudioServer.get_bus_index(bus))
+
 func addEffectToBus(bus: String, effect: AudioEffect, pos: int = -1):
 	AudioServer.add_bus_effect(AudioServer.get_bus_index(bus), effect, pos)
 
 func removeEffectFromBus(bus: String, effect_pos: int = -1):
 	AudioServer.remove_bus_effect(AudioServer.get_bus_index(bus), effect_pos)
+
+func changeEffectProp(bus: String, prop: String, val: Object, effect_idx: int = -1):
+	AudioServer.get_bus_effect_instance(AudioServer.get_bus_index(bus), effect_idx).set(prop, val)
