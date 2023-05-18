@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1700
 window/size/viewport_height=900
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=2
 

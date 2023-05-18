@@ -10,13 +10,21 @@ extends CharacterBody2D
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
+var jumpAvailable: bool = true
+
 func _physics_process(delta):
 	velocity.y += get_gravity() * delta
 	velocity.x = get_input_velocity() * move_speed
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if is_on_floor():
+		jumpAvailable = true
+	if Input.is_action_just_pressed("jump") and jumpAvailable:
 		velocity.y = jump_velocity
-	
+		jumpAvailable = false
+	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
+		velocity.y /= 2
+
+
 	move_and_slide()
 
 func get_gravity():

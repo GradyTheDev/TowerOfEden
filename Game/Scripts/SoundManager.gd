@@ -26,6 +26,12 @@ func pauseSound(key: int):
 	get_child(key).stop()
 	return elapsed
 
+func getSoundLength(key: int):
+	return get_child(key).stream.get_length()
+
+func getPlaybackPosition(key: int):
+	return get_child(key).get_playback_position()
+
 # Switch the audio bus of the given sound.
 func switchBus(key: int, bus: String):
 	get_child(key).bus = bus as StringName
