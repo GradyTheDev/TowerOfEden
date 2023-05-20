@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://diux0cajthk3y"]
 
 [ext_resource type="Script" path="res://Game/Scripts/SoundManager.gd" id="1_1vrnp"]
-[ext_resource type="Script" path="res://Game/Scripts/Player.gd" id="1_524vg"]
+[ext_resource type="Script" path="res://Game/Scripts/PlayerController.gd" id="1_vxyj4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2mgm"]
 size = Vector2(61, 127)
@@ -10,7 +10,7 @@ size = Vector2(61, 127)
 size = Vector2(64, 128)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_524vg")
+script = ExtResource("1_vxyj4")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -0.5)
