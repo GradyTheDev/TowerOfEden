@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpmmmqdrccy1y"
-path="res://.godot/imported/tileset_citylevel_ldscp.png-edffa3d26ef0441a60dc9363aabf125d.ctex"
+uid="uid://cvej3qtewhhmb"
+path="res://.godot/imported/tileset_city-tutorial.normal.png-b456aa4d8c1a9c675b2ed444cf6a2f8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Assets/Textures/Tilesets/tileset_citylevel_ldscp.png"
-dest_files=["res://.godot/imported/tileset_citylevel_ldscp.png-edffa3d26ef0441a60dc9363aabf125d.ctex"]
+source_file="res://Game/Assets/Textures/Tilesets/tileset_city-tutorial.normal.png"
+dest_files=["res://.godot/imported/tileset_city-tutorial.normal.png-b456aa4d8c1a9c675b2ed444cf6a2f8d.ctex"]
 
 [params]
 

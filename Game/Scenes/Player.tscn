@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2mgm"]
 size = Vector2(61, 127)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m7r61"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2vxy7"]
 size = Vector2(64, 128)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pdssw"]
@@ -42,7 +42,7 @@ shape = SubResource("RectangleShape2D_o2mgm")
 
 [node name="TestSprite" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
-texture = SubResource("PlaceholderTexture2D_m7r61")
+texture = SubResource("PlaceholderTexture2D_2vxy7")
 
 [node name="JumpVFX" type="GPUParticles2D" parent="."]
 texture_filter = 1
