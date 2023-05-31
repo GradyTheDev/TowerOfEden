@@ -109,7 +109,7 @@ func change_scene_to_packed(scene: PackedScene):
 	await get_tree().process_frame
 
 	var node = scene.instantiate()
-	get_tree().root.add_child(node)
+	get_tree().root.add_child.call_deferred(node)
 	await node.ready
 
 	scene_changed.emit()
