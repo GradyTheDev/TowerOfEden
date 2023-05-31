@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://pemiprw4tau8"]
+
+[ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_c4x6j"]
+[ext_resource type="Script" path="res://other/sound_manager.gd" id="2_04yyb"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c4x6j")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Tower of Eden"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -90.0
+offset_right = 102.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="Center"]
+layout_mode = 2
+text = "Continue"
+
+[node name="HSeparator4" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="NewGame" type="Button" parent="Center"]
+layout_mode = 2
+text = "New Game"
+
+[node name="HSeparator1" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Settings" type="Button" parent="Center"]
+layout_mode = 2
+text = "Settings"
+
+[node name="HSeparator2" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Credits" type="Button" parent="Center"]
+layout_mode = 2
+text = "Credits"
+
+[node name="HSeparator3" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="Center"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ParallaxBG" type="ParallaxBackground" parent="."]
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer3" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer4" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="Layer5" type="ParallaxLayer" parent="ParallaxBG"]
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("2_04yyb")
+
+[connection signal="pressed" from="Center/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Center/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Center/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Center/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Center/Exit" to="." method="_on_exit_pressed"]

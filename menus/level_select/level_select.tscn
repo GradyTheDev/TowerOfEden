@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6tjftqwfo28p"]
+
+[ext_resource type="Script" path="res://menus/level_select/level_select.gd" id="1_d4bfu"]
+[ext_resource type="Texture2D" uid="uid://cupnnykl0i15n" path="res://entities/cacti/sprites/cacti.png" id="2_ou53s"]
+[ext_resource type="Texture2D" uid="uid://dko8lddq8dmv" path="res://entities/punching_bag/sprites/punching_bag.png" id="2_pebhb"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d4bfu")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -90.0
+offset_right = 102.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="City" type="Button" parent="Center"]
+layout_mode = 2
+text = "City"
+icon = ExtResource("2_pebhb")
+
+[node name="HSeparator" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Level2" type="Button" parent="Center"]
+layout_mode = 2
+text = "Level 2"
+icon = ExtResource("2_ou53s")
+
+[node name="HSeparator2" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="Center"]
+layout_mode = 2
+text = "Save and exit"
+
+[connection signal="pressed" from="Center/City" to="." method="_on_city_pressed"]
+[connection signal="pressed" from="Center/Level2" to="." method="_on_level2_pressed"]
+[connection signal="pressed" from="Center/Exit" to="." method="_on_exit_pressed"]
