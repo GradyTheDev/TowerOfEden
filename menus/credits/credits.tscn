@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://dspa64tlu4t5t"]
+
+[ext_resource type="Script" path="res://menus/credits/credits.gd" id="1_8od2b"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8od2b")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -31.0
+offset_right = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Exit"
+
+[node name="Credits" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -401.0
+offset_right = 320.0
+offset_bottom = 401.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "- Credits -
+
+- Authors -
+Name  -  Job
+
+- Technology / Tools -
+Godot licenses"
+editable = false
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dheicb7nascmw"]
+
+[ext_resource type="Script" path="res://entities/punching_bag/punching_bag.gd" id="1_0oju3"]
+[ext_resource type="Texture2D" uid="uid://dko8lddq8dmv" path="res://entities/punching_bag/sprites/punching_bag.png" id="1_5mb4i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_706ll"]
+size = Vector2(17, 97)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lf0gs"]
+font_size = 12
+font_color = Color(1, 0.141176, 0, 1)
+
+[node name="PunchingBag" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_0oju3")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.5, 6.5)
+shape = SubResource("RectangleShape2D_706ll")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3.125, 6.75)
+texture = ExtResource("1_5mb4i")
+
+[node name="DMGIndicator" type="Label" parent="."]
+visible = false
+offset_top = -42.0
+offset_right = 108.0
+offset_bottom = -16.0
+text = "dmg indicator"
+label_settings = SubResource("LabelSettings_lf0gs")
