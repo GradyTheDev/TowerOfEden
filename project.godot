@@ -17,6 +17,10 @@ config/custom_user_dir_name="tower"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://other/default_bus_layout.tres"
+
 [autoload]
 
 Butler="*res://autoloads/butler.gd"

@@ -13,6 +13,8 @@ size = Vector2(51, 138)
 size = Vector2(55, 142)
 
 [node name="Cacti" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_eef7l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
