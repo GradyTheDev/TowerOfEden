@@ -9,9 +9,14 @@ extends CharacterBody2D
 @export_range(0, 5) var jump_time_to_descent: float
 @export_range(1, 5) var jump_count: int
 
+## in seconds
+@export_range(0.01, 3, 0.05) var invincibility_time: float = 0.3
+
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 var jumpAvailable: bool = true
 var jumpCounter: int = 0
@@ -24,6 +29,7 @@ var facing_direction: int
 @export var health: int = 100 : set = _set_health
 @export var damage: int = 25
 
+var _invincibility_time_left: float = 0
 
 func _ready():
 	health = Butler.save.get('health', 100)
@@ -34,6 +40,9 @@ func _ready():
 func _process(delta):
 	if Butler.paused:
 		return
+	
+	if _invincibility_time_left > 0:
+		_invincibility_time_left -= delta
 	
 	var direction = Input.get_axis("move_left", "move_right")
 	set_facing_direction(direction)
@@ -117,8 +126,18 @@ func _on_hurt_box_area_entered(area: Area2D):
 				print(name, ' hit ', target.name, ' hp: ', target.health)
 
 
-func _set_health(v: int):
-	health = v
+func _set_health(new_health: int):
+	if new_health < health:
+		if _invincibility_time_left > 0: 
+			return
+		else:
+			_invincibility_time_left = invincibility_time
+			var t = sprite.create_tween()
+			t.tween_property(sprite, 'modulate', Color(100, 0, 0, 100), invincibility_time/2)
+			t.tween_property(sprite, 'modulate', sprite.modulate, invincibility_time/2)
+			t.play()
+
+	health = new_health
 	Butler.save.health = health
 	if health <= 0:
 		Butler.load_game()

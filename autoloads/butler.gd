@@ -12,6 +12,11 @@ const GROUP_ENEMY: String = "Enemy"
 const SAVE_FILE: String = "user://save.json"
 const SETTINGS_FILE: String = "user://settings.json"
 
+const SETTING_DEBUG_CONTROLS: String = 'debug_controls'
+const SETTING_WINDOW_SIZE: String = 'window_size'
+const SETTING_MASTER_VOLUME: String = 'master_volume'
+
+
 @onready var DEFAULT_WINDOW_SIZE := Vector2(
 	ProjectSettings.get_setting("display/window/size/viewport_width"),
 	ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -38,9 +43,11 @@ var _save_template: Dictionary = {
 var save: Dictionary = {}
 
 
+## DO NOT SET VALUES HERE DIRECTLY, USE [method set_setting]
 var settings: Dictionary = {
-	'debug_controls': false,
-	'window_size': 'default' # default, fullscreen, or "width"x"height"
+	SETTING_DEBUG_CONTROLS: false,
+	SETTING_WINDOW_SIZE: 'default', # default, fullscreen, or "width"x"height"
+	SETTING_MASTER_VOLUME: 0,
 }
 
 
@@ -62,13 +69,13 @@ func _input(event: InputEvent):
 			await get_tree().process_frame 
 			await get_tree().process_frame # wait for the window to change size
 			await get_tree().process_frame
-			settings.window_size = str(get_window().size.x) + "x" + str(get_window().size.y)
+			Butler.set_setting('window_size', str(get_window().size.x) + "x" + str(get_window().size.y))
 		else:
 			get_window().mode = Window.MODE_FULLSCREEN
-			settings.window_size = 'fullscreen'
+			Butler.set_setting('window_size', 'fullscreen')
 
 
-	if settings.debug_controls:
+	if settings[SETTING_DEBUG_CONTROLS]:
 		if event is InputEventKey:
 			if event.keycode == KEY_END:
 				safe_exit()
@@ -161,24 +168,24 @@ func load_settings():
 			var old_type = typeof(settings[key])
 			var new_type = typeof(json.data[key])
 			if old_type == new_type or (old_type == TYPE_INT and new_type == TYPE_FLOAT):
-				settings[key] = json.data[key]
+				set_setting(key, json.data[key])
 			else:
 				print('value in settings file is the wrong type for key: (', key, ')')
 				print('old value: (', settings[key], ')  type: ', old_type)
 				print('new value: (', json.data[key], ')  type: ', new_type)
 	
 	# apply settings
-	if settings.window_size == 'default':
+	if settings[SETTING_WINDOW_SIZE] == 'default':
 		get_window().mode = Window.MODE_WINDOWED
 		get_window().size = Butler.DEFAULT_WINDOW_SIZE
-		Butler.settings.window_size = 'default'
+		settings[SETTING_WINDOW_SIZE] = 'default'
 
-	elif settings.window_size == 'fullscreen':
+	elif settings[SETTING_WINDOW_SIZE] == 'fullscreen':
 		get_window().mode = Window.MODE_FULLSCREEN
-		Butler.settings.window_size = 'fullscreen'
+		settings[SETTING_WINDOW_SIZE] = 'fullscreen'
 
 	else:
-		var arr = settings.window_size.split('x') as Array
+		var arr = settings[SETTING_WINDOW_SIZE].split('x') as Array
 		if arr.size() == 2 and arr[0].is_valid_int() and arr[1].is_valid_int():
 			get_window().mode = Window.MODE_WINDOWED
 			get_window().size = Vector2(int(arr[0]), int(arr[1]))
@@ -229,3 +236,23 @@ func load_game():
 				print('value in save file is the wrong type for key: (', key, ')')
 				print('old value: (', save[key], ')  type: ', old_type)
 				print('new value: (', json.data[key], ')  type: ', new_type)
+
+
+func set_setting(key: String, value: Variant):
+	if not settings.has(key): return
+
+	var old_type = typeof(settings[key])
+	var new_type = typeof(value)
+
+	if old_type == new_type or (old_type == TYPE_INT and new_type == TYPE_FLOAT) or (old_type == TYPE_FLOAT and new_type == TYPE_INT):
+		settings[key] = value
+	else:
+		print('Failed to set setting: ', key)
+		print('type mismatch: ', old_type, ' != ', new_type)
+		return
+	
+	match key:
+		SETTING_MASTER_VOLUME:
+			for i in AudioServer.bus_count:
+				AudioServer.set_bus_volume_db(i, value)
+	
