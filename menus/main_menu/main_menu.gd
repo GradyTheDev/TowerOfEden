@@ -2,6 +2,10 @@ extends Control
 
 func _ready():
 	$Center/Continue.disabled = Butler.save.size() == 0
+	$Version.text = '{0} - {1}'.format([
+		ProjectSettings.get_setting("application/config/version"),
+		ProjectSettings.get_setting("application/config/build_date")
+	])
 
 
 func _on_settings_pressed():

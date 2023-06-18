@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://dglnj2cgbr2o"]
+
+[ext_resource type="Script" path="res://entities/entity/entity.gd" id="1_00ryy"]
+[ext_resource type="Script" path="res://entities/entity/hitbox.gd" id="2_c587p"]
+[ext_resource type="Texture2D" uid="uid://b48ke73kg4jp1" path="res://entities/entity/assets/entity_placeholder.png" id="3_3e5ag"]
+[ext_resource type="AnimationLibrary" uid="uid://cy5frpom7cu6t" path="res://entities/entity/entity_placeholder_animations.res" id="4_c5tdx"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dkcy4jlq8rmc2" path="res://entities/entity/entity_placeholder_animation_state_machine.tres" id="5_v8oog"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sov2d"]
+resource_local_to_scene = true
+radius = 32.0
+height = 112.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f4jgq"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5iney"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6pqx"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_xvape"]
+
+[node name="Entity" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "hurtbox", "sprite", "anim_tree", "anim_player", "debug_line")]
+editor_description = "Entity Template"
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_00ryy")
+hitbox = NodePath("Hitbox")
+hurtbox = NodePath("Hurtbox")
+sprite = NodePath("Sprite")
+anim_tree = NodePath("AnimTree")
+anim_player = NodePath("AnimPlayer")
+debug_line = NodePath("DebugLine")
+
+[node name="ColBody" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sov2d")
+
+[node name="DebugLine" type="Line2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+collision_layer = 7
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_c587p")
+entity = NodePath("..")
+
+[node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_f4jgq")
+debug_color = Color(0, 0.635294, 0.278431, 0.419608)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 15
+monitorable = false
+
+[node name="HurtBody" type="CollisionShape2D" parent="Hurtbox"]
+editor_description = "When another Entity \"Collides\" with this one."
+shape = SubResource("CapsuleShape2D_5iney")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(3.5, 64)
+shape = SubResource("RectangleShape2D_r6pqx")
+disabled = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("3_3e5ag")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"entity_placeholder_animations": ExtResource("4_c5tdx")
+}
+
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("5_v8oog")
+anim_player = NodePath("../AnimPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_xvape")
+parameters/conditions/attack_down = false
+parameters/conditions/attack_forward = false
+parameters/conditions/attack_up = false
+parameters/conditions/idle = false
+parameters/conditions/in_air = false
+parameters/conditions/jump = false
+parameters/conditions/on_ground = false
+parameters/conditions/walk = false
+
+[connection signal="on_death" from="." to="." method="_on_death"]
+[connection signal="took_damage" from="." to="." method="_on_took_damage"]
+[connection signal="area_shape_entered" from="Hurtbox" to="." method="_on_hurtbox_area_shape_entered"]

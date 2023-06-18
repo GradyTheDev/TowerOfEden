@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://d06tvkg7flbg0"]
+
+[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_dkfgx"]
+[ext_resource type="Texture2D" uid="uid://cnpvovqbl26ac" path="res://entities/bandit/assets/bandit.png" id="2_0t3h2"]
+[ext_resource type="Script" path="res://entities/bandit/bandit.gd" id="2_v50ng"]
+[ext_resource type="Texture2D" uid="uid://7hb2an0jjpl" path="res://entities/bandit/assets/bow.png" id="4_d1ih0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bpimk"]
+resource_local_to_scene = true
+radius = 32.0
+height = 112.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bmp7s"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gg7fg"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2fec"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_whlbx"]
+
+[node name="Bandit" instance=ExtResource("1_dkfgx")]
+collision_layer = 4
+script = ExtResource("2_v50ng")
+damage = 25
+attack_delay = 1.0
+aggro_range = 1000
+speed = 150
+gravity = 98.0
+sight_mask = 3
+arrow_speed = 500.0
+money_for_killing = 20
+
+[node name="ColBody" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_bpimk")
+
+[node name="Hitbox" parent="." index="2"]
+collision_layer = 4
+
+[node name="HitBody" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_bmp7s")
+
+[node name="HurtBody" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_gg7fg")
+
+[node name="Attack" parent="Hurtbox" index="1"]
+shape = SubResource("RectangleShape2D_e2fec")
+
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource("2_0t3h2")
+
+[node name="AnimTree" parent="." index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_whlbx")
+
+[node name="bow_rotate" type="Node2D" parent="." index="7"]
+
+[node name="Bow" type="Sprite2D" parent="bow_rotate" index="0"]
+position = Vector2(50, -1)
+scale = Vector2(2.625, 2.625)
+texture = ExtResource("4_d1ih0")

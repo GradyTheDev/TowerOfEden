@@ -1,83 +1,40 @@
-extends CharacterBody2D
+extends Entity
 
-@export var health: int = 100 : set = _set_health
-@export var damage: int = 10
-@export var speed: int = 100
+@export var speed: float = 90
 
-## in seconds
-@export var damage_delay: float = 0.1
-## in seconds
-@export var switch_direction_delay: float = 0.5
+var direction_swith_delay: float = 1
+var direction_switch_timer: float = 0
 
-@onready var hurtbox: Area2D = $Hurtbox
+var air_time: float = 0
 
-var moving_right: bool = false
-
-var _damage_delay_countdown: float = 0
-var _switch_direction_delay_countdown: float = 0
+func _init():
+	super()
+	add_to_group(Butler.GROUP_ENEMY)
 
 func _physics_process(delta: float):
-	if Butler.paused:
-		return
+	if Butler.paused or health <= 0: return
 	
-	if _switch_direction_delay_countdown > 0:
-		_switch_direction_delay_countdown -= delta
+	direction_switch_timer -= delta
 
-	if moving_right:
-		$Sprite.flip_h = false
-		velocity = Vector2.RIGHT * speed
-		velocity.y += 35
-		var gpos = global_position
-		move_and_slide()
+	velocity.x = speed * get_direction()
+	if not is_on_floor():
+		velocity.y = 98
 
-		if gpos.distance_to(global_position) < 0.5:
-			if _switch_direction_delay_countdown <= 0:
-				moving_right = false
-				_switch_direction_delay_countdown = switch_direction_delay
+	move_and_slide()
+	var rv = get_real_velocity().abs()
+
+	if rv.x < 0.01:
+		if direction_switch_timer <= 0:
+			direction_switch_timer = direction_swith_delay
+			flip_direction()
+	
+	if is_on_floor():
+		air_time = 0
 	else:
-		$Sprite.flip_h = true
-		velocity = Vector2.LEFT * speed
-		velocity.y += 35
-		var gpos = global_position
-		move_and_slide()
+		air_time += delta
 
-		if gpos.distance_to(global_position) < 0.5:
-			if _switch_direction_delay_countdown <= 0:
-				moving_right = true
-				_switch_direction_delay_countdown = switch_direction_delay
-	
-	if _damage_delay_countdown > 0:
-		_damage_delay_countdown -= delta
-	else:
-		for a in hurtbox.get_overlapping_areas():
-			overlap(a)
-
-
-func _set_health(v: int):
-	if v < health:
-		var tween = create_tween()
-		tween.tween_property($Sprite, 'self_modulate', Color.RED, .05)
-		tween.tween_property($Sprite, 'self_modulate', Color.WHITE, .05)
-		tween.play()
-	
-	health = v
-	if health <= 0:
-		Butler.save.money += 10
-		queue_free()
-
-
-func _on_hurtbox_area_entered(area:Area2D):
-	overlap(area)
-
-
-func overlap(area: Area2D):
-	if _damage_delay_countdown > 0: return
-	
-	var target = area.get_parent()
-	if Butler.GROUP_PLAYER in target.get_groups():
-		assert(target.get('health') is int, 'Missing "health" variable in this node -> ' + target.name + ":" + target.get_class())
-		if target.health > 0:
-			target.health -= damage
-			_damage_delay_countdown = damage_delay
-			if OS.is_debug_build():
-				print(name, ' hit ', target.name, ' hp: ', target.health)
+	anim_tree['parameters/conditions/walk'] = velocity.x != 0
+	anim_tree['parameters/conditions/idle'] = not anim_tree['parameters/conditions/walk']
+	anim_tree['parameters/conditions/on_ground'] = air_time < 0.5
+	anim_tree['parameters/conditions/in_air'] = not anim_tree['parameters/conditions/on_ground']
+			

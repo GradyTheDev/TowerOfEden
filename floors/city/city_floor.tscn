@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://oyxujwu0vmbj"]
+[gd_scene load_steps=10 format=3 uid="uid://b03pgeiq6m0m1"]
 
-[ext_resource type="Script" path="res://floors/city/city_floor.gd" id="1_0skf2"]
-[ext_resource type="PackedScene" uid="uid://cs4s3c74quscb" path="res://entities/player/player.tscn" id="1_1jnwn"]
 [ext_resource type="Script" path="res://other/sound_manager.gd" id="3_q6qcm"]
+[ext_resource type="PackedScene" uid="uid://c5m58ge8t00ni" path="res://entities/player/player.tscn" id="4_6a5wt"]
 [ext_resource type="Texture2D" uid="uid://dpmmmqdrccy1y" path="res://assets/textures/tilesets/tileset_citylevel_ldscp.png" id="4_uq0s8"]
-[ext_resource type="PackedScene" uid="uid://dheicb7nascmw" path="res://entities/punching_bag/punching_bag.tscn" id="6_7wgof"]
-[ext_resource type="PackedScene" uid="uid://btwioc6yk1k4q" path="res://entities/door/door.tscn" id="6_gb8ul"]
+[ext_resource type="PackedScene" uid="uid://dxe5qgti3gl7a" path="res://entities/cacti/cacti.tscn" id="5_ut42x"]
+[ext_resource type="PackedScene" uid="uid://btwioc6yk1k4q" path="res://other/door/door.tscn" id="6_gb8ul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r3fi"]
 resource_name = "Landscape"
@@ -155,12 +154,12 @@ size = Vector2(2.875, 438.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0xp6"]
 size = Vector2(1698, 0.1625)
 
-[node name="Floor" type="Node2D"]
+[node name="City" type="Node2D"]
 editor_description = "0"
-script = ExtResource("1_0skf2")
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("3_q6qcm")
+autoplay = 0
 soundPaths = Array[String](["/music/main-menu.ogg"])
 
 [node name="MapBody" type="StaticBody2D" parent="."]
@@ -197,15 +196,8 @@ enabled = false
 position = Vector2(1557, 347)
 change_scene_to = "res://menus/level_select/level_select.tscn"
 
-[node name="Player" parent="." instance=ExtResource("1_1jnwn")]
-position = Vector2(410, 414)
-move_speed_accel = 1.0
-move_speed_max = 400.0
-move_speed_decel = 2.0
-jump_height = 125.0
-jump_time_to_peak = 0.3
-jump_time_to_descent = 0.25
-jump_count = 2
+[node name="Player" parent="." instance=ExtResource("4_6a5wt")]
+position = Vector2(411, 418)
 
-[node name="punching_bag" parent="." instance=ExtResource("6_7wgof")]
-position = Vector2(861, 458)
+[node name="Cacti" parent="." instance=ExtResource("5_ut42x")]
+position = Vector2(721, 481)

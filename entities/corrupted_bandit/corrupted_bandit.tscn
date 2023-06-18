@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://civ8h2jf33qv2"]
+
+[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_hiccx"]
+[ext_resource type="Script" path="res://entities/corrupted_bandit/corrupted_bandit.gd" id="2_snvit"]
+[ext_resource type="Texture2D" uid="uid://cnpvovqbl26ac" path="res://entities/bandit/assets/bandit.png" id="3_jbvte"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oml6j"]
+resource_local_to_scene = true
+radius = 32.0
+height = 112.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0j07v"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqshq"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13scp"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_7y51v"]
+
+[node name="CorruptedBandit" instance=ExtResource("1_hiccx")]
+collision_layer = 4
+script = ExtResource("2_snvit")
+damage = 25
+attack_delay = 3.0
+aggro_range = 1000
+speed = 250
+gravity = 98.0
+sight_mask = 3
+money_for_killing = 30
+
+[node name="ColBody" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_oml6j")
+
+[node name="Hitbox" parent="." index="2"]
+collision_layer = 4
+
+[node name="HitBody" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_0j07v")
+
+[node name="HurtBody" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_xqshq")
+
+[node name="Attack" parent="Hurtbox" index="1"]
+shape = SubResource("RectangleShape2D_13scp")
+
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource("3_jbvte")
+
+[node name="AnimTree" parent="." index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_7y51v")
+
+[connection signal="animation_finished" from="AnimTree" to="." method="_on_anim_tree_animation_finished"]

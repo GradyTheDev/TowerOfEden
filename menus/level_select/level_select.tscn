@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6tjftqwfo28p"]
+[gd_scene load_steps=5 format=3 uid="uid://c6tjftqwfo28p"]
 
 [ext_resource type="Script" path="res://menus/level_select/level_select.gd" id="1_d4bfu"]
-[ext_resource type="Texture2D" uid="uid://cupnnykl0i15n" path="res://entities/cacti/sprites/cacti.png" id="2_ou53s"]
-[ext_resource type="Texture2D" uid="uid://dko8lddq8dmv" path="res://entities/punching_bag/sprites/punching_bag.png" id="2_pebhb"]
+[ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="2_2cauk"]
+[ext_resource type="Texture2D" uid="uid://cupnnykl0i15n" path="res://assets/textures/cacti.png" id="2_ou53s"]
+[ext_resource type="Texture2D" uid="uid://dko8lddq8dmv" path="res://entities/punching_bag/assets/punching_bag.png" id="2_pebhb"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -41,12 +42,24 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="City" type="Button" parent="Center"]
+[node name="Debug" type="Button" parent="Center"]
+visible = false
+layout_mode = 2
+text = "Debug"
+icon = ExtResource("2_2cauk")
+expand_icon = true
+
+[node name="DebugSep" type="HSeparator" parent="Center"]
+visible = false
+clip_children = 1
+layout_mode = 2
+
+[node name="City2" type="Button" parent="Center"]
 layout_mode = 2
 text = "City"
 icon = ExtResource("2_pebhb")
 
-[node name="HSeparator" type="HSeparator" parent="Center"]
+[node name="HSeparator3" type="HSeparator" parent="Center"]
 clip_children = 1
 layout_mode = 2
 
@@ -63,6 +76,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Save and exit"
 
-[connection signal="pressed" from="Center/City" to="." method="_on_city_pressed"]
+[connection signal="pressed" from="Center/Debug" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="Center/City2" to="." method="_on_city_pressed"]
 [connection signal="pressed" from="Center/Level2" to="." method="_on_level2_pressed"]
 [connection signal="pressed" from="Center/Exit" to="." method="_on_exit_pressed"]
