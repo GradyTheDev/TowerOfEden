@@ -1,44 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmyyphdl7w442"]
+[gd_scene load_steps=9 format=3 uid="uid://dxe5qgti3gl7a"]
 
-[ext_resource type="Script" path="res://entities/cacti/cacti.gd" id="1_eef7l"]
-[ext_resource type="Texture2D" uid="uid://cupnnykl0i15n" path="res://entities/cacti/sprites/cacti.png" id="1_k01k6"]
+[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_7h208"]
+[ext_resource type="Script" path="res://entities/cacti/cacti.gd" id="2_5vb27"]
+[ext_resource type="Texture2D" uid="uid://d3pmq4paaa3dn" path="res://entities/cacti/assets/cacti.png" id="3_o772d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0y4q"]
-size = Vector2(51, 138)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_egnk3"]
+resource_local_to_scene = true
+radius = 32.0
+height = 112.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_owl6h"]
-size = Vector2(51, 138)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4tct"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfupg"]
-size = Vector2(55, 142)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3y81"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
 
-[node name="Cacti" type="CharacterBody2D" groups=["Enemy"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4did"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lds5s"]
+
+[node name="Cacti" instance=ExtResource("1_7h208")]
 collision_layer = 4
-collision_mask = 7
-script = ExtResource("1_eef7l")
+script = ExtResource("2_5vb27")
+speed = 90.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, 0)
-shape = SubResource("RectangleShape2D_y0y4q")
+[node name="ColBody" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_egnk3")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(4.625, 8.625)
-texture = ExtResource("1_k01k6")
-
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" parent="." index="2"]
 collision_layer = 4
-collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-2.5, 0)
-shape = SubResource("RectangleShape2D_owl6h")
+[node name="HitBody" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_y4tct")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="HurtBody" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_y3y81")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(-2.5, 0)
-shape = SubResource("RectangleShape2D_rfupg")
+[node name="Attack" parent="Hurtbox" index="1"]
+shape = SubResource("RectangleShape2D_v4did")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource("3_o772d")
+
+[node name="AnimTree" parent="." index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_lds5s")

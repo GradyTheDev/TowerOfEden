@@ -24,6 +24,19 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="OpenSaveLocation" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Open Save location"
+
 [node name="Center" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -39,17 +52,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="Screen" type="OptionButton" parent="Center"]
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "empty"
+popup/item_0/id = 0
+
+[node name="HSeparator3" type="HSeparator" parent="Center"]
+clip_children = 1
+layout_mode = 2
+
 [node name="Resolution" type="OptionButton" parent="Center"]
 layout_mode = 2
 tooltip_text = "Set window resolution"
 alignment = 1
-item_count = 3
-popup/item_0/text = "Default"
-popup/item_0/id = 0
-popup/item_1/text = "Fullscreen"
-popup/item_1/id = 1
-popup/item_2/text = "800x600"
-popup/item_2/id = 2
+item_count = 1
+popup/item_0/text = "800x600"
+popup/item_0/id = 2
 
 [node name="HSeparator1" type="HSeparator" parent="Center"]
 clip_children = 1
@@ -78,6 +97,8 @@ layout_mode = 2
 layout_mode = 2
 text = "Back"
 
+[connection signal="pressed" from="OpenSaveLocation" to="." method="_on_open_save_location_pressed"]
+[connection signal="item_selected" from="Center/Screen" to="." method="_on_screen_item_selected"]
 [connection signal="item_selected" from="Center/Resolution" to="." method="_on_resolution_item_selected"]
 [connection signal="value_changed" from="Center/Control/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="pressed" from="Center/Back" to="." method="_on_back_pressed"]

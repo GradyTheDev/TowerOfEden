@@ -1,399 +1,83 @@
-[gd_scene load_steps=20 format=3 uid="uid://cs4s3c74quscb"]
+[gd_scene load_steps=10 format=3 uid="uid://c5m58ge8t00ni"]
 
-[ext_resource type="Script" path="res://other/sound_manager.gd" id="1_1vrnp"]
-[ext_resource type="Script" path="res://entities/player/player.gd" id="1_3tb64"]
-[ext_resource type="Texture2D" uid="uid://wjieucj1utfu" path="res://assets/textures/particles/jump_particles.png" id="2_6iq2r"]
-[ext_resource type="Texture2D" uid="uid://j6y3g1e2ox6a" path="res://entities/player/sprites/idle.png" id="3_kfod5"]
-[ext_resource type="Texture2D" uid="uid://daybjfai4bd8b" path="res://assets/textures/sword/sword.png" id="5_suy58"]
-[ext_resource type="PackedScene" uid="uid://6r2jrf6l6hmk" path="res://entities/player/camera_fix/camera_fix.tscn" id="6_0rn3o"]
+[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_qwgu4"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="2_7axf8"]
+[ext_resource type="PackedScene" uid="uid://cuojxye56n132" path="res://entities/player/hud/hud.tscn" id="3_epfmw"]
+[ext_resource type="PackedScene" uid="uid://upo0cadlhi80" path="res://entities/player/pause_menu/pause_menu.tscn" id="4_h51os"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2mgm"]
-size = Vector2(61, 127)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6p2x"]
+resource_local_to_scene = true
+radius = 32.0
+height = 112.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pdssw"]
-particles_animation = true
-particles_anim_h_frames = 5
-particles_anim_v_frames = 2
-particles_anim_loop = false
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vb8xy"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h7wq5"]
-lifetime_randomness = 0.2
-emission_shape = 3
-emission_box_extents = Vector3(128, 4, 0)
-particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-spread = 90.0
-gravity = Vector3(0, 100, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-turbulence_noise_speed = Vector3(0.5, 5, 0)
-anim_speed_min = 1.0
-anim_speed_max = 1.25
-collision_mode = 1
-collision_friction = 0.2
-collision_bounce = 0.1
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojy1o"]
+resource_local_to_scene = true
+radius = 36.0
+height = 124.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc4e7"]
-size = Vector2(65, 131)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_361r4"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m7r61"]
-size = Vector2(64, 128)
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ch3n5"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3uhwk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_kfod5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m674g"]
-height = 82.0
-
-[sub_resource type="Animation" id="Animation_f25wn"]
-resource_name = "RESET"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(20, -17)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sword/HurtBox:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_skyp8"]
-resource_name = "left_attack"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-23, -13), Vector2(-30, 11), Vector2(-30, 11), Vector2(-23, -13)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -2.49736, -2.49736, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sword/HurtBox:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_eali8"]
-resource_name = "left_idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-23, -13)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sword/HurtBox:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_1roub"]
-resource_name = "right_attack"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(20, -17), Vector2(24, 17), Vector2(22, 1.90735e-06), Vector2(20, -17)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 2.20496, 1.10248, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sword/HurtBox:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_qnj2d"]
-resource_name = "right_idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(20, -17)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sword:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sword/HurtBox:monitoring")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwcd2"]
-_data = {
-"RESET": SubResource("Animation_f25wn"),
-"left_attack": SubResource("Animation_skyp8"),
-"left_idle": SubResource("Animation_eali8"),
-"right_attack": SubResource("Animation_1roub"),
-"right_idle": SubResource("Animation_qnj2d")
-}
-
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" node_paths=PackedStringArray("camera", "hud", "pause_menu") instance=ExtResource("1_qwgu4")]
 collision_layer = 2
-collision_mask = 7
-script = ExtResource("1_3tb64")
+floor_snap_length = 5.0
+script = ExtResource("2_7axf8")
+melee_damage = 25
+speed = 500.0
+max_jumps = 2
+coyote_time = 0.2
+jump_buffer_time_limit = 0.1
+jump_height = 300.0
+jump_time_to_peak = 0.5
+jump_time_to_floor = 0.5
+jump_cancel_velocity_multiplier = 0.5
+camera = NodePath("Camera")
+hud = NodePath("Camera/UI/HUD")
+pause_menu = NodePath("Camera/UI/PauseMenu")
+collide_damage = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -0.5)
-shape = SubResource("RectangleShape2D_o2mgm")
+[node name="ColBody" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_l6p2x")
 
-[node name="SoundManager" type="Node" parent="."]
-script = ExtResource("1_1vrnp")
-
-[node name="CameraFix" parent="." instance=ExtResource("6_0rn3o")]
-visible = false
-rotation_smoothing_enabled = true
-
-[node name="JumpVFX" type="GPUParticles2D" parent="."]
-texture_filter = 1
-material = SubResource("CanvasItemMaterial_pdssw")
-position = Vector2(0, 57)
-emitting = false
-amount = 16
-process_material = SubResource("ParticleProcessMaterial_h7wq5")
-texture = ExtResource("2_6iq2r")
-lifetime = 2.0
-one_shot = true
-speed_scale = 8.0
-randomness = 0.2
-fixed_fps = 60
-collision_base_size = 2.0
-trail_enabled = true
-trail_lifetime = 0.2
-
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" parent="." index="2"]
 collision_layer = 2
-collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-1.5, -0.5)
-shape = SubResource("RectangleShape2D_yc4e7")
+[node name="HitBody" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_vb8xy")
 
-[node name="TestSprite" type="Sprite2D" parent="."]
+[node name="HurtBody" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_ojy1o")
+
+[node name="Attack" parent="Hurtbox" index="1"]
+shape = SubResource("RectangleShape2D_361r4")
+
+[node name="AnimTree" parent="." index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ch3n5")
+
+[node name="Camera" type="Camera2D" parent="." index="7"]
 visible = false
-position = Vector2(-1, 0)
-texture = SubResource("PlaceholderTexture2D_m7r61")
+top_level = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.5, -0.5)
-scale = Vector2(3.8125, 7.9375)
-sprite_frames = SubResource("SpriteFrames_3uhwk")
-frame_progress = 0.737927
+[node name="UI" type="Control" parent="Camera" index="0"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -849.0
+offset_top = -449.0
+offset_right = 849.0
+offset_bottom = 449.0
 
-[node name="Sword" type="Node2D" parent="."]
-position = Vector2(20, -17)
+[node name="HUD" parent="Camera/UI" index="0" node_paths=PackedStringArray("player") instance=ExtResource("3_epfmw")]
+layout_mode = 1
+player = NodePath("../../..")
 
-[node name="Sprite" type="Sprite2D" parent="Sword"]
-position = Vector2(2, -28)
-scale = Vector2(3.59291, 6.92497)
-texture = ExtResource("5_suy58")
-
-[node name="HurtBox" type="Area2D" parent="Sword"]
-position = Vector2(0, -37)
-collision_layer = 0
-collision_mask = 4
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/HurtBox"]
-shape = SubResource("CapsuleShape2D_m674g")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qwcd2")
-}
-
-[connection signal="area_entered" from="Sword/HurtBox" to="." method="_on_hurt_box_area_entered"]
+[node name="PauseMenu" parent="Camera/UI" index="1" instance=ExtResource("4_h51os")]
+visible = false
+layout_mode = 1

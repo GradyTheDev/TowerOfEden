@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://m54qv3jk41a2"]
+[gd_scene load_steps=11 format=3 uid="uid://bmingdhc4ht8d"]
 
-[ext_resource type="Script" path="res://floors/level_2/level_2.gd" id="1_sbixl"]
 [ext_resource type="Script" path="res://other/sound_manager.gd" id="2_3i8km"]
 [ext_resource type="Texture2D" uid="uid://dpmmmqdrccy1y" path="res://assets/textures/tilesets/tileset_citylevel_ldscp.png" id="3_ughep"]
-[ext_resource type="PackedScene" uid="uid://btwioc6yk1k4q" path="res://entities/door/door.tscn" id="4_sv00a"]
-[ext_resource type="PackedScene" uid="uid://cs4s3c74quscb" path="res://entities/player/player.tscn" id="5_ugptt"]
-[ext_resource type="PackedScene" uid="uid://cmyyphdl7w442" path="res://entities/cacti/cacti.tscn" id="6_ol8vu"]
+[ext_resource type="PackedScene" uid="uid://d06tvkg7flbg0" path="res://entities/bandit/bandit.tscn" id="4_d4gjo"]
+[ext_resource type="PackedScene" uid="uid://btwioc6yk1k4q" path="res://other/door/door.tscn" id="4_sv00a"]
+[ext_resource type="PackedScene" uid="uid://civ8h2jf33qv2" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="5_uxoay"]
+[ext_resource type="PackedScene" uid="uid://c5m58ge8t00ni" path="res://entities/player/player.tscn" id="6_cqrao"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r3fi"]
 resource_name = "Landscape"
@@ -155,12 +155,12 @@ size = Vector2(2.875, 438.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0xp6"]
 size = Vector2(1698, 0.1625)
 
-[node name="Floor" type="Node2D"]
+[node name="Level2" type="Node2D"]
 editor_description = "0"
-script = ExtResource("1_sbixl")
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("2_3i8km")
+autoplay = 0
 soundPaths = Array[String](["/music/main-menu.ogg"])
 
 [node name="MapBody" type="StaticBody2D" parent="."]
@@ -197,15 +197,12 @@ enabled = false
 position = Vector2(1557, 347)
 change_scene_to = "res://menus/level_select/level_select.tscn"
 
-[node name="Player" parent="." instance=ExtResource("5_ugptt")]
-position = Vector2(391, 415)
-move_speed_accel = 1.0
-move_speed_max = 400.0
-move_speed_decel = 2.0
-jump_height = 125.0
-jump_time_to_peak = 0.3
-jump_time_to_descent = 0.25
-jump_count = 2
+[node name="Bandit" parent="." instance=ExtResource("4_d4gjo")]
+position = Vector2(581, 449)
 
-[node name="Cacti" parent="." instance=ExtResource("6_ol8vu")]
-position = Vector2(1154, 408)
+[node name="CorruptedBandit" parent="." instance=ExtResource("5_uxoay")]
+position = Vector2(1221, 418)
+attack_delay = 2.0
+
+[node name="Player" parent="." instance=ExtResource("6_cqrao")]
+position = Vector2(303, 418)

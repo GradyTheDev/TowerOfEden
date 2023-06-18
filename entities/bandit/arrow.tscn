@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3a1knenv3bgn"]
+
+[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_nudtp"]
+[ext_resource type="Script" path="res://entities/bandit/arrow.gd" id="2_i1nxl"]
+[ext_resource type="Texture2D" uid="uid://ci80ihwrsvgni" path="res://entities/bandit/assets/arrow.png" id="3_fcbgy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_62086"]
+resource_local_to_scene = true
+radius = 3.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8fsy"]
+resource_local_to_scene = true
+radius = 5.0
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xcu8q"]
+resource_local_to_scene = true
+radius = 5.0
+height = 36.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4os85"]
+resource_local_to_scene = true
+size = Vector2(201, 130)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_qb6xs"]
+
+[node name="Arrow" instance=ExtResource("1_nudtp")]
+collision_layer = 0
+collision_mask = 15
+motion_mode = 1
+script = ExtResource("2_i1nxl")
+init_velocity = Vector2(0, 0)
+friction = 10.0
+gravity = 98.0
+fall_accel = 30.0
+homing_power = 500.0
+homing_range = 300.0
+life_time = 5.0
+health = 10
+money_for_killing = 0
+activate_anim_tree = false
+
+[node name="ColBody" parent="." index="0"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_62086")
+
+[node name="Hitbox" parent="." index="2"]
+collision_layer = 8
+
+[node name="HitBody" parent="Hitbox" index="0"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_p8fsy")
+
+[node name="Hurtbox" parent="." index="3"]
+priority = 1.0
+
+[node name="HurtBody" parent="Hurtbox" index="0"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xcu8q")
+
+[node name="Attack" parent="Hurtbox" index="1"]
+visible = false
+shape = SubResource("RectangleShape2D_4os85")
+
+[node name="Sprite" parent="." index="4"]
+position = Vector2(0, 2)
+scale = Vector2(4, 4)
+texture = ExtResource("3_fcbgy")
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="AnimTree" parent="." index="6"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_qb6xs")

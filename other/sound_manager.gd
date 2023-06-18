@@ -1,6 +1,9 @@
 extends Node
 class_name SoundManager
 
+## set this to the index of the music you want to play.
+@export var autoplay: int = -1
+
 # The list of paths to sound files (relative to res://Game/Assets/Audio) managed by this SoundManager instance
 @export var soundPaths: Array[String]
 
@@ -15,6 +18,9 @@ func _ready():
 		currSoundNode.stream = currSoundRes
 		add_child(currSoundNode)
 		cnt += 1
+	
+	if autoplay >= 0 and autoplay < soundPaths.size():
+		playSound(autoplay)
 
 # Starts the given sound. When the time argument is given, it will start the sound from that position.
 func playSound(key: int, time: float = 0.0):
