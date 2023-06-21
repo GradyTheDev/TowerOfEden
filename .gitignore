@@ -16,3 +16,9 @@ mono_crash.*.json
 
 # Export files
 Export/*
+
+# Exclude all 3rd party addons
+addons/*
+
+# Include in-house addons
+!addons/buildscripts/
