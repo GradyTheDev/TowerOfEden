@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const script_build_date_updater = preload("res://addons/build_date_updater.gd")
+const script_build_date_updater = preload("res://addons/buildscripts/build_date_updater.gd")
 var build_date_updater = script_build_date_updater.new()
 
 func _enter_tree():
