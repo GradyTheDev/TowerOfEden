@@ -1,83 +1,162 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5m58ge8t00ni"]
+[gd_scene load_steps=18 format=3 uid="uid://du248qvl7jubl"]
 
-[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_qwgu4"]
-[ext_resource type="Script" path="res://entities/player/player.gd" id="2_7axf8"]
-[ext_resource type="PackedScene" uid="uid://cuojxye56n132" path="res://entities/player/hud/hud.tscn" id="3_epfmw"]
-[ext_resource type="PackedScene" uid="uid://upo0cadlhi80" path="res://entities/player/pause_menu/pause_menu.tscn" id="4_h51os"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_r8oxd"]
+[ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="2_6yq3t"]
+[ext_resource type="Texture2D" uid="uid://bhifix67je7lx" path="res://assets/spritesheets/entity_placeholder.png" id="2_bh1wu"]
+[ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_mwfyw"]
+[ext_resource type="Script" path="res://other/hitbox.gd" id="4_pvono"]
+[ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="4_quil2"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="5_0q7ux"]
+[ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_5x0tb"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
+[ext_resource type="Script" path="res://attributes/attribute_money.gd" id="7_xntrw"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6p2x"]
-resource_local_to_scene = true
-radius = 32.0
-height = 112.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7b6m4"]
+radius = 4.0
+height = 14.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vb8xy"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kew8h"]
+size = Vector2(4, 14)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ojy1o"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3krie"]
+size = Vector2(4, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_361r4"]
-resource_local_to_scene = true
-size = Vector2(201, 130)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0wk0"]
+size = Vector2(25, 16)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ch3n5"]
+[sub_resource type="Animation" id="Animation_f8c0q"]
+resource_name = "RESET"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox/Attack:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
 
-[node name="Player" node_paths=PackedStringArray("camera", "hud", "pause_menu") instance=ExtResource("1_qwgu4")]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dv5ry"]
+_data = {
+"RESET": SubResource("Animation_f8c0q")
+}
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_liq1e"]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(5, 5)
 collision_layer = 2
-floor_snap_length = 5.0
-script = ExtResource("2_7axf8")
-melee_damage = 25
-speed = 500.0
-max_jumps = 2
-coyote_time = 0.2
-jump_buffer_time_limit = 0.1
-jump_height = 300.0
-jump_time_to_peak = 0.5
-jump_time_to_floor = 0.5
-jump_cancel_velocity_multiplier = 0.5
-camera = NodePath("Camera")
-hud = NodePath("Camera/UI/HUD")
-pause_menu = NodePath("Camera/UI/PauseMenu")
-collide_damage = 0
+collision_mask = 15
+script = ExtResource("1_r8oxd")
 
-[node name="ColBody" parent="." index="0"]
-shape = SubResource("CapsuleShape2D_l6p2x")
-
-[node name="Hitbox" parent="." index="2"]
-collision_layer = 2
-
-[node name="HitBody" parent="Hitbox" index="0"]
-shape = SubResource("CapsuleShape2D_vb8xy")
-
-[node name="HurtBody" parent="Hurtbox" index="0"]
-shape = SubResource("CapsuleShape2D_ojy1o")
-
-[node name="Attack" parent="Hurtbox" index="1"]
-shape = SubResource("RectangleShape2D_361r4")
-
-[node name="AnimTree" parent="." index="6"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ch3n5")
-
-[node name="Camera" type="Camera2D" parent="." index="7"]
+[node name="Camera" type="Camera2D" parent="."]
 visible = false
 top_level = true
+z_index = 11
 
-[node name="UI" type="Control" parent="Camera" index="0"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -849.0
-offset_top = -449.0
-offset_right = 849.0
-offset_bottom = 449.0
+[node name="PlayerUI" parent="Camera" node_paths=PackedStringArray("atr_health", "atr_money") instance=ExtResource("2_6yq3t")]
+custom_minimum_size = Vector2(100, 100)
+atr_health = NodePath("../../Attributes/Health")
+atr_money = NodePath("../../Attributes/Money")
 
-[node name="HUD" parent="Camera/UI" index="0" node_paths=PackedStringArray("player") instance=ExtResource("3_epfmw")]
-layout_mode = 1
-player = NodePath("../../..")
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_bh1wu")
+hframes = 4
+vframes = 4
+frame = 1
 
-[node name="PauseMenu" parent="Camera/UI" index="1" instance=ExtResource("4_h51os")]
-visible = false
-layout_mode = 1
+[node name="ColBody" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7b6m4")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_pvono")
+entity = NodePath("..")
+health = NodePath("../Attributes/Health")
+
+[node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_kew8h")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 13
+script = ExtResource("5_5x0tb")
+
+[node name="HurtBody" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_3krie")
+disabled = true
+
+[node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.5, -8)
+shape = SubResource("RectangleShape2D_c0wk0")
+disabled = true
+
+[node name="Attributes" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("3_mwfyw")
+body = NodePath("../..")
+save = true
+
+[node name="PortalTransversal" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("4_quil2")
+body = NodePath("../..")
+save = true
+
+[node name="Money" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("7_xntrw")
+money = 50
+body = NodePath("../..")
+save = true
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dv5ry"),
+"player_animations": ExtResource("5_0q7ux")
+}
+
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("5_jrxt3")
+anim_player = NodePath("../AnimPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_liq1e")
+parameters/conditions/attack_down = false
+parameters/conditions/attack_forward = false
+parameters/conditions/attack_up = false
+parameters/conditions/idle = false
+parameters/conditions/in_air = false
+parameters/conditions/jump = false
+parameters/conditions/on_ground = false
+parameters/conditions/walk = false
+
+[connection signal="death" from="Attributes/Health" to="." method="_on_death"]
+[connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_changed"]

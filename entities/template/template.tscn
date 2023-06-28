@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://eft2puo5eun4"]
+
+[ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_gu288"]
+[ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="2_ioxiq"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="3_rgxvu"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="4_onpmo"]
+[ext_resource type="Script" path="res://other/hitbox.gd" id="5_8eb6x"]
+[ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_g38rl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
+radius = 2.0
+height = 14.0
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_21tpt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hic20"]
+size = Vector2(8, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3pti"]
+size = Vector2(8, 18)
+
+[node name="Template" type="CharacterBody2D"]
+
+[node name="Attributes" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("1_gu288")
+body = NodePath("../..")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_ioxiq")
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="ColBody" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1veg0")
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"player_animations": ExtResource("3_rgxvu")
+}
+
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("4_onpmo")
+anim_player = NodePath("../AnimPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_21tpt")
+parameters/conditions/attack_down = false
+parameters/conditions/attack_forward = false
+parameters/conditions/attack_up = false
+parameters/conditions/idle = false
+parameters/conditions/in_air = false
+parameters/conditions/jump = false
+parameters/conditions/on_ground = false
+parameters/conditions/walk = false
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("5_8eb6x")
+
+[node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hic20")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("6_g38rl")
+
+[node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_o3pti")
+disabled = true

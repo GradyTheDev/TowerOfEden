@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cqtl2cue7aq2b"]
 
 [ext_resource type="Script" path="res://menus/game_over/game_over.gd" id="1_4couf"]
-[ext_resource type="Script" path="res://other/sound_manager.gd" id="2_2x1ma"]
 
 [node name="game_over" type="Control"]
 layout_mode = 3
@@ -47,8 +46,5 @@ text = "Level select"
 [node name="HSeparator3" type="HSeparator" parent="Center"]
 clip_children = 1
 layout_mode = 2
-
-[node name="SoundManager" type="Node" parent="."]
-script = ExtResource("2_2x1ma")
 
 [connection signal="pressed" from="Center/LevelSelect" to="." method="_on_level_select_pressed"]

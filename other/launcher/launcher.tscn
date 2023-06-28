@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ka5e7pur2lpx"]
+
+[ext_resource type="Script" path="res://other/launcher/launcher.gd" id="1_07r1x"]
+
+[node name="Launcher" type="Node"]
+script = ExtResource("1_07r1x")

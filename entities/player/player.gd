@@ -1,26 +1,27 @@
 class_name Player
-extends Entity
-
-@export var melee_damage: int = 25
+extends CharacterBody2D
 
 @export_group("Physics")
 @export var speed: float = 500
 @export var max_jumps: int = 2
 @export var coyote_time: float = 0.2
 @export var jump_buffer_time_limit: float = 0.1
-@export var jump_height: float = 300 # pixels
-@export var jump_time_to_peak: float = 0.5 # sec 
+@export var jump_height: float = 200 # pixels
+@export var jump_time_to_peak: float = 0.5 # sec
 @export var jump_time_to_floor: float = 0.5 # sec
 @export var jump_cancel_velocity_multiplier: float = 0.5
-
-@export_group('Nodes')
-@export var camera: Camera2D
-@export var hud: Control
-@export var pause_menu: Control
 
 @onready var jump_velocity: float =  ((2.0 * jump_height) / jump_time_to_peak) * -1
 @onready var jump_accend_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1
 @onready var regular_gravity: float = ((-2.0 * jump_height) / (jump_time_to_floor * jump_time_to_floor)) * -1
+
+
+@onready var camera: Camera2D = get_node("Camera")
+@onready var anim_tree: AnimationTree = get_node("AnimTree")
+@onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
+
+@onready var health: AttributeHealth = get_node("Attributes/Health")
+@onready var sprite: Sprite2D = get_node("Sprite")
 
 ## unpaused time, ms
 var air_time: float
@@ -34,50 +35,56 @@ var jump_counter: int = 0
 ## buffer after you hit jump to play the jump anim
 var jump_anim_fix: float = 0
 
-var money: int = 0
+# var money: int = 0
 
-# todo:
-# - animation tree: State Machine
-# - animations, Idle, Walk, Jump, Attack (directional), injured
-# - 
+func _init():
+	add_to_group(Globals.GROUP_PLAYER)
+
 
 func _ready():
-	if Butler.player == null:
-		Butler.player = self
+	if Globals.player == null:
+		Globals.player = self
+	
 	camera.visible = true
-	add_to_group(Butler.GROUP_PLAYER)
-	super()
 
-	money = Butler.save['money']
-	health_max = Butler.save['health_max']
-	health = Butler.save['health']
+	# resize ui elements to camera size and zoom
+	var size = camera.get_viewport_rect().size / camera.zoom
+	$Camera/PlayerUI.size = size
+	$Camera/PlayerUI.position = -size/2
 
-	Butler.saving_game.connect(_saving_game)
+	SavesManager.save_start.connect(_save_start)
+
+	anim_tree.active = true
+
+	# todo: snap to floor
+
+	# snap camera to player
+	camera.global_position = global_position
 
 
 func _exit_tree():
-	if Butler.player == self:
-		Butler.player = null
+	if Globals.player == self:
+		Globals.player = null
+	if health.alive:
+		_save_start()
 
 
 func _on_death():
+	if not is_inside_tree() or not is_node_ready(): return
 	anim_tree.active = false
-	anim_player.play("entity_placeholder_animations/death")
-	var af = func(a): Butler.change_scene_to_file(Butler.SCENE_LEVEL_SELECT)
+	anim_player.play("player_animations/death")
+	var af = func(a): get_tree().change_scene_to_file(Globals.SCENE_LEVEL_SELECT)
 	anim_player.animation_finished.connect(af, CONNECT_ONE_SHOT)
 
 
 func _input(event: InputEvent):
-	if Butler.paused or health <= 0: return
-	
+	if not health.alive: return
 	if event.is_action("jump") and Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time_limit
 
 
-func _process(delta):
-	pause_menu.visible = Butler.paused
-
-	if Butler.paused or health <= 0: return
+func _process(delta: float):
+	if not health.alive: return
 
 	jump_anim_fix = move_toward(jump_anim_fix, 0, delta)
 	update_animation_parms()
@@ -89,36 +96,28 @@ func _physics_process(delta: float):
 	var weight = remap(camera.global_position.distance_to(global_position), 0, vrect, 0, 1)
 	camera.global_position = camera.global_position.lerp(global_position, clamp(weight, 0, 1))
 	
-	# Pause Menu
-	if Butler.paused or health <= 0: return
-	
 	# Jump Buffer timer
 	jump_buffer_timer = move_toward(jump_buffer_timer, 0, delta)
 
 	# Gravity
-	velocity.y += get_gravity() * delta
-	# velocity.y = move_toward(velocity.y, get_gravity(), get_gravity() * delta)
+	var gravity = get_gravity()
+	if velocity.y < gravity and not is_on_floor():
+		velocity.y += gravity * delta
 
-	if health > 0:
+	if health.alive:
 		# Movement
 		var input_direction = Vector2(Input.get_axis("move_left", "move_right"), 0)
 		if input_direction.x != 0:
-			set_direction(input_direction.x >= 0)
+			Tools.set_node2D_direction(self, input_direction.x > 0)
 	
 		if is_on_floor():
 			# Movement adjusted to slope of floor
 			velocity = Tools.adjust_vector_to_slope(input_direction, get_floor_normal()) * speed
-
-			# var wish = Tools.adjust_vector_to_slope(input_direction, get_floor_normal()) * speed
-			# velocity = velocity.move_toward(wish, speed * delta)
 		else:
 			# Air movement
 			velocity.x = input_direction.x * speed
-			# var wish = input_direction.x * speed
-			# velocity.x = move_toward(velocity.x ,wish, speed * delta)
 
 		# Jump
-		# if Input.is_action_just_pressed("jump") and is_on_floor():
 		if jump_buffer_timer > 0 and jump_counter < max_jumps and (air_time < coyote_time or jump_counter > 0):
 			jump_counter += 1
 			jump_buffer_timer = -1
@@ -128,6 +127,11 @@ func _physics_process(delta: float):
 		
 		if jump_counter > 0 and Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y *= jump_cancel_velocity_multiplier
+	
+	else:
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, 1300 * delta)
+
 
 	# Floor Snap
 	var was_on_floor = is_on_floor()
@@ -143,13 +147,13 @@ func _physics_process(delta: float):
 	else:
 		air_time += delta
 
+
 func get_gravity() -> float:
 	return jump_accend_gravity if velocity.y < 0 else regular_gravity
 
 
 func update_animation_parms():
-	if health <= 0:
-		return
+	if not health.alive: return
 
 	anim_tree['parameters/conditions/walk'] = velocity.x != 0
 	anim_tree['parameters/conditions/idle'] = not anim_tree['parameters/conditions/walk']
@@ -176,11 +180,16 @@ func update_animation_parms():
 				else:
 					anim_tree['parameters/conditions/attack_up'] = true
 
-func hurtbox_entered(their_area: Area2D, their_shape: CollisionShape2D, my_shape: CollisionShape2D):
-	if their_area is Hitbox and my_shape == $Hurtbox/Attack:
-		their_area.entity.hurt(self, melee_damage)
 
-func _saving_game():
-	Butler.save['health'] = health
-	Butler.save['health_max'] = health_max
-	Butler.save['money'] = money
+func _save_start():
+	pass
+
+
+
+func _on_health_changed(old: int, new: int):
+	if new < old:
+		if sprite == null: return
+		var t = sprite.create_tween()
+		t.tween_property(sprite, 'modulate', Color.RED, 0.5)
+		t.tween_property(sprite, 'modulate', Color.WHITE, 0.5)
+		t.play()

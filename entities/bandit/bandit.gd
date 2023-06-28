@@ -1,4 +1,33 @@
-extends Entity
+extends CharacterBody2D
+
+@onready var anim_tree: AnimationTree = get_node("AnimTree")
+@onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
+@onready var health: AttributeHealth = get_node("Attributes/Health")
+@onready var sprite: Sprite2D = get_node("Sprite")
+
+
+func _ready():
+	health.death.connect(_on_death)
+	health.health_changed.connect(_on_health_changed)
+	add_to_group(Globals.GROUP_ENEMY)
+
+
+func _on_death():
+	if not is_inside_tree() or not is_node_ready(): return
+	anim_tree.active = false
+	anim_player.play("player_animations/death")
+	var af = func(a): queue_free()
+	anim_player.animation_finished.connect(af, CONNECT_ONE_SHOT)
+
+
+func _on_health_changed(old: int, new: int):
+	if new < old:
+		var t = sprite.create_tween()
+		t.tween_property(sprite, 'modulate', Color.RED, 0.5)
+		t.tween_property(sprite, 'modulate', Color.WHITE, 0.5)
+		t.play()
+
+#########
 
 @export var damage: int = 25
 @export var attack_delay: float = 1
@@ -10,7 +39,7 @@ extends Entity
 
 @onready var bowr: Node2D = $bow_rotate
 
-@onready var pck_arrow: PackedScene = preload("res://entities/bandit/arrow.tscn")
+@export var pck_arrow: PackedScene
 
 var _sight_delay: float = 0.2  # sec
 var _sight_timer: float = 0  # sec
@@ -26,13 +55,9 @@ enum states{
 
 var state: states = states.idle
 
-func _ready():
-	super()
-	add_to_group(Butler.GROUP_ENEMY)
-
 
 func _physics_process(delta):
-	if Butler.paused or health <= 0: return
+	if not health.alive: return
 
 	if _sight_timer > 0:
 		_sight_timer -= delta
@@ -41,7 +66,7 @@ func _physics_process(delta):
 	
 	_attack_timer = move_toward(_attack_timer, 0, delta)
 	
-	if Butler.player == null or Butler.player.health <= 0 and state == states.hunting:
+	if Globals.player == null or not Globals.player.health.alive and state == states.hunting:
 		state = states.idle
 
 	if state == states.idle:
@@ -49,20 +74,18 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, speed)
 	
 	elif state == states.hunting:
-		var dis := global_position.distance_to(Butler.player.global_position)
-		var dir := global_position.direction_to(Butler.player.global_position)
-		bowr.look_at(Butler.player.global_position)
-		if dis > aggro_range / 2:
+		var dis := global_position.distance_to(Globals.player.global_position)
+		var dir := global_position.direction_to(Globals.player.global_position)
+		bowr.look_at(Globals.player.global_position)
+
+		if dis > aggro_range / 3:
 			velocity = dir * speed
-		elif dis < aggro_range / 3:
+		elif dis < aggro_range / 5:
 			velocity = dir * -speed
 		else:
 			velocity = Vector2.ZERO
 
-		if Butler.player.global_position.x >= global_position.x:
-			set_direction(true)
-		else:
-			set_direction(false)
+		Tools.set_node2D_direction(self, Globals.player.global_position.x >= global_position.x)
 		
 		if _can_hit and _attack_timer <= 0:
 			shoot()
@@ -80,8 +103,8 @@ func _physics_process(delta):
 
 func refresh_sight():
 	_sight_timer = _sight_delay
-	if Butler.player != null and Butler.player.health > 0:
-		var player = Butler.player as Player
+	if Globals.player != null and Globals.player.health.alive:
+		var player = Globals.player as Player
 		var dis := global_position.distance_to(player.global_position)
 		
 		if dis < aggro_range:
@@ -89,7 +112,7 @@ func refresh_sight():
 		
 			var query := PhysicsRayQueryParameters2D.create(
 				global_position,
-				Butler.player.global_position,
+				Globals.player.global_position,
 				sight_mask
 			)
 
@@ -123,12 +146,14 @@ func update_animation_parms():
 
 func shoot():
 	_attack_timer = attack_delay
-	var arrow = pck_arrow.instantiate() as Entity
+	var arrow = pck_arrow.instantiate() as AttackBasicProjectile
 
-	var dis = global_position.distance_to(Butler.player.global_position)
-	var dir = global_position.direction_to(Butler.player.global_position)
+	arrow.collision_mask = 1 | 2
+
+	var dis = global_position.distance_to(Globals.player.global_position)
+	var dir = global_position.direction_to(Globals.player.global_position)
 	arrow.position = global_position + dir * 150
-	arrow.init_velocity = dir * arrow_speed
-	arrow.target = Butler.player
+	arrow.initial_velocity = dir * arrow_speed
+#	arrow.target = Globals.player
 
 	get_tree().root.add_child(arrow)
