@@ -569,7 +569,7 @@ to_portal = "start"
 scene = 3
 
 [node name="Player" parent="." instance=ExtResource("4_6a5wt")]
-position = Vector2(1701, 896)
+position = Vector2(218, 673)
 scale = Vector2(2, 2)
 speed = 200.0
 jump_height = 100.0
