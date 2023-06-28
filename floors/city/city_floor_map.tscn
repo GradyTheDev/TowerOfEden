@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgaltiksioyy5"]
+
+[ext_resource type="PackedScene" uid="uid://7gvr4bpe1fjv" path="res://floors/city/city_floor.ldtk" id="1_uabk0"]
+
+[node name="city_floor_map" instance=ExtResource("1_uabk0")]
