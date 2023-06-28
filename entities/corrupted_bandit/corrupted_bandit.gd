@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var aggro_range: int = 1000
 @export var speed: int = 250
 @export var gravity: float = 98
+@export var far: int = 100
+@export var near: int = 80
 @export_flags_2d_physics var sight_mask: int
 
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
@@ -70,9 +72,9 @@ func _physics_process(delta):
 	elif state == states.hunting:
 		var dis := global_position.distance_to(Globals.player.global_position)
 		var dir := global_position.direction_to(Globals.player.global_position)
-		if dis > 90:
+		if dis > far:
 			velocity = dir * speed
-		elif dis < 70:
+		elif dis < near:
 			velocity = dir * -speed
 		else:
 			velocity = Vector2.ZERO

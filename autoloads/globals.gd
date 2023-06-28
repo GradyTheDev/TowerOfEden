@@ -23,10 +23,8 @@ const ATTRIBUTE_MONEY := 'health'
 
 ## for runtime operations. Like portal and level select
 const LEVELS := {
+	"city floor": "res://levels/city/city_floor.tscn",
 	"level 1": "res://levels/level_1/level_1.tscn",
-	"level 2": "res://levels/level_2/level_2.tscn",
-	"level 3": "res://levels/level_3/level_3.tscn",
-	"level 4": "res://levels/level_4/level_4.tscn",
 }
 
 ## READONLY

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var far: int = 500
+@export var near: int = 300
+
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
 @onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
 @onready var health: AttributeHealth = get_node("Attributes/Health")
@@ -78,9 +81,9 @@ func _physics_process(delta):
 		var dir := global_position.direction_to(Globals.player.global_position)
 		bowr.look_at(Globals.player.global_position)
 
-		if dis > aggro_range / 3:
+		if dis > far:
 			velocity = dir * speed
-		elif dis < aggro_range / 5:
+		elif dis < near:
 			velocity = dir * -speed
 		else:
 			velocity = Vector2.ZERO
@@ -152,7 +155,8 @@ func shoot():
 
 	var dis = global_position.distance_to(Globals.player.global_position)
 	var dir = global_position.direction_to(Globals.player.global_position)
-	arrow.position = global_position + dir * 150
+	# arrow.position = global_position + dir
+	arrow.global_position = global_position
 	arrow.initial_velocity = dir * arrow_speed
 #	arrow.target = Globals.player
 

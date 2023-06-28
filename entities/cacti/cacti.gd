@@ -13,12 +13,12 @@ var direction_switch_timer: float = 0
 var air_time: float = 0
 
 func _init():
-	super()
 	add_to_group(Globals.GROUP_ENEMY)
 
 
 func _ready():
 	anim_tree.active = true
+	print(scale.round(), round(rotation_degrees))
 
 
 func _physics_process(delta: float):

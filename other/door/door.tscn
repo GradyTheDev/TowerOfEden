@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dft3aft6nlj28"]
+
+[ext_resource type="Script" path="res://other/portal.gd" id="1_qvy8f"]
+[ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="2_apdrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aimoe"]
+
+[node name="Door" type="Area2D" node_paths=PackedStringArray("exit_pos")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_qvy8f")
+exit_pos = NodePath("Marker2D")
+scene = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aimoe")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture = ExtResource("2_apdrm")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(34, 0)

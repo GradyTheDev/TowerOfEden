@@ -17,9 +17,12 @@ static func set_node2D_direction(node: Node2D, right: bool):
 ## 0 = can't tell  [br]
 ## 1 = right  [br]
 static func get_node2D_direction(node: Node2D) -> int:
-	if node.scale.y > 0 and node.rotation_degrees == 0:
+	var scale_y = round(node.scale.y)
+	var rotation = round(abs(node.rotation_degrees))
+
+	if scale_y > 0 and rotation == 0:
 		return 1 # right
-	elif node.scale.y < 0 and abs(node.rotation_degrees) == 180:
+	elif scale_y < 0 and rotation == 180:
 		return -1 # left
 	else:
 		return 0 # unknown

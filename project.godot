@@ -51,7 +51,7 @@ naming/node_name_num_separator=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/buildscripts/plugin.cfg")
+enabled=PackedStringArray("res://addons/buildscripts/plugin.cfg", "res://addons/ldtk/plugin.cfg")
 
 [input]
 
