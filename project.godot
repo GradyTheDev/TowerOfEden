@@ -12,8 +12,7 @@ config_version=5
 
 config/name="Tower of Eden"
 config/description="Game for the SMVM 2023 by terraquad and 9 other amazing developers."
-run/main_scene="res://menus/main_menu/main_menu.tscn"
-config/custom_user_dir_name="tower"
+run/main_scene="res://other/launcher/launcher.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 config/version="v0.0.0.A"
@@ -25,7 +24,12 @@ buses/default_bus_layout="res://other/default_bus_layout.tres"
 
 [autoload]
 
-Butler="*res://other/butler.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+Globals="*res://autoloads/globals.gd"
+SettingsManager="*res://autoloads/settings_manager.gd"
+SavesManager="*res://autoloads/saves_manager.gd"
+Controls="*res://autoloads/controls.gd"
+SoundManager="*res://autoloads/sound_manager/sound_manager.tscn"
 
 [debug]
 
@@ -34,15 +38,16 @@ gdscript/warnings/enable=false
 
 [display]
 
-window/size/viewport_width=1700
-window/size/viewport_height=900
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 window/vsync/vsync_mode=2
 
 [editor]
 
 movie_writer/movie_file="../movie.avi"
+naming/node_name_num_separator=2
 
 [editor_plugins]
 
@@ -120,12 +125,13 @@ toggle_fullscreen={
 
 [layer_names]
 
-2d_physics/layer_1="Enviroment"
-2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Enemy_Projectile"
+2d_physics/layer_1="enviroment"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="enemy_Projectile"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_environment="res://other/default_enviroment.tres"

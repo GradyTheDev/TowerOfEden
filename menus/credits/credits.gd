@@ -2,4 +2,4 @@ extends Control
 
 
 func _on_exit_pressed():
-	Butler.change_scene_to_file(Butler.SCENE_MAIN_MENU)
+	get_tree().change_scene_to_file(Globals.SCENE_MAIN_MENU)

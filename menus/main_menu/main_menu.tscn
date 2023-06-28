@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://pemiprw4tau8"]
+[gd_scene load_steps=5 format=3 uid="uid://pemiprw4tau8"]
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_c4x6j"]
-[ext_resource type="Script" path="res://other/sound_manager.gd" id="2_04yyb"]
-[ext_resource type="Texture2D" uid="uid://4il0w1r1u6q7" path="res://assets/textures/main_menu.png" id="2_yhi41"]
+[ext_resource type="Texture2D" uid="uid://4il0w1r1u6q7" path="res://assets/other/main_menu.png" id="2_yhi41"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_32igt"]
 font_size = 24
@@ -100,11 +99,6 @@ text = "Exit"
 [node name="Layer4" type="ParallaxLayer" parent="ParallaxBG"]
 
 [node name="Layer5" type="ParallaxLayer" parent="ParallaxBG"]
-
-[node name="SoundManager" type="Node" parent="."]
-script = ExtResource("2_04yyb")
-autoplay = 0
-soundPaths = Array[String](["/music/main-menu.ogg"])
 
 [node name="Version" type="Label" parent="."]
 layout_mode = 1

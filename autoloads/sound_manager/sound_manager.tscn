@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch3xec01tjrja"]
+
+[ext_resource type="Script" path="res://autoloads/sound_manager/sound_manager.gd" id="1_g7wtr"]
+[ext_resource type="AudioStream" uid="uid://dd8qkm0lfw81n" path="res://assets/music/main-menu.ogg" id="1_ypwyr"]
+
+[node name="SoundManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_g7wtr")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ypwyr")
+autoplay = true
+max_polyphony = 3
+bus = &"Music"
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]
