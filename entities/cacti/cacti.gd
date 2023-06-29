@@ -18,7 +18,6 @@ func _init():
 
 func _ready():
 	anim_tree.active = true
-	print(scale.round(), round(rotation_degrees))
 
 
 func _physics_process(delta: float):
