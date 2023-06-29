@@ -128,6 +128,27 @@ shape = SubResource("RectangleShape2D_wc3jl")
 z_index = 1
 position = Vector2(1246, -335)
 
+[node name="debug_ui" type="Control" parent="."]
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1205.0
+offset_top = -501.0
+offset_right = 1290.0
+offset_bottom = -427.0
+
+[node name="hurt" type="Button" parent="debug_ui"]
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 67.0
+offset_bottom = 68.0
+text = "Hurt 25"
+
+[node name="heal" type="Button" parent="debug_ui"]
+offset_right = 66.0
+offset_bottom = 31.0
+text = "Heal 25"
+
 [node name="Cacti" parent="." instance=ExtResource("9_nfiqi")]
 position = Vector2(1698, -54)
 
@@ -150,3 +171,6 @@ position = Vector2(-755, -43)
 position = Vector2(-1314, -48)
 collision_layer = 5
 enable_collision = true
+
+[connection signal="pressed" from="debug_ui/hurt" to="." method="_on_hurt_pressed"]
+[connection signal="pressed" from="debug_ui/heal" to="." method="_on_heal_pressed"]

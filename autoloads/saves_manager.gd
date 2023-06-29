@@ -59,11 +59,27 @@ func load_save(save_name: String):
 			break
 
 
-## resets current save
-func reload_save():
-	if current == null: return
-	var n = current.get_value('save', 'name')
-	load_save(n)
+## Reloads current save and scene
+## [br]1. closes scene
+## [br]2. loads previous save data if there is a previous save
+## [br]3. loads current scene or loads 'scene_override' if not empty
+## loads into main menu if there is no current or scene override
+func reload_save(scene_override: String = ''):
+	get_tree().paused = true
+
+	var fp = Globals.SCENE_MAIN_MENU
+	if is_instance_valid(get_tree().current_scene):
+		fp = get_tree().current_scene.scene_file_path
+	
+	get_tree().unload_current_scene()
+
+	if current != null:
+		load_save(current.get_value('save', 'name'))
+	
+	if scene_override.is_empty():
+		get_tree().change_scene_to_file(fp)
+	else:
+		get_tree().change_scene_to_file(scene_override)
 
 
 func save_to_file():

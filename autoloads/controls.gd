@@ -10,9 +10,6 @@ func _input(event: InputEvent):
 			if event.keycode == KEY_END:
 				get_tree().quit()
 			elif event.keycode == KEY_HOME:
-				get_tree().paused = true
-				get_tree().reload_current_scene()
-				await get_tree().current_scene.tree_exited
 				SavesManager.reload_save()
 	
 	

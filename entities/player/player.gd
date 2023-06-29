@@ -73,8 +73,9 @@ func _on_death():
 	if not is_inside_tree() or not is_node_ready(): return
 	anim_tree.active = false
 	anim_player.play("player_animations/death")
-	var af = func(a): get_tree().change_scene_to_file(Globals.SCENE_LEVEL_SELECT)
-	anim_player.animation_finished.connect(af, CONNECT_ONE_SHOT)
+	var af = func(a): SavesManager.reload_save.call_deferred()
+	anim_player.animation_finished.connect(af,CONNECT_ONE_SHOT)
+	# health.save = false
 
 
 func _input(event: InputEvent):
