@@ -1006,9 +1006,6 @@ scene = 3
 
 [node name="Player" parent="." instance=ExtResource("4_6a5wt")]
 position = Vector2(225, 748)
-scale = Vector2(4.5, 4.5)
-speed = 200.0
-jump_height = 100.0
 
 [node name="Cacti" parent="." instance=ExtResource("5_ut42x")]
 position = Vector2(944, 1082)

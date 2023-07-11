@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_5f8qx"]
 [ext_resource type="Script" path="res://entities/punching_bag/punching_bag.gd" id="1_8f60v"]
 [ext_resource type="Texture2D" uid="uid://b23oaiwots5f8" path="res://assets/other/punching_bag.png" id="2_fiapn"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="3_nia0o"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="4_amj4k"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="3_nia0o"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="4_amj4k"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_5akjw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]

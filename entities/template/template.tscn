@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_gu288"]
 [ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="2_ioxiq"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="3_rgxvu"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="4_onpmo"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="3_rgxvu"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="4_onpmo"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_8eb6x"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_g38rl"]
 

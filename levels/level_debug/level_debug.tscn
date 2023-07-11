@@ -126,7 +126,7 @@ shape = SubResource("RectangleShape2D_wc3jl")
 
 [node name="Player" parent="." instance=ExtResource("5_8q741")]
 z_index = 1
-position = Vector2(1246, -335)
+position = Vector2(984, -414)
 
 [node name="debug_ui" type="Control" parent="."]
 top_level = true
@@ -138,6 +138,7 @@ offset_right = 1290.0
 offset_bottom = -427.0
 
 [node name="hurt" type="Button" parent="debug_ui"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 37.0
 offset_right = 67.0
@@ -145,6 +146,7 @@ offset_bottom = 68.0
 text = "Hurt 25"
 
 [node name="heal" type="Button" parent="debug_ui"]
+layout_mode = 0
 offset_right = 66.0
 offset_bottom = 31.0
 text = "Heal 25"

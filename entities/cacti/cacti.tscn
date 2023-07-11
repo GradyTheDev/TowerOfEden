@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_afx2u"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="3_o5qyl"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_nwsm8"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="6_vgsdl"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="7_whps8"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="6_vgsdl"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="7_whps8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kufo6"]
 radius = 6.0
