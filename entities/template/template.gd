@@ -23,6 +23,6 @@ func _on_death():
 func _on_health_changed(old: int, new: int):
 	if new < old:
 		var t = sprite.create_tween()
-		t.tween_property(sprite, 'modulate', Color.RED, 0.5)
-		t.tween_property(sprite, 'modulate', Color.WHITE, 0.5)
+		t.tween_property(sprite, 'modulate', Color.RED, 0.05)
+		t.tween_property(sprite, 'modulate', Color.WHITE, 0.05)
 		t.play()

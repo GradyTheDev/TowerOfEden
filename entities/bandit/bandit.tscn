@@ -1,11 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6qv07kj57ou6"]
+[gd_scene load_steps=15 format=3 uid="uid://c6qv07kj57ou6"]
 
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_gu288"]
 [ext_resource type="Script" path="res://entities/bandit/bandit.gd" id="1_rc08h"]
 [ext_resource type="PackedScene" uid="uid://w7pthq8g44qw" path="res://entities/bandit/arrow.tscn" id="2_4j7ll"]
 [ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="2_ioxiq"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="3_rgxvu"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="4_onpmo"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="3_rgxvu"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="4_onpmo"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_8eb6x"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_g38rl"]
 [ext_resource type="Texture2D" uid="uid://jqptwnie00mn" path="res://assets/other/bow.png" id="9_kjyfl"]
@@ -15,8 +15,6 @@ radius = 2.0
 height = 14.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tj4b6"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_21tpt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hic20"]
 size = Vector2(8, 18)
@@ -59,7 +57,6 @@ libraries = {
 [node name="AnimTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("4_onpmo")
 anim_player = NodePath("../AnimPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_21tpt")
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
 parameters/conditions/attack_up = false

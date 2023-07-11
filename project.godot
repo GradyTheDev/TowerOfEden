@@ -13,7 +13,7 @@ config_version=5
 config/name="Tower of Eden"
 config/description="Game for the SMVM 2023 by terraquad and 9 other amazing developers."
 run/main_scene="res://other/launcher/launcher.tscn"
-config/features=PackedStringArray("4.0", "Mobile")
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 config/version="v0.0.0.A"
 config/build_date="Running inside Editor"
@@ -46,6 +46,7 @@ window/vsync/vsync_mode=2
 
 [editor]
 
+movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="../movie.avi"
 naming/node_name_num_separator=2
 
@@ -78,13 +79,13 @@ move_down={
 }
 attack={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(375, 11),"global_position":Vector2(379, 54),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(375, 11),"global_position":Vector2(379, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
 parry={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(252, 10),"global_position":Vector2(256, 53),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(252, 10),"global_position":Vector2(256, 53),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
 ]
 }

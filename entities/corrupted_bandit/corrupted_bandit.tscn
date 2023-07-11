@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://entities/corrupted_bandit/corrupted_bandit.gd" id="1_7nvn5"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="2_p2dwv"]
 [ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="3_27y8q"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="4_0wfjp"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="4_0wfjp"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_cp8er"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="5_t7m8x"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="5_t7m8x"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_86kmx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]

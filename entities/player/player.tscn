@@ -1,28 +1,28 @@
-[gd_scene load_steps=18 format=3 uid="uid://du248qvl7jubl"]
+[gd_scene load_steps=17 format=3 uid="uid://du248qvl7jubl"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_r8oxd"]
 [ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="2_6yq3t"]
-[ext_resource type="Texture2D" uid="uid://bhifix67je7lx" path="res://assets/spritesheets/entity_placeholder.png" id="2_bh1wu"]
+[ext_resource type="Texture2D" uid="uid://dgdaaiorm73js" path="res://assets/spritesheets/nym_sprite_v1.png" id="3_bhhvf"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_mwfyw"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="4_pvono"]
 [ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="4_quil2"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/player_animations.res" id="5_0q7ux"]
+[ext_resource type="AnimationLibrary" uid="uid://byvn72n2234gy" path="res://entities/player/player_animations.res" id="5_0q7ux"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_5x0tb"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dymccknvy0nf6" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="7_xntrw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7b6m4"]
-radius = 4.0
-height = 14.0
+radius = 10.4
+height = 67.6
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kew8h"]
-size = Vector2(4, 14)
+size = Vector2(9.6, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3krie"]
-size = Vector2(4, 14)
+size = Vector2(12, 58.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0wk0"]
-size = Vector2(25, 16)
+size = Vector2(64, 77)
 
 [sub_resource type="Animation" id="Animation_f8c0q"]
 resource_name = "RESET"
@@ -38,31 +38,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox/Attack:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0.0]
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dv5ry"]
@@ -70,10 +46,7 @@ _data = {
 "RESET": SubResource("Animation_f8c0q")
 }
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_liq1e"]
-
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(5, 5)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_r8oxd")
@@ -89,15 +62,17 @@ atr_health = NodePath("../../Attributes/Health")
 atr_money = NodePath("../../Attributes/Money")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_bh1wu")
-hframes = 4
-vframes = 4
-frame = 1
+texture = ExtResource("3_bhhvf")
+flip_h = true
+hframes = 8
+vframes = 8
 
 [node name="ColBody" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_7b6m4")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health")]
+visible = false
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("4_pvono")
@@ -105,6 +80,7 @@ entity = NodePath("..")
 health = NodePath("../Attributes/Health")
 
 [node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kew8h")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -113,11 +89,14 @@ collision_mask = 13
 script = ExtResource("5_5x0tb")
 
 [node name="HurtBody" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3krie")
 disabled = true
 
 [node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0.5, -8)
+position = Vector2(32, -5.3)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_c0wk0")
 disabled = true
 
@@ -148,7 +127,6 @@ libraries = {
 [node name="AnimTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("5_jrxt3")
 anim_player = NodePath("../AnimPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_liq1e")
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
 parameters/conditions/attack_up = false
