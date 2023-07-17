@@ -7,6 +7,8 @@ extends Area2D
 ## Node name must have the prefix "portal_" see [AttributePortalTransversal]
 ## any [Portal] must have the prefix "portal_"
 
+signal teleporting(entity: Node2D)
+
 @export var enabled: bool = true
 
 ## saves the state of [member enabled] to the save file
@@ -98,6 +100,7 @@ func _body_entered(body: Node2D):
 	pta.to_portal = to_portal
 
 	# attempt to teleport.
+	teleporting.emit(body)
 	pta.teleport()
 
 

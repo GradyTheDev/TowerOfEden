@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://du248qvl7jubl"]
+[gd_scene load_steps=18 format=3 uid="uid://du248qvl7jubl"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_r8oxd"]
 [ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="2_6yq3t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_5x0tb"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dymccknvy0nf6" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="7_xntrw"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="11_l0jxj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7b6m4"]
 radius = 10.4
@@ -80,7 +81,6 @@ entity = NodePath("..")
 health = NodePath("../Attributes/Health")
 
 [node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kew8h")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -90,13 +90,11 @@ script = ExtResource("5_5x0tb")
 
 [node name="HurtBody" type="CollisionShape2D" parent="Hurtbox"]
 visible = false
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_3krie")
 disabled = true
 
 [node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(32, -5.3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_c0wk0")
 disabled = true
 
@@ -135,6 +133,14 @@ parameters/conditions/in_air = false
 parameters/conditions/jump = false
 parameters/conditions/on_ground = false
 parameters/conditions/walk = false
+
+[node name="Dialog" parent="." instance=ExtResource("11_l0jxj")]
+visible = false
+offset_left = -133.0
+offset_top = -57.0
+offset_right = 133.0
+offset_bottom = -40.0
+text = ""
 
 [connection signal="death" from="Attributes/Health" to="." method="_on_death"]
 [connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_changed"]

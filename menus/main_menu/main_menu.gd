@@ -26,4 +26,4 @@ func _on_continue_pressed():
 
 func _on_new_game_pressed():
 	SavesManager.new_save()
-	_on_continue_pressed()
+	get_tree().change_scene_to_file(Globals.CUTSCENES.intro)

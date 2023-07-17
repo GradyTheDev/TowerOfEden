@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var gravity: float = 98
 @export var far: int = 100
 @export var near: int = 80
+@export var passive: bool = false
 @export_flags_2d_physics var sight_mask: int
 
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
@@ -63,7 +64,7 @@ func _physics_process(delta):
 	
 	_attack_timer = move_toward(_attack_timer, 0, delta)
 	
-	if Globals.player == null or not Globals.player.health.alive and state == states.hunting:
+	if passive or Globals.player == null or not Globals.player.health.alive and state == states.hunting:
 		state = states.idle
 
 	if state == states.idle:
@@ -129,7 +130,7 @@ func update_animation_parms():
 	# anim_tree['parameters/conditions/attack_up'] = false
 	# anim_tree['parameters/conditions/attack_down'] = false
 
-	if Globals.player == null: 
+	if passive or Globals.player == null: 
 		anim_tree['parameters/conditions/attack_forward'] = false
 		return
 	

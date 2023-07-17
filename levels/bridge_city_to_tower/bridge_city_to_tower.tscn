@@ -1,0 +1,250 @@
+[gd_scene load_steps=16 format=3 uid="uid://b5s0vffw3hdgd"]
+
+[ext_resource type="TileSet" uid="uid://cmh2c7oc8kydj" path="res://assets/tilesets/city_floor.tres" id="1_euht7"]
+[ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
+[ext_resource type="Script" path="res://other/portal.gd" id="2_vsfw8"]
+[ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="3_2plir"]
+[ext_resource type="Texture2D" uid="uid://d4ndsnfe477rs" path="res://assets/levels/bridge_city_to_tower/bridge_prototype.png" id="5_sr14i"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="7_her2d"]
+[ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="9_lin5f"]
+[ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="9_ub1y7"]
+[ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="10_qnf1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcovx"]
+size = Vector2(96, 132)
+
+[sub_resource type="Animation" id="Animation_a75p8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cutscene/Dialog_2:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cutscene/Dialog:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/Dialog:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="Animation" id="Animation_710yp"]
+resource_name = "intro"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_cutscene_intro_start"
+}, {
+"args": [],
+"method": &"_cutscene_intro_2"
+}, {
+"args": [],
+"method": &"_cutscene_intro_end"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2406, -34), Vector2(-1248, -34)]
+}
+
+[sub_resource type="Animation" id="Animation_uyckf"]
+resource_name = "talk_to_bandits"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cutscene/Dialog_2:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Well, what have we here?", "", "Then we’ll make it short. Give it to us.", "", "Kill him.", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player/Camera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(381, -28), Vector2(540, -140)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player/Dialog:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "...", "", "Only in good company.", "", "And what would “it” be?", "", ""]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cutscene/Dialog:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3, 4, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["", "Not very talkative, ey?", "", ""]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_cutscene_talk_to_bandits_end"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fr8g"]
+_data = {
+"RESET": SubResource("Animation_a75p8"),
+"intro": SubResource("Animation_710yp"),
+"talk_to_bandits": SubResource("Animation_uyckf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk4ce"]
+size = Vector2(128, 436)
+
+[node name="BridgeCityToTower" type="Node2D"]
+script = ExtResource("1_pbnj1")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_euht7")
+format = 2
+layer_0/tile_data = PackedInt32Array(65535, 0, 1, 65534, 0, 1, 65533, 0, 2, 65532, 0, 2, 65531, 0, 2, 65530, 0, 0, 65529, 0, 1, 65528, 0, 0, 65527, 0, 2, 65526, 0, 1, 65525, 0, 1, 65524, 0, 2, 65523, 0, 0, 65522, 0, 1, 65521, 0, 0, 65520, 0, 0, 65519, 0, 1, 65518, 0, 1, 65517, 0, 0, 65516, 0, 2, 65515, 0, 0, 65514, 0, 2, 65513, 0, 1, 65512, 0, 1, 65511, 0, 1, 65510, 0, 2, 65509, 0, 0, 65508, 0, 2, 65506, 0, 0, 65507, 0, 0, 65505, 0, 0, 65504, 0, 1, 65503, 0, 2, 65502, 0, 0, 65501, 0, 2, 65500, 0, 1, 65499, 0, 0, 52, 0, 0, 53, 0, 1, 54, 0, 2, 55, 0, 1, 56, 0, 1, 57, 0, 2, 58, 0, 0, 59, 0, 2, 60, 0, 2, 61, 0, 2, 62, 0, 0, 63, 0, 0, 64, 0, 2, 65, 0, 0, 66, 0, 2, 67, 0, 0, 68, 0, 2, 69, 0, 0, 70, 0, 0, 71, 0, 1, 72, 0, 1, 73, 0, 2, 74, 0, 1, 75, 196608, 1, -31, 131072, 0, -65567, 0, 0, -65566, 196608, 0, -29, 196608, 0, -30, 131072, 0, 0, 131072, 0, 1, 131072, 0, 2, 131072, 0, 3, 131072, 0, 4, 131072, 0, 5, 131072, 0, 6, 131072, 0, 7, 131072, 0, 8, 131072, 0, 9, 131072, 0, 10, 131072, 0, 11, 131072, 0, 12, 131072, 0, 13, 131072, 0, 14, 131072, 0, 15, 131072, 0, 16, 131072, 0, 17, 131072, 0, 18, 131072, 0, 19, 131072, 0, 20, 131072, 0, 21, 131072, 0, 22, 131072, 0, 23, 131072, 0, 24, 131072, 0, 25, 131072, 0, 26, 131072, 0, 27, 131072, 0, 28, 131072, 0, 29, 131072, 0, 30, 131072, 0, 31, 131072, 0, 32, 131072, 0, 33, 131072, 0, 34, 131072, 0, 35, 131072, 0, 36, 131072, 0, 37, 131072, 0, 38, 131072, 0, 39, 131072, 0, 40, 131072, 0, 41, 131072, 0, 42, 131072, 0, 43, 131072, 0, 44, 131072, 0, 45, 131072, 0, 46, 131072, 0, 47, 131072, 0, 48, 131072, 0, 49, 131072, 0, 50, 131072, 0, 51, 131072, 0, 65498, 0, 1, 65497, 0, 0, 65496, 0, 0, 65495, 0, 1, 65494, 0, 1, 65493, 0, 1, 65492, 0, 0, 65491, 0, 2, 65490, 0, 0, 65489, 0, 2, 65488, 0, 1, 65487, 0, 1, 65486, 0, 1, 65485, 0, 1, 65484, 0, 1, 65483, 0, 1, 65482, 0, 0, 65481, 0, 0, 65480, 0, 2, 65479, 0, 0, 65478, 0, 2, 65477, 0, 0, 65476, 0, 1, 65475, 0, 2, 65474, 0, 2, 65473, 0, 1, 65472, 0, 0, 65471, 0, 2, 65470, 0, 0, 65469, 0, 1, 65468, 0, 2, 65467, 0, 0, 65466, 0, 1, 65465, 0, 1, 65464, 0, 2, 65463, 0, 1, 65462, 0, 2, 65461, 0, 2, 65460, 0, 0, 65459, 131072, 2, -77, 131072, 0, -65613, 131072, 0, -131149, 131072, 0, -196685, 131072, 0, -262221, 131072, 0, -327757, 131072, 0, -393293, 131072, 0, -458829, 131072, 0, -524365, 131072, 0, -589901, 131072, 0, -655437, 131072, 0, -720973, 131072, 0, -786509, 131072, 0, -852045, 131072, 0, -917581, 131072, 0)
+
+[node name="BridgePrototype" type="Sprite2D" parent="."]
+position = Vector2(831, 269)
+texture = ExtResource("5_sr14i")
+
+[node name="portal_end" type="Area2D" parent="." node_paths=PackedStringArray("exit_pos")]
+position = Vector2(1624, -60)
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("2_vsfw8")
+to_portal = "start"
+exit_pos = NodePath("end")
+scene = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="portal_end"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_kcovx")
+
+[node name="Icon2" type="Sprite2D" parent="portal_end/CollisionShape2D2"]
+position = Vector2(0, -2.24997)
+scale = Vector2(8.875, 8.34375)
+texture = ExtResource("3_2plir")
+
+[node name="end" type="Marker2D" parent="portal_end"]
+position = Vector2(-179, -5)
+
+[node name="cutscene" type="Node2D" parent="."]
+
+[node name="Dialog" parent="cutscene" instance=ExtResource("7_her2d")]
+visible = false
+offset_left = 605.0
+offset_top = -114.0
+offset_right = 836.0
+offset_bottom = -85.0
+size_flags_horizontal = 0
+text = ""
+
+[node name="Bandit" parent="cutscene" instance=ExtResource("10_qnf1p")]
+position = Vector2(722, -37)
+rotation = 3.14159
+scale = Vector2(5, -5)
+passive = true
+
+[node name="Dialog_2" parent="cutscene" instance=ExtResource("7_her2d")]
+visible = false
+offset_left = 601.0
+offset_top = -101.0
+offset_right = 988.0
+offset_bottom = -78.0
+text = ""
+
+[node name="CorruptedBandit" parent="cutscene" instance=ExtResource("9_lin5f")]
+position = Vector2(795, -38)
+rotation = 3.14159
+scale = Vector2(5, -5)
+passive = true
+
+[node name="cutscene" type="AnimationPlayer" parent="cutscene"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_7fr8g")
+}
+
+[node name="TalkToBanditsTrigger" type="Area2D" parent="cutscene"]
+position = Vector2(382, 3)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cutscene/TalkToBanditsTrigger"]
+position = Vector2(63, -208)
+shape = SubResource("RectangleShape2D_nk4ce")
+
+[node name="Player" parent="." instance=ExtResource("9_ub1y7")]
+position = Vector2(-1248, -34)
+
+[connection signal="body_entered" from="cutscene/TalkToBanditsTrigger" to="." method="_on_talk_to_bandits_trigger_body_entered"]

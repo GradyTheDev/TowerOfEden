@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://baj71jxlpgohd"]
+
+[ext_resource type="Script" path="res://cutscenes/intro/intro.gd" id="1_foeq4"]
+[ext_resource type="SystemFont" uid="uid://oltghup7lh4e" path="res://other/font_monospace_dynamic.tres" id="2_8nrge"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_foeq4")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autoplay = true
+
+[node name="Developer" type="Label" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8nrge")
+text = "OPENING CUTSCENE
+Nym’s Theme plays throughout opening scene.
+BLACK.
+INT. DARK ROOM
+It’s pitch black- No, there’s a spike of LIGHT...
+It glows and grows through the thin wooden shutter of a room.
+Alone underneath a halo of new light sits a BOY (8).
+In front of him, a letter and an artifact we’ll learn later
+is THE SPARK.
+NYM’S FATHER (V.O.)
+Nym, my son... You might not
+understand this now... You might
+never understand but... I’m gone.
+The shutter-light slowly dims as if the sun is setting behind
+the moon. No warm shades, just the fading of light.
+NYM’S FATHER (V.O.)
+But I will return. Your mother
+is... But the Tower can create
+miracles- It will bring her back to
+life... Back to us.
+It’s black, the PATTER of rain hits against the wooden
+shutters. Low INHALES of a child CRYING strike through like
+lightning bolts.
+NYM’S FATHER (V.O.)
+We’ll be a family again. Wait for
+me, I promise I’ll find her, and
+once I have...
+FADE TO BLACK.
+SUPER: “Ten years later..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 1
+
+[node name="Continue" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_8nrge")
+text = "press space to skip"
+
+[connection signal="timeout" from="Continue" to="." method="_on_continue_timeout"]

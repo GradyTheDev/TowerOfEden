@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var far: int = 500
 @export var near: int = 300
+@export var passive: bool = false
 
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
 @onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
@@ -13,6 +14,7 @@ func _ready():
 	health.death.connect(_on_death)
 	health.health_changed.connect(_on_health_changed)
 	add_to_group(Globals.GROUP_ENEMY)
+	anim_tree.active = true
 
 
 func _on_death():
@@ -69,7 +71,7 @@ func _physics_process(delta):
 	
 	_attack_timer = move_toward(_attack_timer, 0, delta)
 	
-	if Globals.player == null or not Globals.player.health.alive and state == states.hunting:
+	if passive or Globals.player == null or not Globals.player.health.alive and state == states.hunting:
 		state = states.idle
 
 	if state == states.idle:
@@ -131,6 +133,8 @@ func refresh_sight():
 
 
 func _on_hurtbox_area_entered(area: Area2D):
+	if passive: return
+	
 	if area is Hitbox and area.target is Player:
 		area.target.health -= damage
 
