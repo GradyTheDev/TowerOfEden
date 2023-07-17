@@ -137,6 +137,8 @@ func new_save(save_name: String = ''):
 
 
 func get_value(section: String, key: String, default: Variant = null) -> Variant:
+	section = section.to_lower()
+	key = key.to_lower()
 	if current == null or not current.has_section_key(section, key):
 		return default
 	else:
@@ -144,10 +146,14 @@ func get_value(section: String, key: String, default: Variant = null) -> Variant
 
 
 func set_value(section: String, key: String, value: Variant):
+	section = section.to_lower()
+	key = key.to_lower()
 	if current != null:
 		current.set_value(section, key, value)
 
 
 func has_key(section: String, key: String) -> bool:
+	section = section.to_lower()
+	key = key.to_lower()
 	if current == null: return false
 	return current.has_section_key(section, key)

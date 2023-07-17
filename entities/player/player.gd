@@ -19,9 +19,11 @@ extends CharacterBody2D
 @onready var camera: Camera2D = get_node("Camera")
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
 @onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
+var camera_follow_player: bool = true
 
 @onready var health: AttributeHealth = get_node("Attributes/Health")
 @onready var sprite: Sprite2D = get_node("Sprite")
+@onready var dialog: RichTextLabel = get_node("Dialog")
 
 ## unpaused time, ms
 var air_time: float
@@ -36,6 +38,8 @@ var jump_counter: int = 0
 var jump_anim_fix: float = 0
 
 # var money: int = 0
+
+var in_cutscene: bool = false
 
 func _init():
 	add_to_group(Globals.GROUP_PLAYER)
@@ -79,33 +83,34 @@ func _on_death():
 
 
 func _input(event: InputEvent):
-	if not health.alive: return
+	if not health.alive or in_cutscene: return
 	if event.is_action("jump") and Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time_limit
 
 
-func _process(delta: float):
-	if not health.alive: return
-
-	jump_anim_fix = move_toward(jump_anim_fix, 0, delta)
-	update_animation_parms()
-
-
 func _physics_process(delta: float):
-	# Smoothly align Camera
-	var vrect = min(camera.get_viewport_rect().size.x, camera.get_viewport_rect().size.y)/2
-	var weight = remap(camera.global_position.distance_to(global_position), 0, vrect, 0, 1)
-	camera.global_position = camera.global_position.lerp(global_position, clamp(weight, 0, 1))
+	if camera_follow_player:
+		# Smoothly align Camera
+		var vrect = min(camera.get_viewport_rect().size.x, camera.get_viewport_rect().size.y)/2
+		var weight = remap(camera.global_position.distance_to(global_position), 0, vrect, 0, 1)
+		camera.global_position = camera.global_position.lerp(global_position, clamp(weight, 0, 1))
 	
+	# Jump anim fix (fix jump anim switching spam)
+	jump_anim_fix = move_toward(jump_anim_fix, 0, delta)
+
 	# Jump Buffer timer
 	jump_buffer_timer = move_toward(jump_buffer_timer, 0, delta)
+
+	# cutscene - disable physics
+	if in_cutscene and is_on_floor():
+		return
 
 	# Gravity
 	var gravity = get_gravity()
 	if velocity.y < gravity and not is_on_floor():
 		velocity.y += gravity * delta
 
-	if health.alive:
+	if health.alive and not in_cutscene:
 		# Movement
 		var input_direction = Vector2(Input.get_axis("move_left", "move_right"), 0)
 		if input_direction.x != 0:
@@ -133,10 +138,10 @@ func _physics_process(delta: float):
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, 1300 * delta)
 
-
 	# Floor Snap
 	var was_on_floor = is_on_floor()
 	move_and_slide()
+	update_animation_parms()
 	if was_on_floor and not is_on_floor() and not jump_counter > 0:
 		apply_floor_snap()
 	
@@ -165,7 +170,7 @@ func update_animation_parms():
 	anim_tree['parameters/conditions/attack_forward'] = false
 	anim_tree['parameters/conditions/attack_up'] = false
 	anim_tree['parameters/conditions/attack_down'] = false
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and not in_cutscene:
 		var d = Input.get_vector("move_left", "move_right", "jump", "move_down")
 		if is_on_floor():
 			if d.y < 0:

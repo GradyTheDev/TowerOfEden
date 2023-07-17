@@ -16,6 +16,7 @@ scene = 0
 shape = SubResource("RectangleShape2D_aimoe")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_apdrm")
 
 [node name="Marker2D" type="Marker2D" parent="."]

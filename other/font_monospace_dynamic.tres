@@ -1,0 +1,5 @@
+[gd_resource type="SystemFont" format=3 uid="uid://oltghup7lh4e"]
+
+[resource]
+font_names = PackedStringArray("Monospace")
+multichannel_signed_distance_field = true
