@@ -87,6 +87,7 @@ shape = SubResource("RectangleShape2D_kew8h")
 collision_layer = 0
 collision_mask = 13
 script = ExtResource("5_5x0tb")
+damage = 100
 
 [node name="HurtBody" type="CollisionShape2D" parent="Hurtbox"]
 visible = false
@@ -102,6 +103,7 @@ disabled = true
 
 [node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
 script = ExtResource("3_mwfyw")
+invincible = true
 body = NodePath("../..")
 save = true
 
@@ -135,7 +137,6 @@ parameters/conditions/on_ground = false
 parameters/conditions/walk = false
 
 [node name="Dialog" parent="." instance=ExtResource("11_l0jxj")]
-visible = false
 offset_left = -133.0
 offset_top = -57.0
 offset_right = 133.0

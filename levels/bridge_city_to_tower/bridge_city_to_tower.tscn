@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5s0vffw3hdgd"]
+[gd_scene load_steps=23 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="TileSet" uid="uid://cmh2c7oc8kydj" path="res://assets/tilesets/city_floor.tres" id="1_euht7"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
@@ -6,70 +6,35 @@
 [ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="3_2plir"]
 [ext_resource type="Texture2D" uid="uid://d4ndsnfe477rs" path="res://assets/levels/bridge_city_to_tower/bridge_prototype.png" id="5_sr14i"]
 [ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="7_her2d"]
+[ext_resource type="Script" path="res://cutscenes/intro/act0.gd" id="7_o7k3d"]
+[ext_resource type="Script" path="res://cutscenes/intro/act1.gd" id="8_2dnxa"]
 [ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="9_lin5f"]
 [ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="9_ub1y7"]
 [ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="10_qnf1p"]
+[ext_resource type="PackedScene" uid="uid://bj20p3excamw7" path="res://entities/cacti/cacti.tscn" id="11_c38y0"]
+[ext_resource type="Script" path="res://cutscenes/intro/act2.gd" id="12_dupbb"]
+[ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="12_m5ntc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcovx"]
 size = Vector2(96, 132)
 
-[sub_resource type="Animation" id="Animation_a75p8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("cutscene/Dialog_2:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [""]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("cutscene/Dialog:text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [""]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Player/Dialog:text")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [""]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhcvv"]
+size = Vector2(128, 436)
 
-[sub_resource type="Animation" id="Animation_710yp"]
-resource_name = "intro"
-length = 2.0
+[sub_resource type="Animation" id="Animation_xh3be"]
+resource_name = "Act0"
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".")
+tracks/0/path = NodePath("Act0")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.9, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"_cutscene_intro_start"
-}, {
-"args": [],
-"method": &"_cutscene_intro_2"
 }, {
 "args": [],
 "method": &"_cutscene_intro_end"
@@ -78,23 +43,23 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Player:position")
+tracks/1/path = NodePath("../Player:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.9),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-2406, -34), Vector2(-1248, -34)]
+"values": [Vector2(-2406, -34), Vector2(-1278, -34)]
 }
 
-[sub_resource type="Animation" id="Animation_uyckf"]
-resource_name = "talk_to_bandits"
+[sub_resource type="Animation" id="Animation_femde"]
+resource_name = "Act1"
 length = 8.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("cutscene/Dialog_2:text")
+tracks/0/path = NodePath("Act1/BanditDialog:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,66 +71,536 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Player/Camera:position")
+tracks/1/path = NodePath("%Act1/Camera:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 7.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(381, -28), Vector2(540, -140)]
+"values": [Vector2(0, 0), Vector2(280, -110), Vector2(280, -110), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Player/Dialog:text")
+tracks/2/path = NodePath("Act1/CorruptedBanditDialog:text")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2, 3, 4, 5, 6, 7, 8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": ["", "...", "", "Only in good company.", "", "And what would “it” be?", "", ""]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("cutscene/Dialog:text")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 3, 4, 8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": ["", "Not very talkative, ey?", "", ""]
 }
-tracks/4/type = "method"
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Act1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("Act1/BanditBow:passive")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(8),
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Act1/BanditSword:passive")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Act1:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_cutscene_talk_to_bandits_end"
-}]
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Act1/Camera:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Player:dialog_text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2, 3, 4, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["...", "", "Only in good company.", "", "And what would “it” be?", ""]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fr8g"]
+[sub_resource type="Animation" id="Animation_pnc0o"]
+resource_name = "Act2"
+length = 3.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Act2/Cacti/TankDialog:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["", "Where is it, child?", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Act2/Cacti:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1e-05),
+"update": 0,
+"values": [0.0, 81.0, -180.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Act2/Cacti:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(717, 0), Vector2(480, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Act2/Camera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 3.3, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(190, -110), Vector2(190, -110), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Act2/Cacti:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 4, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Act2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Act2:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Act2/Camera:enabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Player:dialog_text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.9, 1.7, 2.5, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["Is there where you ask me to join you?", "", "Did you mean this?", ""]
+}
+
+[sub_resource type="Animation" id="Animation_7j3kx"]
+resource_name = "Act3"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Act3/Separator/BanditKneeling:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Act3/Separator/BanditKneeling/TankDialog:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1, 2.6, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Who are you?", "", "You rotten... Ugh-", ""]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Act3/Camera:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 5.5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -55), Vector2(0, -55), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Act3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Act3:process_mode")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Act3/Camera:zoom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 5.5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Act3/ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3, 3.4, 3.42, 5, 5.5),
+"transitions": PackedFloat32Array(1, 1e+06, 1e-05, 1e-05, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0.701961, 0.701961, 0.701961, 1), Color(0.701961, 0.701961, 0.701961, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Act3/ColorRect:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Act3/FatherDialog:text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 3.8, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["", "Carry this with you, it’s an artifact from the Tower. As long as you have this...", ""]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Act3/Camera:enabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Player:dialog_text")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1, 2.6, 5.2, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["My name is Nym. Remember it for when you wander the after life.", "", "I will find you.", ""]
+}
+
+[sub_resource type="Animation" id="Animation_xud73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2406, -34)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Act1:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Act2:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Act3:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Act1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Act2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Act3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Act2/Cacti:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(717, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%Act3/ColorRect:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%Act3/ColorRect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%Act1/Camera:enabled")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%Act2/Camera:enabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("%Act3/Camera:enabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../Player:dialog_text")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0pxhb"]
 _data = {
-"RESET": SubResource("Animation_a75p8"),
-"intro": SubResource("Animation_710yp"),
-"talk_to_bandits": SubResource("Animation_uyckf")
+"Act0": SubResource("Animation_xh3be"),
+"Act1": SubResource("Animation_femde"),
+"Act2": SubResource("Animation_pnc0o"),
+"Act3": SubResource("Animation_7j3kx"),
+"RESET": SubResource("Animation_xud73")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk4ce"]
-size = Vector2(128, 436)
 
 [node name="BridgeCityToTower" type="Node2D"]
 script = ExtResource("1_pbnj1")
+animation_speed = {
+0: 1.0,
+1: 1.0,
+2: 0.7,
+3: 0.5
+}
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_euht7")
@@ -197,54 +632,137 @@ texture = ExtResource("3_2plir")
 [node name="end" type="Marker2D" parent="portal_end"]
 position = Vector2(-179, -5)
 
-[node name="cutscene" type="Node2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("9_ub1y7")]
+position = Vector2(-2406, -34)
 
-[node name="Dialog" parent="cutscene" instance=ExtResource("7_her2d")]
-visible = false
-offset_left = 605.0
-offset_top = -114.0
-offset_right = 836.0
-offset_bottom = -85.0
-size_flags_horizontal = 0
-text = ""
-
-[node name="Bandit" parent="cutscene" instance=ExtResource("10_qnf1p")]
-position = Vector2(722, -37)
-rotation = 3.14159
-scale = Vector2(5, -5)
-passive = true
-
-[node name="Dialog_2" parent="cutscene" instance=ExtResource("7_her2d")]
-visible = false
-offset_left = 601.0
-offset_top = -101.0
-offset_right = 988.0
-offset_bottom = -78.0
-text = ""
-
-[node name="CorruptedBandit" parent="cutscene" instance=ExtResource("9_lin5f")]
-position = Vector2(795, -38)
-rotation = 3.14159
-scale = Vector2(5, -5)
-passive = true
-
-[node name="cutscene" type="AnimationPlayer" parent="cutscene"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_7fr8g")
-}
-
-[node name="TalkToBanditsTrigger" type="Area2D" parent="cutscene"]
-position = Vector2(382, 3)
+[node name="CutsceneTrigger" type="Area2D" parent="."]
+position = Vector2(66, -207)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cutscene/TalkToBanditsTrigger"]
-position = Vector2(63, -208)
-shape = SubResource("RectangleShape2D_nk4ce")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
+position = Vector2(202, -13)
+shape = SubResource("RectangleShape2D_bhcvv")
 
-[node name="Player" parent="." instance=ExtResource("9_ub1y7")]
-position = Vector2(-1248, -34)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath(".")
+speed_scale = 0.5
+libraries = {
+"": SubResource("AnimationLibrary_0pxhb")
+}
 
-[connection signal="body_entered" from="cutscene/TalkToBanditsTrigger" to="." method="_on_talk_to_bandits_trigger_body_entered"]
+[node name="Act0" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("player")]
+script = ExtResource("7_o7k3d")
+player = NodePath("../../Player")
+
+[node name="Act1" type="Node2D" parent="AnimationPlayer"]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+position = Vector2(1242, -155)
+script = ExtResource("8_2dnxa")
+
+[node name="BanditDialog" parent="AnimationPlayer/Act1" instance=ExtResource("7_her2d")]
+custom_minimum_size = Vector2(240, 23)
+offset_left = 389.0
+offset_top = -68.0
+offset_right = 629.0
+offset_bottom = -45.0
+size_flags_horizontal = 0
+text = ""
+
+[node name="CorruptedBanditDialog" parent="AnimationPlayer/Act1" instance=ExtResource("7_her2d")]
+custom_minimum_size = Vector2(230, 23)
+offset_left = 495.0
+offset_top = -68.0
+offset_right = 735.0
+offset_bottom = -45.0
+size_flags_horizontal = 0
+text = ""
+
+[node name="BanditBow" parent="AnimationPlayer/Act1" instance=ExtResource("10_qnf1p")]
+position = Vector2(509, 0)
+rotation = 3.14159
+scale = Vector2(5, -5)
+passive = true
+
+[node name="BanditSword" parent="AnimationPlayer/Act1" instance=ExtResource("9_lin5f")]
+position = Vector2(622, 0)
+rotation = 3.14159
+scale = Vector2(5, -5)
+passive = true
+
+[node name="Camera" type="Camera2D" parent="AnimationPlayer/Act1"]
+enabled = false
+
+[node name="Act2" type="Node2D" parent="AnimationPlayer"]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+position = Vector2(1242, -155)
+script = ExtResource("12_dupbb")
+
+[node name="Cacti" parent="AnimationPlayer/Act2" instance=ExtResource("11_c38y0")]
+position = Vector2(717, 0)
+speed = 0.0
+
+[node name="TankDialog" parent="AnimationPlayer/Act2/Cacti" instance=ExtResource("7_her2d")]
+process_mode = 3
+custom_minimum_size = Vector2(200, 23)
+offset_left = -20.2001
+offset_top = -14.0
+offset_right = 179.8
+offset_bottom = 9.0
+scale = Vector2(0.2, 0.2)
+text = ""
+
+[node name="Camera" type="Camera2D" parent="AnimationPlayer/Act2"]
+enabled = false
+
+[node name="Act3" type="Node2D" parent="AnimationPlayer"]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+position = Vector2(1242, -155)
+
+[node name="Separator" type="Node" parent="AnimationPlayer/Act3"]
+
+[node name="BanditKneeling" type="Sprite2D" parent="AnimationPlayer/Act3/Separator"]
+z_index = -1
+position = Vector2(1486, -486)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_m5ntc")
+
+[node name="TankDialog" parent="AnimationPlayer/Act3/Separator/BanditKneeling" instance=ExtResource("7_her2d")]
+offset_left = -172.0
+offset_top = -296.0
+offset_right = 0.0
+offset_bottom = -271.0
+scale = Vector2(2, 2)
+text = ""
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer/Act3"]
+visible = false
+offset_left = -521.0
+offset_top = -418.0
+offset_right = 550.0
+offset_bottom = 323.0
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 0)
+
+[node name="FatherDialog" parent="AnimationPlayer/Act3" instance=ExtResource("7_her2d")]
+offset_left = -146.0
+offset_top = -67.0
+offset_right = 155.0
+offset_bottom = -12.0
+text = ""
+
+[node name="Camera" type="Camera2D" parent="AnimationPlayer/Act3"]
+enabled = false
+
+[connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_triggered" flags=6]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="act_ended" from="AnimationPlayer/Act1" to="." method="_on_act_1_act_ended"]
+[connection signal="act_ended" from="AnimationPlayer/Act2" to="." method="_on_act_2_act_ended"]

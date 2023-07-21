@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @export var far: int = 500
 @export var near: int = 300
 @export var passive: bool = false

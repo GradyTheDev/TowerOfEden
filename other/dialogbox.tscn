@@ -9,8 +9,12 @@
 z_index = 64
 texture_filter = 2
 clip_contents = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
 offset_right = 99.0
-offset_bottom = 23.0
+grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("1_b4fnl")
 theme_override_fonts/bold_font = ExtResource("1_b4fnl")
 theme_override_fonts/italics_font = ExtResource("1_b4fnl")

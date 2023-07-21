@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://eft2puo5eun4"]
+[gd_scene load_steps=10 format=3 uid="uid://eft2puo5eun4"]
 
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_gu288"]
 [ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="2_ioxiq"]
@@ -10,8 +10,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
 radius = 2.0
 height = 14.0
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_21tpt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hic20"]
 size = Vector2(8, 18)
@@ -44,7 +42,6 @@ libraries = {
 [node name="AnimTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("4_onpmo")
 anim_player = NodePath("../AnimPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_21tpt")
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
 parameters/conditions/attack_up = false

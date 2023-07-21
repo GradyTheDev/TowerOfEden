@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj20p3excamw7"]
+[gd_scene load_steps=11 format=3 uid="uid://bj20p3excamw7"]
 
 [ext_resource type="Script" path="res://entities/cacti/cacti.gd" id="1_s6fvg"]
 [ext_resource type="Texture2D" uid="uid://cpba01xufk21m" path="res://assets/spritesheets/cacti.png" id="2_576xb"]
@@ -16,9 +16,7 @@ height = 14.0
 size = Vector2(18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ube6e"]
-size = Vector2(18, 18)
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_xd6jq"]
+size = Vector2(23, 15.6)
 
 [node name="Cacti" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -57,7 +55,9 @@ collision_mask = 2
 script = ExtResource("5_nwsm8")
 
 [node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.499999, 8.2)
 shape = SubResource("RectangleShape2D_ube6e")
+disabled = true
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -67,7 +67,6 @@ libraries = {
 [node name="AnimTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("7_whps8")
 anim_player = NodePath("../AnimPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_xd6jq")
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
 parameters/conditions/attack_up = false

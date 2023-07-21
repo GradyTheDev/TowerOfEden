@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+@export var dialog_text: String:
+	set(new_text):
+		dialog_text = new_text
+		dialog.set_text(new_text)
 @export_group("Physics")
 @export var speed: float = 500
 @export var max_jumps: int = 2
@@ -10,6 +14,7 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float = 0.5 # sec
 @export var jump_time_to_floor: float = 0.5 # sec
 @export var jump_cancel_velocity_multiplier: float = 0.5
+
 
 @onready var jump_velocity: float =  ((2.0 * jump_height) / jump_time_to_peak) * -1
 @onready var jump_accend_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1
