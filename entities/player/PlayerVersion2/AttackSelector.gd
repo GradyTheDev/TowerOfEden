@@ -2,7 +2,6 @@ extends Node
 
 
 signal AttemptMade(attempt)
-signal actionCleared
 
 var maxTimeTillInput:float = 0.2
 var unsolvedActionChain = []

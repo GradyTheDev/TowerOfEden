@@ -10,6 +10,8 @@ class_name PlayerController extends CharacterBody2D
 @export var timeToJumpPeak:float
 @export var jumpDistance:float
 
+var selectedAttack:String = ""
+
 var jumpAvailability:bool = true
 var gravity:float
 var jumpSpeed:float
@@ -24,6 +26,7 @@ var in_cutscene: bool = false
 @onready var camera: Camera2D = $PlayerCamera
 @onready var health: AttributeHealth = get_node("Attributes/Health")
 @onready var coyote_timer: Timer = $CoyoteTimer
+@onready var invinicibility_timer: Timer = $InvinicibilityTimer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var MaxGravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -94,13 +97,20 @@ func StateMachineDelta(delta:float)->void:
 		"fall/coyoteJump":
 			Jump()
 		"fall/falling":
-			FlipCharacter(GetMoveDirection())
+			FlipCharacter(velocity.x)
 			animController.travel("fall")
 			if Input.is_action_just_released("jump") and velocity.y < -jumpSpeed/2:
 				velocity.y = -jumpSpeed/2
-#			MoveWithFriction(airAccel,airDecel, delta, maxSpeed)
+			MoveWithFriction(airAccel,airDecel, delta, maxSpeed)
 			Applygravity(delta)
 		"attack":
+			animController.travel(selectedAttack)
+			pass
+		"dodge/entry":
+			health.invincible = true
+			invinicibility_timer.start
+			pass
+		"dodge/rolling":
 			pass
 	pass
 
@@ -110,7 +120,7 @@ func GetMoveDirection()->float:
 	return 0
 
 func GetIsOnFloor()->bool:
-	return is_on_floor()
+	return ground_checker.is_colliding()
 
 
 func MoveWithFriction(accelS:float, decelS:float, delta:float, maxVel:float)->void:
@@ -141,6 +151,7 @@ func HandleStateTransitions()->void:
 	smp.set_param("movement", GetMoveDirection())
 	if Input.is_action_just_pressed("jump") : smp.set_trigger("jump")
 	smp.set_param("coyoteAvailable", jumpAvailability)
+	if Input.is_action_just_pressed("slide") : smp.set_trigger("roll")
 	pass
 
 func SetJumpSpeed()->void:
@@ -175,5 +186,14 @@ func _on_coyote_timer_timeout() -> void:
 
 
 func _on_attack_selector_attempt_made(attempt) -> void:
-	print(attempt)
+	selectedAttack = attempt
+	smp.set_trigger("attackPressed")
+	pass # Replace with function body.
+
+func EndAttack()->void:
+	pass
+
+func _on_invinicibility_timer_timeout() -> void:
+	smp.set_trigger("dodgeEnd")
+	health.invincible = false
 	pass # Replace with function body.
