@@ -37,7 +37,7 @@ static func flip_node2D_direction(node: Node2D) -> int:
 
 ## rotate vector to match the angle and direction of the slope
 ## used to walk along slopes, instead of bounce off them
-static func adjust_vector_to_slope(vector: Vector2, slope_normal: Vector2):
+static func adjust_vector_to_slope(vector: Vector2, slope_normal: Vector2)->Vector2:
 	return vector.rotated(Vector2.UP.angle_to(slope_normal))
 
 

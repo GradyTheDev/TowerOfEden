@@ -32,7 +32,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Visuals/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,6 +125,7 @@ libraries = {
 [node name="AnimTree" type="AnimationTree" parent="."]
 tree_root = ExtResource("5_jrxt3")
 anim_player = NodePath("../AnimPlayer")
+active = true
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
 parameters/conditions/attack_up = false
