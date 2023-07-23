@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="9_lin5f"]
 [ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="9_ub1y7"]
 [ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="10_qnf1p"]
-[ext_resource type="PackedScene" uid="uid://bj20p3excamw7" path="res://entities/cacti/cacti.tscn" id="11_c38y0"]
 [ext_resource type="Script" path="res://cutscenes/intro/act2.gd" id="12_dupbb"]
 [ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="12_m5ntc"]
+[ext_resource type="PackedScene" uid="uid://4xefw6lhcjh8" path="res://entities/tank_bandit/tank_bandit.tscn" id="15_467xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcovx"]
 size = Vector2(96, 132)
@@ -171,7 +171,7 @@ length = 3.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Act2/Cacti/TankDialog:text")
+tracks/0/path = NodePath("%Act2/TankBandit:dialog_text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -183,98 +183,90 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Act2/Cacti:speed")
+tracks/1/path = NodePath("%Act2/Camera:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0001, 3.7),
-"transitions": PackedFloat32Array(1, 1, 1e-05),
-"update": 0,
-"values": [0.0, 81.0, -180.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Act2/Cacti:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(717, 0), Vector2(480, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%Act2/Camera:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5, 3.3, 3.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(190, -110), Vector2(190, -110), Vector2(0, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Act2/Cacti:process_mode")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1, 3.7),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 4, 0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Act2:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Act2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Act2:process_mode")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Act2:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("%Act2/Camera:enabled")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%Act2/Camera:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 3.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../Player:dialog_text")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Player:dialog_text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0.9, 1.7, 2.5, 3.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": ["Is there where you ask me to join you?", "", "Did you mean this?", ""]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Act2/TankBandit:is_passive")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%Act2/TankBandit")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [{
+"Position": Vector2(0, 0)
+}],
+"method": &"_on_idle_player_entered_vision"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_7j3kx"]
@@ -502,7 +494,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("%Act2/Cacti:position")
+tracks/7/path = NodePath("%Act2/TankBandit:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -578,6 +570,18 @@ tracks/13/path = NodePath("../Player:dialog_text")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("%Act2/TankBandit:dialog_text")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -703,22 +707,11 @@ visible = false
 position = Vector2(1242, -155)
 script = ExtResource("12_dupbb")
 
-[node name="Cacti" parent="AnimationPlayer/Act2" instance=ExtResource("11_c38y0")]
-position = Vector2(717, 0)
-speed = 0.0
-
-[node name="TankDialog" parent="AnimationPlayer/Act2/Cacti" instance=ExtResource("7_her2d")]
-process_mode = 3
-custom_minimum_size = Vector2(200, 23)
-offset_left = -20.2001
-offset_top = -14.0
-offset_right = 179.8
-offset_bottom = 9.0
-scale = Vector2(0.2, 0.2)
-text = ""
-
 [node name="Camera" type="Camera2D" parent="AnimationPlayer/Act2"]
 enabled = false
+
+[node name="TankBandit" parent="AnimationPlayer/Act2" instance=ExtResource("15_467xs")]
+position = Vector2(717, 0)
 
 [node name="Act3" type="Node2D" parent="AnimationPlayer"]
 unique_name_in_owner = true
@@ -733,12 +726,13 @@ z_index = -1
 position = Vector2(1486, -486)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_m5ntc")
+offset = Vector2(0, -64)
 
 [node name="TankDialog" parent="AnimationPlayer/Act3/Separator/BanditKneeling" instance=ExtResource("7_her2d")]
 offset_left = -172.0
-offset_top = -296.0
+offset_top = -330.0
 offset_right = 0.0
-offset_bottom = -271.0
+offset_bottom = -305.0
 scale = Vector2(2, 2)
 text = ""
 metadata/_edit_use_anchors_ = true

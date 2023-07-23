@@ -43,7 +43,7 @@ body = NodePath("../..")
 texture = ExtResource("2_ioxiq")
 hframes = 4
 vframes = 4
-frame = 1
+frame = 12
 
 [node name="ColBody" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1veg0")
