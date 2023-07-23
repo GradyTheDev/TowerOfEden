@@ -9,6 +9,8 @@ class_name PlayerController extends CharacterBody2D
 @export var jumpHeight:int
 @export var timeToJumpPeak:float
 @export var jumpDistance:float
+@export var jumpCountMax:int
+@export var rollSpeed:float
 
 var selectedAttack:String = ""
 
@@ -17,16 +19,20 @@ var gravity:float
 var jumpSpeed:float
 var maxSpeed:float
 
+var rollDirection:float = 0
+
 var in_cutscene: bool = false
 
 @onready var smp: Node = $StateMachinePlayer
+@onready var animTree:AnimationTree = $AnimTree
 @onready var animController = $AnimTree.get("parameters/playback")
 @onready var visuals: Marker2D = $Visuals
 @onready var ground_checker: ShapeCast2D = $GroundChecker
 @onready var camera: Camera2D = $PlayerCamera
 @onready var health: AttributeHealth = get_node("Attributes/Health")
 @onready var coyote_timer: Timer = $CoyoteTimer
-@onready var invinicibility_timer: Timer = $InvinicibilityTimer
+@onready var anim_player: AnimationPlayer = $AnimPlayer
+@onready var sprite: Sprite2D = $Visuals/Sprite
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var MaxGravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -53,8 +59,8 @@ func SetGlobalsAndCamera()->void:
 
 	# resize ui elements to camera size and zoom
 	var size = camera.get_viewport_rect().size / camera.zoom
-#	$Camera/PlayerUI.size = size
-#	$Camera/PlayerUI.position = -size/2
+	$PlayerCamera/PlayerUI.size = size
+	$PlayerCamera/PlayerUI.position = -size/2
 
 	SavesManager.save_start.connect(_save_start)
 
@@ -80,12 +86,10 @@ func StateMachineDelta(delta:float)->void:
 	match smp.get_current():
 		"idle":
 			animController.travel("idle")
-			jumpAvailability = true
 			velocity.x = lerp(velocity.x, 0.0, decel)
 		"move":
 			animController.travel("walk")
 			FlipCharacter(GetMoveDirection())
-			jumpAvailability = true
 			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
 		"jump":
 			animController.travel("jump")
@@ -103,19 +107,19 @@ func StateMachineDelta(delta:float)->void:
 				velocity.y = -jumpSpeed/2
 			MoveWithFriction(airAccel,airDecel, delta, maxSpeed)
 			Applygravity(delta)
+		"fall/Exit":
+			jumpAvailability = true
 		"attack":
 			animController.travel(selectedAttack)
-			pass
-		"dodge/entry":
+		"dodge/Entry":
 			health.invincible = true
-			invinicibility_timer.start
-			pass
+			rollDirection = GetMoveDirection()
 		"dodge/rolling":
-			pass
-	pass
+			animController.travel("dodge")
+			velocity.x = rollDirection * rollSpeed
 
 func GetMoveDirection()->float:
-	if health.alive and not in_cutscene:
+	if not in_cutscene:
 		return Input.get_axis("move_left", "move_right")
 	return 0
 
@@ -126,8 +130,9 @@ func GetIsOnFloor()->bool:
 func MoveWithFriction(accelS:float, decelS:float, delta:float, maxVel:float)->void:
 	var clampVel = clamp(velocity.x, -1, 1)
 	var directionVector := Vector2(GetMoveDirection(), 0)
-	var movementRotated := Tools.adjust_vector_to_slope(directionVector, ground_checker.get_collision_normal(0))
-	velocity.x += movementRotated.x * accelS * delta
+	if GetIsOnFloor():
+		var movementRotated := Tools.adjust_vector_to_slope(directionVector, ground_checker.get_collision_normal(0))
+		velocity.x += movementRotated.x * accelS * delta
 	if GetMoveDirection() != clampVel and GetMoveDirection() != 0:
 		velocity.x *= decelS
 #	else:
@@ -166,13 +171,24 @@ func FlipCharacter(dir):
 		visuals.scale.x = -1
 
 func _on_health_death() -> void:
+	if not is_inside_tree() or not is_node_ready(): return
+	animTree.active = false
+	smp.active = false
+	anim_player.play("player_animations/death")
+	var af = func(a): SavesManager.reload_save.call_deferred()
+	anim_player.animation_finished.connect(af,CONNECT_ONE_SHOT)
 	pass # Replace with function body.
 
 func _save_start():
 	pass
 
 func _on_health_health_changed(old, new) -> void:
-	pass # Replace with function body.
+	if new < old:
+		if sprite == null: return
+		var t = sprite.create_tween()
+		t.tween_property(sprite, 'modulate', Color.RED, 0.05)
+		t.tween_property(sprite, 'modulate', Color.WHITE, 0.05)
+		t.play()
 
 
 func _on_state_machine_player_transited(from, to) -> void:
@@ -191,9 +207,11 @@ func _on_attack_selector_attempt_made(attempt) -> void:
 	pass # Replace with function body.
 
 func EndAttack()->void:
+	smp.set_trigger("endAttack")
 	pass
 
-func _on_invinicibility_timer_timeout() -> void:
+func _on_invinicibility_end() -> void:
+	velocity = velocity * .2
 	smp.set_trigger("dodgeEnd")
 	health.invincible = false
 	pass # Replace with function body.
