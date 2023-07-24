@@ -10,3 +10,8 @@ func _unhandled_input(event):
 
 func _on_animation_finished(anim_name):
 	self.set_speed_scale(current_speed_scale)
+	Globals.is_in_cutscene = false
+
+
+func _on_animation_started(anim_name):
+	Globals.is_in_cutscene = true

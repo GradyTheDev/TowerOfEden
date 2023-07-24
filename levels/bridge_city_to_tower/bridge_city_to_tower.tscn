@@ -761,5 +761,6 @@ enabled = false
 [connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_triggered" flags=6]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
+[connection signal="animation_started" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_started"]
 [connection signal="act_ended" from="AnimationPlayer/Act1" to="." method="_on_act_1_act_ended"]
 [connection signal="act_ended" from="AnimationPlayer/Act2" to="." method="_on_act_2_act_ended"]

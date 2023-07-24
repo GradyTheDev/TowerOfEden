@@ -37,3 +37,5 @@ const CUTSCENES := {
 var debug_enabled: bool = false
 
 var player: Node = null
+
+var is_in_cutscene: bool = false

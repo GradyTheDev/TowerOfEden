@@ -14,7 +14,7 @@ func _input(event: InputEvent):
 	
 	
 	if event.is_action("pause") and Input.is_action_just_pressed("pause"):
-		if Globals.player != null:
+		if Globals.player != null and not Globals.is_in_cutscene:
 			get_tree().paused = not get_tree().paused
 		
 	elif event.is_action("toggle_fullscreen") and Input.is_action_just_pressed("toggle_fullscreen"):
