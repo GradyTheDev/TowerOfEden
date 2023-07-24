@@ -239,7 +239,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.9, 1.7, 2.5, 3.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": ["Is there where you ask me to join you?", "", "Did you mean this?", ""]
+"values": ["Is this where you ask me to join you?", "", "Did you mean this?", ""]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -600,12 +600,6 @@ _data = {
 
 [node name="BridgeCityToTower" type="Node2D"]
 script = ExtResource("1_pbnj1")
-animation_speed = {
-0: 1.0,
-1: 1.0,
-2: 0.7,
-3: 0.5
-}
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_euht7")

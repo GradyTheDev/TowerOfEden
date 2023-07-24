@@ -330,6 +330,7 @@ target_position = Vector2(-33, -19)
 
 [node name="State" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 26.0
