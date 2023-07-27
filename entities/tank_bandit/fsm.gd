@@ -1,10 +1,10 @@
 extends Node
-class_name StateMachine
+class_name FSM_StateMachine
 
 enum STATE {WALK, IDLE, ATTACK, MOVEBACKWARD, DEATH}
 @export var initial_state: STATE = STATE.IDLE
 var all_states: Dictionary
-var current_state: State
+var current_state: FSM_State
 @onready var debug_state = $"%State"
 
 

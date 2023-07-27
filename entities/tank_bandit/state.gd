@@ -1,5 +1,5 @@
 extends Node
-class_name State
+class_name FSM_State
 
 var is_active = false
 

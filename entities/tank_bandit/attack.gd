@@ -1,4 +1,4 @@
-extends State
+extends FSM_State
 
 signal attack_ended()
 

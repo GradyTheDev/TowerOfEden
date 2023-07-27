@@ -1,4 +1,4 @@
-extends State
+extends FSM_State
 
 signal player_entered_vision(data)
 signal player_entered_attack_range()

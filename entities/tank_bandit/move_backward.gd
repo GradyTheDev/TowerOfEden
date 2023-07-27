@@ -1,4 +1,4 @@
-extends State
+extends FSM_State
 
 signal player_vanished()
 signal attack_reloaded(data)

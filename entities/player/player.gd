@@ -4,7 +4,9 @@ extends CharacterBody2D
 @export var dialog_text: String:
 	set(new_text):
 		dialog_text = new_text
-		dialog.set_text(new_text)
+		if dialog != null:
+			dialog.set_text(new_text)
+
 @export_group("Physics")
 @export var speed: float = 500
 @export var max_jumps: int = 2
@@ -27,7 +29,7 @@ extends CharacterBody2D
 var camera_follow_player: bool = true
 
 @onready var health: AttributeHealth = get_node("Attributes/Health")
-@onready var sprite: Sprite2D = get_node("Sprite")
+@onready var sprite: Sprite2D = get_node("Visuals/Sprite")
 @onready var dialog: RichTextLabel = get_node("Dialog")
 
 ## unpaused time, ms
@@ -51,6 +53,8 @@ func _init():
 
 
 func _ready():
+	self.dialog_text = self.dialog_text
+
 	if Globals.player == null:
 		Globals.player = self
 	

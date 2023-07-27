@@ -15,13 +15,13 @@ const GRAVITY = 100
 			for detector in detectors:
 				detector.monitoring = false
 			anim_sprite.set_animation("Idle")
-			fsm.change_state_to(StateMachine.STATE.IDLE, {})
+			fsm.change_state_to(FSM_StateMachine.STATE.IDLE, {})
 @export var hurt_color: Color
 @export var heal_color: Color
 @export var no_dmg_color: Color
 @onready var detectors = [$Pivot/VisionBox, $Pivot/AttackTrigger]
 @onready var dialog = $Dialog
-@onready var fsm: StateMachine = $FSM
+@onready var fsm: FSM_StateMachine = $FSM
 @onready var anim_sprite = $Pivot/AnimatedSprite2D
 
 
@@ -44,36 +44,36 @@ func show_health_change(difference):
 
 
 func _on_idle_player_entered_vision(data):
-	fsm.change_state_to(StateMachine.STATE.WALK, data)
+	fsm.change_state_to(FSM_StateMachine.STATE.WALK, data)
 
 
 func _on_walk_player_entered_attack_range():
-	fsm.change_state_to(StateMachine.STATE.ATTACK, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.ATTACK, {})
 
 func _on_idle_player_entered_attack_range():
-	fsm.change_state_to(StateMachine.STATE.ATTACK, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.ATTACK, {})
 
 
 func _on_walk_walking_target_reached():
-	fsm.change_state_to(StateMachine.STATE.IDLE, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.IDLE, {})
 
 func _on_attack_attack_ended():
-	fsm.change_state_to(StateMachine.STATE.MOVEBACKWARD, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.MOVEBACKWARD, {})
 
 func _on_move_backward_attack_reloaded(data):
 	if data == {}:
-		fsm.change_state_to(StateMachine.STATE.IDLE, data)
+		fsm.change_state_to(FSM_StateMachine.STATE.IDLE, data)
 	else:
-		fsm.change_state_to(StateMachine.STATE.ATTACK, data)
+		fsm.change_state_to(FSM_StateMachine.STATE.ATTACK, data)
 
 func _on_move_backward_player_vanished():
-	fsm.change_state_to(StateMachine.STATE.IDLE, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.IDLE, {})
 
 func _on_walk_wall_detected():
-	fsm.change_state_to(StateMachine.STATE.IDLE, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.IDLE, {})
 
 func _on_health_death():
-	fsm.change_state_to(StateMachine.STATE.DEATH, {})
+	fsm.change_state_to(FSM_StateMachine.STATE.DEATH, {})
 
 
 func _on_health_health_changed(old, new):

@@ -1,4 +1,4 @@
-extends State
+extends FSM_State
 
 @export var death_time: float = 1
 @export var anim_sprite: AnimatedSprite2D

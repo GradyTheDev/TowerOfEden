@@ -124,10 +124,6 @@ position = Vector2(0, -0.5)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_wc3jl")
 
-[node name="Player" parent="." instance=ExtResource("5_8q741")]
-z_index = 1
-position = Vector2(984, -414)
-
 [node name="debug_ui" type="Control" parent="."]
 top_level = true
 layout_mode = 3
@@ -173,6 +169,9 @@ position = Vector2(-755, -43)
 position = Vector2(-1314, -48)
 collision_layer = 5
 enable_collision = true
+
+[node name="Player" parent="." instance=ExtResource("5_8q741")]
+position = Vector2(984, -242)
 
 [connection signal="pressed" from="debug_ui/hurt" to="." method="_on_hurt_pressed"]
 [connection signal="pressed" from="debug_ui/heal" to="." method="_on_heal_pressed"]
