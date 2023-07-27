@@ -18,6 +18,7 @@ var jumpAvailability:bool = true
 var gravity:float
 var jumpSpeed:float
 var maxSpeed:float
+var jumpCount:int = jumpCountMax
 
 var rollDirection:float = 0
 
@@ -94,11 +95,13 @@ func StateMachineDelta(delta:float)->void:
 		"jump":
 			animController.travel("jump")
 			jumpAvailability=false
+			jumpCount-=1
 			Jump()
 		"fall/Entry":
 			if coyote_timer.is_stopped():
 				coyote_timer.start()
 		"fall/coyoteJump":
+			jumpCount-=1
 			Jump()
 		"fall/falling":
 			FlipCharacter(velocity.x)
@@ -107,16 +110,25 @@ func StateMachineDelta(delta:float)->void:
 				velocity.y = -jumpSpeed/2
 			MoveWithFriction(airAccel,airDecel, delta, maxSpeed)
 			Applygravity(delta)
+		"fall/attack":
+			animController.travel(selectedAttack)
+			Applygravity(delta)
 		"fall/Exit":
 			jumpAvailability = true
+			jumpCount = jumpCountMax
+		"fall/doubleJump":
+			jumpCount-=1
+			Jump()
 		"attack":
+			velocity.x *= decel
 			animController.travel(selectedAttack)
 		"dodge/Entry":
 			health.invincible = true
 			rollDirection = GetMoveDirection()
-		"dodge/rolling":
 			animController.travel("dodge")
 			velocity.x = rollDirection * rollSpeed
+		"dodge/rolling":
+			pass
 
 func GetMoveDirection()->float:
 	if not in_cutscene:
@@ -133,7 +145,9 @@ func MoveWithFriction(accelS:float, decelS:float, delta:float, maxVel:float)->vo
 	if GetIsOnFloor():
 		var movementRotated := Tools.adjust_vector_to_slope(directionVector, ground_checker.get_collision_normal(0))
 		velocity.x += movementRotated.x * accelS * delta
-	if GetMoveDirection() != clampVel and GetMoveDirection() != 0:
+	else:
+		velocity.x += GetMoveDirection() * accelS * delta * 3
+	if GetMoveDirection() != clampVel:
 		velocity.x *= decelS
 #	else:
 #		velocity.x += moveDir.x * accelS * delta
@@ -157,6 +171,7 @@ func HandleStateTransitions()->void:
 	if Input.is_action_just_pressed("jump") : smp.set_trigger("jump")
 	smp.set_param("coyoteAvailable", jumpAvailability)
 	if Input.is_action_just_pressed("slide") : smp.set_trigger("roll")
+	smp.set_param("jumpCount", jumpCount)
 	pass
 
 func SetJumpSpeed()->void:

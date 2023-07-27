@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=136 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="8_uc3qj"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="9_0jhae"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="9_4j1ts"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/IntegerCondition.gd" id="10_qk8r0"]
 [ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="13_dbvgd"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
@@ -25,7 +26,7 @@ height = 66.0
 size = Vector2(12, 58.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe1vk"]
-size = Vector2(64, 77)
+size = Vector2(64, 58.6)
 
 [sub_resource type="Resource" id="Resource_dyk3j"]
 script = ExtResource("5_bie18")
@@ -115,6 +116,16 @@ script = ExtResource("5_bie18")
 name = "falling"
 metadata/graph_offset = Vector2(409, 263.5)
 
+[sub_resource type="Resource" id="Resource_4g434"]
+script = ExtResource("5_bie18")
+name = "attack"
+metadata/graph_offset = Vector2(629, 103.5)
+
+[sub_resource type="Resource" id="Resource_r4vcq"]
+script = ExtResource("5_bie18")
+name = "doubleJump"
+metadata/graph_offset = Vector2(395.5, 423.5)
+
 [sub_resource type="Resource" id="Resource_28x7g"]
 script = ExtResource("6_shm0h")
 from = "Entry"
@@ -164,24 +175,87 @@ conditions = {
 }
 priority = 0
 
+[sub_resource type="Resource" id="Resource_xldkb"]
+script = ExtResource("9_0jhae")
+name = "attackPressed"
+
+[sub_resource type="Resource" id="Resource_51xq2"]
+script = ExtResource("6_shm0h")
+from = "falling"
+to = "attack"
+conditions = {
+"attackPressed": SubResource("Resource_xldkb")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_ae1u2"]
+script = ExtResource("9_0jhae")
+name = "jump"
+
+[sub_resource type="Resource" id="Resource_ukqrd"]
+script = ExtResource("10_qk8r0")
+value = 0
+comparation = 2
+name = "jumpCount"
+
+[sub_resource type="Resource" id="Resource_fctyp"]
+script = ExtResource("6_shm0h")
+from = "falling"
+to = "doubleJump"
+conditions = {
+"jump": SubResource("Resource_ae1u2"),
+"jumpCount": SubResource("Resource_ukqrd")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_vt7is"]
+script = ExtResource("9_0jhae")
+name = "endAttack"
+
+[sub_resource type="Resource" id="Resource_4heu7"]
+script = ExtResource("6_shm0h")
+from = "attack"
+to = "falling"
+conditions = {
+"endAttack": SubResource("Resource_vt7is")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_j5pjo"]
+script = ExtResource("6_shm0h")
+from = "doubleJump"
+to = "falling"
+conditions = {}
+priority = 0
+
 [sub_resource type="Resource" id="Resource_0k6cj"]
 script = ExtResource("4_bdbss")
 states = {
 "Entry": SubResource("Resource_7dpgk"),
 "Exit": SubResource("Resource_52tok"),
+"attack": SubResource("Resource_4g434"),
 "coyoteJump": SubResource("Resource_rbx6h"),
+"doubleJump": SubResource("Resource_r4vcq"),
 "falling": SubResource("Resource_4nmet")
 }
 transitions = {
 "Entry": {
 "falling": SubResource("Resource_28x7g")
 },
+"attack": {
+"falling": SubResource("Resource_4heu7")
+},
 "coyoteJump": {
 "falling": SubResource("Resource_6mti0")
 },
+"doubleJump": {
+"falling": SubResource("Resource_j5pjo")
+},
 "falling": {
 "Exit": SubResource("Resource_ajrf6"),
-"coyoteJump": SubResource("Resource_1cu6k")
+"attack": SubResource("Resource_51xq2"),
+"coyoteJump": SubResource("Resource_1cu6k"),
+"doubleJump": SubResource("Resource_fctyp")
 }
 }
 name = "fall"
@@ -699,15 +773,15 @@ collision_layer = 2
 collision_mask = 15
 floor_snap_length = 8.0
 script = ExtResource("1_qjkmw")
-decel = 0.45
-accel = 800.0
-airAccel = 700.0
-moveDecel = 0.5
-airDecel = 0.35
+decel = 0.8
+accel = 1000.0
+airAccel = 800.0
+moveDecel = 0.9
+airDecel = 0.99
 jumpHeight = 200
 timeToJumpPeak = 0.5
 jumpDistance = 400.0
-jumpCountMax = 3
+jumpCountMax = 2
 rollSpeed = 600.0
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
@@ -732,7 +806,7 @@ shape = SubResource("RectangleShape2D_7s1yt")
 disabled = true
 
 [node name="Attack" type="CollisionShape2D" parent="Visuals/Hurtbox"]
-position = Vector2(32, -5.3)
+position = Vector2(32, 3.9)
 shape = SubResource("RectangleShape2D_pe1vk")
 disabled = true
 
