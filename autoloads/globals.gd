@@ -20,6 +20,7 @@ const SCENE_DEBUG_LEVEL := "res://levels/level_debug/level_debug.tscn"
 const ATTRIBUTE_PORTAL_TRANSVERSAL := 'portal_transversal'
 const ATTRIBUTE_HEALTH := 'health'
 const ATTRIBUTE_MONEY := 'health'
+const ATTRIBUTE_SCORE := 'score'
 
 ## for runtime operations. Like portal and level select
 const LEVELS := {
