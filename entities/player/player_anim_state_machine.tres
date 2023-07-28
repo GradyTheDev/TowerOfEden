@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=36 format=3 uid="uid://dymccknvy0nf6"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=36 format=3 uid="uid://dam2d87uc0tlr"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t6l8x"]
 animation = &"player_animations/attack_forward"
