@@ -1,0 +1,359 @@
+[gd_scene load_steps=41 format=3 uid="uid://4xefw6lhcjh8"]
+
+[ext_resource type="Script" path="res://entities/tank_bandit/tank_bandit.gd" id="1_b4ho6"]
+[ext_resource type="Texture2D" uid="uid://dc03ua3t1qls3" path="res://assets/spritesheets/entities/tank_bandit_wip.png" id="1_me2dh"]
+[ext_resource type="Script" path="res://attributes/attribute_health.gd" id="2_ue85p"]
+[ext_resource type="Script" path="res://entities/tank_bandit/fsm.gd" id="3_1i4a0"]
+[ext_resource type="Script" path="res://entities/tank_bandit/attack.gd" id="4_4172j"]
+[ext_resource type="Script" path="res://entities/tank_bandit/idle.gd" id="5_djt6q"]
+[ext_resource type="Script" path="res://entities/tank_bandit/walk.gd" id="6_d25nh"]
+[ext_resource type="Script" path="res://entities/tank_bandit/move_backward.gd" id="7_qdqg3"]
+[ext_resource type="Script" path="res://other/hitbox.gd" id="8_rvm41"]
+[ext_resource type="Script" path="res://entities/tank_bandit/Death.gd" id="8_uh3oi"]
+[ext_resource type="Script" path="res://attacks/attack_basic.gd" id="10_pspsf"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="12_4aked"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3xi6i"]
+radius = 21.0
+height = 78.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk5ju"]
+size = Vector2(800, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dkgt"]
+size = Vector2(56, 83)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5aat"]
+size = Vector2(93, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcyb3"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks5tr"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcii0"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(400, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jph60"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(600, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jrw6"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(800, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3idq"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1000, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f21ve"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1200, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8nle"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s3cd"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjiih"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps7uq"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqkoj"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_008a3"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wrj7"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owyv2"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtuvq"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el2yv"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmxfk"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45fea"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(600, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bhe5"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(800, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0257"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1000, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc5q7"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gthkv"]
+atlas = ExtResource("1_me2dh")
+region = Rect2(1400, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcyb3")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_ks5tr")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_pcii0")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_jph60")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_7jrw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3idq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f21ve")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8nle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s3cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjiih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps7uq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqkoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_008a3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wrj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owyv2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtuvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el2yv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmxfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45fea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bhe5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0257")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc5q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gthkv")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="TankBandit" type="CharacterBody2D"]
+position = Vector2(196, 199)
+collision_layer = 4
+floor_snap_length = 2.0
+script = ExtResource("1_b4ho6")
+hurt_color = Color(1, 0.345098, 0.278431, 1)
+heal_color = Color(0.584314, 1, 0.552941, 1)
+no_dmg_color = Color(0.482353, 0.482353, 0.482353, 1)
+
+[node name="ColBody" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39)
+shape = SubResource("CapsuleShape2D_3xi6i")
+
+[node name="Attributes" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("2_ue85p")
+body = NodePath("../..")
+
+[node name="FSM" type="Node" parent="."]
+script = ExtResource("3_1i4a0")
+
+[node name="Attack" type="Node" parent="FSM" node_paths=PackedStringArray("attack_range", "anim_sprite")]
+script = ExtResource("4_4172j")
+attack_range = NodePath("../../Pivot/AttackRange")
+anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
+
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("anim_sprite", "vision_area", "attack_trigger", "wall_detector", "pivot")]
+script = ExtResource("5_djt6q")
+anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
+vision_area = NodePath("../../Pivot/VisionBox")
+attack_trigger = NodePath("../../Pivot/AttackTrigger")
+wall_detector = NodePath("../../Pivot/WallDetector")
+pivot = NodePath("../../Pivot")
+
+[node name="Walk" type="Node" parent="FSM" node_paths=PackedStringArray("vision_area", "attack_trigger", "wall_detector", "anim_sprite", "pivot")]
+script = ExtResource("6_d25nh")
+vision_area = NodePath("../../Pivot/VisionBox")
+attack_trigger = NodePath("../../Pivot/AttackTrigger")
+wall_detector = NodePath("../../Pivot/WallDetector")
+anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
+pivot = NodePath("../../Pivot")
+
+[node name="MoveBackward" type="Node" parent="FSM" node_paths=PackedStringArray("anim_sprite", "vision_area", "attack_trigger", "pivot")]
+script = ExtResource("7_qdqg3")
+anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
+vision_area = NodePath("../../Pivot/VisionBox")
+attack_trigger = NodePath("../../Pivot/AttackTrigger")
+pivot = NodePath("../../Pivot")
+
+[node name="AttackReload" type="Timer" parent="FSM/MoveBackward"]
+one_shot = true
+
+[node name="Death" type="Node" parent="FSM" node_paths=PackedStringArray("anim_sprite", "hurt_box")]
+script = ExtResource("8_uh3oi")
+anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
+hurt_box = NodePath("../../Pivot/HurtBox")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="VisionBox" type="Area2D" parent="Pivot"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/VisionBox"]
+shape = SubResource("RectangleShape2D_rk5ju")
+debug_color = Color(0.823529, 0.827451, 0.827451, 0.160784)
+
+[node name="HitBox" type="Area2D" parent="Pivot" node_paths=PackedStringArray("entity", "health")]
+visible = false
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("8_rvm41")
+entity = NodePath("../..")
+health = NodePath("../../Attributes/Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HitBox"]
+position = Vector2(0, -42.5)
+shape = SubResource("RectangleShape2D_5dkgt")
+
+[node name="HurtBox" type="Area2D" parent="Pivot"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("10_pspsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/HurtBox"]
+position = Vector2(0, -42.5)
+shape = SubResource("RectangleShape2D_5dkgt")
+
+[node name="AttackRange" type="Area2D" parent="Pivot"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/AttackRange"]
+polygon = PackedVector2Array(-28, 0, -83, 0, -103, -44, -86, -86, -15, -122, 79, -114)
+
+[node name="AttackTrigger" type="Area2D" parent="Pivot"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/AttackTrigger"]
+position = Vector2(-26.5, -55)
+shape = SubResource("RectangleShape2D_t5aat")
+debug_color = Color(0.783345, 0.423862, 0.265646, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pivot"]
+position = Vector2(-8, -51)
+sprite_frames = SubResource("SpriteFrames_jhy15")
+animation = &"Idle"
+
+[node name="WallDetector" type="RayCast2D" parent="Pivot"]
+position = Vector2(-22, -37)
+target_position = Vector2(-33, -19)
+
+[node name="State" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 26.0
+text = "State"
+metadata/_edit_use_anchors_ = true
+
+[node name="Dialog" parent="." instance=ExtResource("12_4aked")]
+process_mode = 3
+custom_minimum_size = Vector2(240, 25)
+offset_left = -120.0
+offset_top = -110.0
+offset_right = 120.0
+offset_bottom = -85.0
+text = ""
+
+[connection signal="death" from="Attributes/Health" to="." method="_on_health_death"]
+[connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_health_changed"]
+[connection signal="attack_ended" from="FSM/Attack" to="." method="_on_attack_attack_ended"]
+[connection signal="player_entered_attack_range" from="FSM/Idle" to="." method="_on_idle_player_entered_attack_range"]
+[connection signal="player_entered_vision" from="FSM/Idle" to="." method="_on_idle_player_entered_vision"]
+[connection signal="player_entered_attack_range" from="FSM/Walk" to="." method="_on_walk_player_entered_attack_range"]
+[connection signal="walking_target_reached" from="FSM/Walk" to="." method="_on_walk_walking_target_reached"]
+[connection signal="wall_detected" from="FSM/Walk" to="." method="_on_walk_wall_detected"]
+[connection signal="attack_reloaded" from="FSM/MoveBackward" to="." method="_on_move_backward_attack_reloaded"]
+[connection signal="player_vanished" from="FSM/MoveBackward" to="." method="_on_move_backward_player_vanished"]
+[connection signal="timeout" from="FSM/MoveBackward/AttackReload" to="FSM/MoveBackward" method="_on_attack_reload_timeout"]

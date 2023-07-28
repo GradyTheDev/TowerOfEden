@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	$Center/Continue.disabled = Butler.save.size() == 0
+	$Center/Continue.disabled = SavesManager.current == null
 	$Version.text = '{0} - {1}'.format([
 		ProjectSettings.get_setting("application/config/version"),
 		ProjectSettings.get_setting("application/config/build_date")
@@ -9,21 +9,21 @@ func _ready():
 
 
 func _on_settings_pressed():
-	Butler.change_scene_to_file(Butler.SCENE_SETTINGS_MENU)
+	get_tree().change_scene_to_file(Globals.SCENE_SETTINGS_MENU)
 
 
 func _on_credits_pressed():
-	Butler.change_scene_to_file(Butler.SCENE_CREDITS)
+	get_tree().change_scene_to_file(Globals.SCENE_CREDITS)
 
 
 func _on_exit_pressed():
-	Butler.safe_exit()
+	get_tree().quit()
 
 
 func _on_continue_pressed():
-	Butler.start_game()
+	get_tree().change_scene_to_file(Globals.SCENE_LEVEL_SELECT)
 
 
 func _on_new_game_pressed():
-	Butler.new_game()
-	Butler.start_game()
+	SavesManager.new_save()
+	get_tree().change_scene_to_file(Globals.CUTSCENES.intro)

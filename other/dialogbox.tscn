@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt7lpufwarf0r"]
+
+[ext_resource type="SystemFont" uid="uid://oltghup7lh4e" path="res://other/font_monospace_dynamic.tres" id="1_b4fnl"]
+[ext_resource type="Script" path="res://other/dialogbox.gd" id="2_m56ke"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qpflm"]
+
+[node name="Dialog" type="RichTextLabel"]
+z_index = 64
+texture_filter = 2
+clip_contents = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 99.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("1_b4fnl")
+theme_override_fonts/bold_font = ExtResource("1_b4fnl")
+theme_override_fonts/italics_font = ExtResource("1_b4fnl")
+theme_override_fonts/bold_italics_font = ExtResource("1_b4fnl")
+theme_override_fonts/mono_font = ExtResource("1_b4fnl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qpflm")
+bbcode_enabled = true
+text = "Dialog [b]box[/b]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_m56ke")

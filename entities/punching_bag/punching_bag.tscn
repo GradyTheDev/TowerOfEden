@@ -1,69 +1,88 @@
-[gd_scene load_steps=10 format=3 uid="uid://bks73mccx6uq6"]
+[gd_scene load_steps=12 format=3 uid="uid://ctsouf77tvm1d"]
 
-[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_oj4g1"]
-[ext_resource type="Script" path="res://entities/punching_bag/punching_bag.gd" id="2_e7jsg"]
-[ext_resource type="Texture2D" uid="uid://dko8lddq8dmv" path="res://entities/punching_bag/assets/punching_bag.png" id="3_0nojt"]
+[ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_5f8qx"]
+[ext_resource type="Script" path="res://entities/punching_bag/punching_bag.gd" id="1_8f60v"]
+[ext_resource type="Texture2D" uid="uid://b23oaiwots5f8" path="res://assets/other/punching_bag.png" id="2_fiapn"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="3_nia0o"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="4_amj4k"]
+[ext_resource type="Script" path="res://other/hitbox.gd" id="5_5akjw"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l3bfg"]
-resource_local_to_scene = true
-radius = 32.0
-height = 112.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
+radius = 2.0
+height = 14.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebyeh"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_21tpt"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_la1ws"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hic20"]
+size = Vector2(8, 18)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ep7vt"]
-resource_local_to_scene = true
-size = Vector2(201, 130)
+[sub_resource type="LabelSettings" id="LabelSettings_axl30"]
+font_color = Color(1, 0, 0, 1)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3il6q"]
+[sub_resource type="LabelSettings" id="LabelSettings_iqasy"]
+font_color = Color(0.117647, 1, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_5ubtb"]
-font_size = 12
-font_color = Color(1, 0.141176, 0, 1)
-
-[node name="PunchingBag" instance=ExtResource("1_oj4g1")]
-collision_layer = 0
+[node name="PunchingBag" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+collision_layer = 4
 collision_mask = 0
-script = ExtResource("2_e7jsg")
-health_max = 9999
-health = 9999
-money_for_killing = 0
-collide_damage = 0
-activate_anim_tree = false
+script = ExtResource("1_8f60v")
 
-[node name="ColBody" parent="." index="0"]
-shape = SubResource("CapsuleShape2D_l3bfg")
+[node name="Attributes" type="Node" parent="."]
 
-[node name="HitBody" parent="Hitbox" index="0"]
-shape = SubResource("CapsuleShape2D_ebyeh")
+[node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("1_5f8qx")
+health = 1000
+body = NodePath("../..")
 
-[node name="HurtBody" parent="Hurtbox" index="0"]
-shape = SubResource("CapsuleShape2D_la1ws")
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fiapn")
 
-[node name="Attack" parent="Hurtbox" index="1"]
-shape = SubResource("RectangleShape2D_ep7vt")
+[node name="ColBody" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1veg0")
 
-[node name="Sprite" parent="." index="4"]
-texture = ExtResource("3_0nojt")
-hframes = 1
-vframes = 1
-frame = 0
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"player_animations": ExtResource("3_nia0o")
+}
 
-[node name="AnimTree" parent="." index="6"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_3il6q")
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("4_amj4k")
+anim_player = NodePath("../AnimPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_21tpt")
+parameters/conditions/attack_down = false
+parameters/conditions/attack_forward = false
+parameters/conditions/attack_up = false
+parameters/conditions/idle = false
+parameters/conditions/in_air = false
+parameters/conditions/jump = false
+parameters/conditions/on_ground = false
+parameters/conditions/walk = false
 
-[node name="DMGIndicator" type="Label" parent="." index="7"]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health")]
+script = ExtResource("5_5akjw")
+entity = NodePath("..")
+health = NodePath("../Attributes/Health")
+
+[node name="HitBody" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hic20")
+
+[node name="DMGIndicator" type="Label" parent="."]
 visible = false
-offset_top = -42.0
-offset_right = 108.0
-offset_bottom = -16.0
-text = "dmg indicator"
-label_settings = SubResource("LabelSettings_5ubtb")
+top_level = true
+offset_left = -21.0
+offset_top = -67.0
+offset_right = 28.0
+offset_bottom = -41.0
+text = "25"
+label_settings = SubResource("LabelSettings_axl30")
+
+[node name="HealIndicator" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = 2.0
+offset_top = -69.0
+offset_right = 51.0
+offset_bottom = -43.0
+text = "25"
+label_settings = SubResource("LabelSettings_iqasy")

@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=3 uid="uid://clf8oescymyqw"]
+
+[ext_resource type="Script" path="res://entities/player/player_ui.gd" id="1_c863b"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 300.0
+script = ExtResource("1_c863b")
+
+[node name="HUD" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+
+[node name="Redraw" type="Timer" parent="HUD"]
+wait_time = 0.1
+autostart = true
+
+[node name="Money" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 109.0
+grow_vertical = 0
+text = "Money: "
+
+[node name="Health" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_right = 113.0
+offset_bottom = -29.0
+grow_vertical = 0
+text = "Health: "
+
+[node name="PauseMenu" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -90.0
+offset_right = 102.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LevelSelect" type="Button" parent="PauseMenu/Center"]
+layout_mode = 2
+text = "Level Select"
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/Center"]
+clip_children = 1
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="PauseMenu/Center"]
+layout_mode = 2
+text = "Save and Exit"
+
+[connection signal="timeout" from="HUD/Redraw" to="." method="_on_redraw_timeout"]
+[connection signal="pressed" from="PauseMenu/Center/LevelSelect" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="PauseMenu/Center/Exit" to="." method="_on_exit_pressed"]

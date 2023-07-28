@@ -12,9 +12,8 @@ config_version=5
 
 config/name="Tower of Eden"
 config/description="Game for the SMVM 2023 by terraquad and 9 other amazing developers."
-run/main_scene="res://menus/main_menu/main_menu.tscn"
-config/custom_user_dir_name="tower"
-config/features=PackedStringArray("4.0", "Mobile")
+run/main_scene="res://other/launcher/launcher.tscn"
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 config/version="v0.0.0.A"
 config/build_date="Running inside Editor"
@@ -25,7 +24,12 @@ buses/default_bus_layout="res://other/default_bus_layout.tres"
 
 [autoload]
 
-Butler="*res://other/butler.gd"
+SceneManager="*res://autoloads/scene_manager.gd"
+Globals="*res://autoloads/globals.gd"
+SettingsManager="*res://autoloads/settings_manager.gd"
+SavesManager="*res://autoloads/saves_manager.gd"
+Controls="*res://autoloads/controls.gd"
+SoundManager="*res://autoloads/sound_manager/sound_manager.tscn"
 
 [debug]
 
@@ -34,19 +38,22 @@ gdscript/warnings/enable=false
 
 [display]
 
-window/size/viewport_width=1700
-window/size/viewport_height=900
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 window/vsync/vsync_mode=2
 
 [editor]
 
+movie_writer/mjpeg_quality=0.9
 movie_writer/movie_file="../movie.avi"
+movie_writer/disable_vsync=true
+naming/node_name_num_separator=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/buildscripts/plugin.cfg")
+enabled=PackedStringArray("res://addons/buildscripts/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg", "res://addons/ldtk/plugin.cfg")
 
 [input]
 
@@ -73,13 +80,13 @@ move_down={
 }
 attack={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(375, 11),"global_position":Vector2(379, 54),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(375, 11),"global_position":Vector2(379, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
 parry={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(252, 10),"global_position":Vector2(256, 53),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(252, 10),"global_position":Vector2(256, 53),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
 ]
 }
@@ -120,12 +127,13 @@ toggle_fullscreen={
 
 [layer_names]
 
-2d_physics/layer_1="Enviroment"
-2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Enemy_Projectile"
+2d_physics/layer_1="enviroment"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="enemy_Projectile"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_environment="res://other/default_enviroment.tres"

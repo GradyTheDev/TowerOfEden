@@ -1,52 +1,80 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxe5qgti3gl7a"]
+[gd_scene load_steps=11 format=3 uid="uid://bj20p3excamw7"]
 
-[ext_resource type="PackedScene" uid="uid://dglnj2cgbr2o" path="res://entities/entity/entity.tscn" id="1_7h208"]
-[ext_resource type="Script" path="res://entities/cacti/cacti.gd" id="2_5vb27"]
-[ext_resource type="Texture2D" uid="uid://d3pmq4paaa3dn" path="res://entities/cacti/assets/cacti.png" id="3_o772d"]
+[ext_resource type="Script" path="res://entities/cacti/cacti.gd" id="1_s6fvg"]
+[ext_resource type="Texture2D" uid="uid://cpba01xufk21m" path="res://assets/spritesheets/cacti.png" id="2_576xb"]
+[ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_afx2u"]
+[ext_resource type="Script" path="res://other/hitbox.gd" id="3_o5qyl"]
+[ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_nwsm8"]
+[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="6_vgsdl"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="7_whps8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_egnk3"]
-resource_local_to_scene = true
-radius = 32.0
-height = 112.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kufo6"]
+radius = 6.0
+height = 14.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4tct"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rmpe"]
+size = Vector2(18, 18)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3y81"]
-resource_local_to_scene = true
-radius = 36.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ube6e"]
+size = Vector2(23, 15.6)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4did"]
-resource_local_to_scene = true
-size = Vector2(201, 130)
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_lds5s"]
-
-[node name="Cacti" instance=ExtResource("1_7h208")]
+[node name="Cacti" type="CharacterBody2D"]
+scale = Vector2(5, 5)
 collision_layer = 4
-script = ExtResource("2_5vb27")
-speed = 90.0
+collision_mask = 7
+script = ExtResource("1_s6fvg")
 
-[node name="ColBody" parent="." index="0"]
-shape = SubResource("CapsuleShape2D_egnk3")
+[node name="ColBody" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_kufo6")
 
-[node name="Hitbox" parent="." index="2"]
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_576xb")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="Attributes" type="Node" parent="."]
+
+[node name="AttributeHealth" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
+script = ExtResource("3_afx2u")
+body = NodePath("../..")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health")]
 collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_o5qyl")
+entity = NodePath("..")
+health = NodePath("../Attributes/AttributeHealth")
 
-[node name="HitBody" parent="Hitbox" index="0"]
-shape = SubResource("CapsuleShape2D_y4tct")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_1rmpe")
 
-[node name="HurtBody" parent="Hurtbox" index="0"]
-shape = SubResource("CapsuleShape2D_y3y81")
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_nwsm8")
 
-[node name="Attack" parent="Hurtbox" index="1"]
-shape = SubResource("RectangleShape2D_v4did")
+[node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.499999, 8.2)
+shape = SubResource("RectangleShape2D_ube6e")
+disabled = true
 
-[node name="Sprite" parent="." index="4"]
-texture = ExtResource("3_o772d")
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"player_animations": ExtResource("6_vgsdl")
+}
 
-[node name="AnimTree" parent="." index="6"]
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_lds5s")
+[node name="AnimTree" type="AnimationTree" parent="."]
+tree_root = ExtResource("7_whps8")
+anim_player = NodePath("../AnimPlayer")
+parameters/conditions/attack_down = false
+parameters/conditions/attack_forward = false
+parameters/conditions/attack_up = false
+parameters/conditions/idle = false
+parameters/conditions/in_air = false
+parameters/conditions/jump = false
+parameters/conditions/on_ground = false
+parameters/conditions/walk = false
+
+[connection signal="death" from="Attributes/AttributeHealth" to="." method="_on_death"]
+[connection signal="health_changed" from="Attributes/AttributeHealth" to="." method="_on_health_changed"]

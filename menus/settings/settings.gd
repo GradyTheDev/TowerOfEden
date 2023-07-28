@@ -8,7 +8,9 @@ func _ready():
 	var v = ''
 	# Adding Resolution Options
 	var items = []
-	items.append("Default - {0}x{1}".format([Butler.DEFAULT_WINDOW_SIZE.x, Butler.DEFAULT_WINDOW_SIZE.y]))
+	items.append("Default - {0}x{1}".format([
+		SettingsManager.DEFAULT_WINDOW_SIZE.x,
+		SettingsManager.DEFAULT_WINDOW_SIZE.y]))
 	items.append('fullscreen')
 	for i in resolution.item_count:
 		var txt := resolution.get_item_text(i)
@@ -20,8 +22,7 @@ func _ready():
 	for item in items:
 		resolution.add_item(item)
 	
-	# todo: Load Resolution from save
-	v = Butler.settings[Butler.SETTING_WINDOW_SIZE]
+	v = SettingsManager.get_setting(SettingsManager.SETTING_WINDOW_SIZE)
 	if v.to_lower().contains('default'):
 		resolution.select(0)
 	elif v == 'fullscreen':
@@ -39,7 +40,7 @@ func _ready():
 			resolution.select(items.size()-1)
 	
 	# Load volume from save
-	volume.value = Butler.settings.get(Butler.SETTING_MASTER_VOLUME, 0)
+	volume.value = SettingsManager.get_setting(SettingsManager.SETTING_MASTER_VOLUME)
 
 	# Add Screen Options
 	screen.clear()
@@ -55,37 +56,48 @@ func _ready():
 			]))
 	
 	# Load Screen Option from save
-	v = Butler.settings[Butler.SETTING_SCREEN]
-	if v == 'current':
-		screen.select(0)
-	elif v == 'primary':
-		screen.select(1)
+	v = SettingsManager.get_setting(SettingsManager.SETTING_SCREEN)
+	var vtype = typeof(v)
+	if vtype == TYPE_STRING:
+		if v == 'current':
+			screen.select(0)
+		elif v == 'primary':
+			screen.select(1)
+		else:
+			screen.select(0)
+	elif vtype == TYPE_INT:
+		v = int(v) + 2
+		if v >= 0 and v < screen.item_count:
+			screen.select(int(v))
+		else:
+			screen.select(0)
 	else:
-		screen.select(int(v)+2)
+		screen.select(0)
 
 func _on_back_pressed():
-	Butler.change_scene_to_file(Butler.SCENE_MAIN_MENU)
+	SettingsManager.save_to_file()
+	get_tree().change_scene_to_file(Globals.SCENE_MAIN_MENU)
 
 
 func _on_resolution_item_selected(index):	
 	if index == 0:
-		Butler.set_setting(Butler.SETTING_WINDOW_SIZE, 'default')
+		SettingsManager.set_setting(SettingsManager.SETTING_WINDOW_SIZE, 'default')
 	elif index == 1:
-		Butler.set_setting(Butler.SETTING_WINDOW_SIZE, 'fullscreen')
+		SettingsManager.set_setting(SettingsManager.SETTING_WINDOW_SIZE, 'fullscreen')
 	else:
-		Butler.set_setting(Butler.SETTING_WINDOW_SIZE, resolution.get_item_text(index))
+		SettingsManager.set_setting(SettingsManager.SETTING_WINDOW_SIZE, resolution.get_item_text(index))
 
 
 func _on_volume_value_changed(value: float):
-	Butler.set_setting(Butler.SETTING_MASTER_VOLUME, value)
+	SettingsManager.set_setting(SettingsManager.SETTING_MASTER_VOLUME, value)
 
 
 func _on_screen_item_selected(index:int):
 	var v = ''
 	if index > 1:
-		Butler.set_setting(Butler.SETTING_SCREEN, str(index-2))
+		SettingsManager.set_setting(SettingsManager.SETTING_SCREEN, str(index-2))
 	else:
-		Butler.set_setting(Butler.SETTING_SCREEN, screen.get_item_text(index))
+		SettingsManager.set_setting(SettingsManager.SETTING_SCREEN, screen.get_item_text(index))
 
 
 func _on_open_save_location_pressed():

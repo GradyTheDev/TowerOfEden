@@ -1,0 +1,177 @@
+[gd_scene load_steps=17 format=3 uid="uid://6m6p4bnigtlc"]
+
+[ext_resource type="Script" path="res://levels/level_debug/level_debug.gd" id="1_4syo4"]
+[ext_resource type="TileSet" uid="uid://cmh2c7oc8kydj" path="res://assets/tilesets/city_floor.tres" id="2_esifr"]
+[ext_resource type="Script" path="res://other/portal.gd" id="3_88k48"]
+[ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="4_fvn3u"]
+[ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="4_ydhcq"]
+[ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="5_8q741"]
+[ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_u744n"]
+[ext_resource type="Script" path="res://attacks/attack_basic_projectile.gd" id="6_ybr3q"]
+[ext_resource type="Texture2D" uid="uid://dtb5sak2qiok0" path="res://assets/other/arrow.png" id="7_riat4"]
+[ext_resource type="PackedScene" uid="uid://bj20p3excamw7" path="res://entities/cacti/cacti.tscn" id="9_nfiqi"]
+[ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="10_wni41"]
+[ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="11_khnkn"]
+[ext_resource type="PackedScene" uid="uid://ctsouf77tvm1d" path="res://entities/punching_bag/punching_bag.tscn" id="12_2vsm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcovx"]
+size = Vector2(96, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krhjb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wc3jl"]
+size = Vector2(3, 8)
+
+[node name="LevelDebug" type="Node2D"]
+script = ExtResource("1_4syo4")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_esifr")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 38, 0, 0, 39, 0, 0, 40, 0, 0, 41, 0, 0, 42, 0, 0, 43, 0, 0, 44, 0, 0, 45, 0, 0, 46, 0, 0, 47, 0, 0, 48, 0, 0, 49, 0, 0, 50, 0, 0, 51, 0, 0, 52, 0, 0, 53, 0, 0, 54, 0, 0, 55, 0, 0, 56, 0, 0, 57, 0, 0, 58, 0, 0, 59, 0, 0, 60, 0, 0, 61, 0, 0, 62, 0, 0, 63, 0, 0, 64, 0, 0, -327651, 131072, 0, -327650, 131072, 0, -327649, 131072, 0, -327648, 131072, 0, -393183, 65536, 0, -458718, 65536, 0, -524253, 65536, 0, -589788, 65536, 0, -589787, 131072, 0, -589786, 131072, 0, -589785, 131072, 0, -589784, 131072, 0, -589783, 131072, 0, -589782, 131072, 0, -589781, 131072, 0, -589780, 131072, 0, -589779, 131072, 0, -589778, 131072, 0, -589777, 131072, 0, -589776, 131072, 0, -589775, 131072, 0, -589774, 131072, 0, -524238, 131072, 0, -458702, 131072, 0, -393166, 131072, 0, -327630, 131072, 0, -262094, 131072, 0, -196558, 131072, 0, -131022, 131072, 0, -65486, 131072, 0, 65, 0, 0, 66, 0, 0, 67, 0, 0, 68, 0, 0, 69, 0, 0, 70, 0, 0, 71, 0, 0, 72, 0, 0, 73, 0, 0, 74, 0, 0, 75, 0, 0, 76, 0, 0, 77, 0, 0, 78, 0, 0, 79, 0, 0, 80, 0, 0, 81, 0, 0, 82, 0, 0, 83, 0, 0, 84, 0, 0, -65452, 131072, 0, -130988, 131072, 0, -196524, 131072, 0, -524204, 131072, 0, -589740, 131072, 0, -458668, 131072, 0, -393132, 131072, 0, -327596, 131072, 0, -262060, 131072, 0, -524221, 131072, 0, -524220, 131072, 0, -524219, 131072, 0, -524218, 131072, 0, -524217, 131072, 0, -524232, 131072, 0, -524231, 131072, 0, -524230, 131072, 0, -524229, 131072, 0, -524228, 131072, 0, -524210, 131072, 0, -524209, 131072, 0, -524208, 131072, 0, -524207, 131072, 0, -65536, 131072, 0, -131072, 131072, 0, -196608, 131072, 0, -262144, 131072, 0, -327680, 131072, 0, -393216, 131072, 0, -458752, 131072, 0, 65535, 0, 0, 65534, 0, 0, 65533, 0, 0, 65532, 0, 0, 65531, 0, 0, 65530, 0, 0, 65529, 0, 0, 65528, 0, 0, 65527, 0, 0, 65526, 0, 0, 65525, 0, 0, 65524, 0, 0, 65523, 0, 0, 65522, 0, 0, 65521, 0, 0, 65520, 0, 0, 65519, 0, 0, 65518, 0, 0, 65517, 0, 0, 65516, 0, 0, 65515, 0, 0, 65514, 0, 0, 65513, 0, 0, 65512, 0, 0, 65511, 0, 0, 65510, 0, 0, 65509, 0, 0, 65508, 0, 0, 65507, 0, 0, 65506, 0, 0, 65505, 0, 0, 65504, 0, 0, 65503, 0, 0, 65502, 0, 0, 65501, 0, 0, 65500, 0, 0, 65499, 0, 0, 65498, 0, 0, -393235, 131072, 0, -327699, 131072, 0, -262163, 131072, 0, -196627, 131072, 0, -131091, 131072, 0, -65555, 131072, 0, -19, 131072, 0, -393237, 131072, 0, -393236, 131072, 0, -393234, 131072, 0, -393233, 131072, 0, 65497, 131072, 0, 65496, 131072, 0, 65495, 131072, 0, 65494, 131072, 0, 65493, 131072, 0, 65492, 131072, 0, 65491, 131072, 0, -45, 131072, 0, -65581, 131072, 0, -131117, 131072, 0, -196653, 131072, 0, -262189, 131072, 0, -327725, 131072, 0, -393261, 131072, 0, -458797, 131072, 0, -1245138, 131072, 0, -1245137, 131072, 0, -1245136, 131072, 0, -1245135, 131072, 0, -1245134, 131072, 0, -1245139, 131072, 0, -1245140, 131072, 0, -1245141, 131072, 0, -1245142, 131072, 0)
+
+[node name="portal_start" type="Area2D" parent="." node_paths=PackedStringArray("exit_pos")]
+position = Vector2(242, -74)
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("3_88k48")
+to_portal = "end"
+exit_pos = NodePath("start")
+scene = 1
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="portal_start"]
+position = Vector2(-140, -11)
+scale = Vector2(8.99998, 8.84375)
+texture = ExtResource("4_ydhcq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="portal_start"]
+position = Vector2(-144, -5)
+shape = SubResource("RectangleShape2D_kcovx")
+
+[node name="start" type="Marker2D" parent="portal_start"]
+
+[node name="Node2D" type="Node2D" parent="portal_start"]
+
+[node name="portal_end" type="Area2D" parent="." node_paths=PackedStringArray("exit_pos")]
+position = Vector2(1456, -65)
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("3_88k48")
+to_portal = "start"
+exit_pos = NodePath("end")
+scene = 1
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="portal_end"]
+position = Vector2(3, -13)
+scale = Vector2(8.99998, 8.84375)
+texture = ExtResource("4_ydhcq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="portal_end"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_kcovx")
+
+[node name="end" type="Marker2D" parent="portal_end"]
+position = Vector2(-179, -5)
+
+[node name="portal_lvl_select" type="Area2D" parent="." node_paths=PackedStringArray("exit_pos")]
+position = Vector2(1571, -672)
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("3_88k48")
+exit_pos = NodePath("end")
+scene = 0
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="portal_lvl_select"]
+position = Vector2(1, -9)
+scale = Vector2(8.99998, 8.84375)
+texture = ExtResource("4_ydhcq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="portal_lvl_select"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_kcovx")
+
+[node name="end" type="Marker2D" parent="portal_lvl_select"]
+position = Vector2(-179, -5)
+
+[node name="Spikes" type="Area2D" parent="."]
+position = Vector2(718, -17)
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("6_u744n")
+
+[node name="Icon" type="Sprite2D" parent="Spikes"]
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("4_fvn3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes"]
+shape = SubResource("RectangleShape2D_krhjb")
+
+[node name="Arrow" type="Area2D" parent="."]
+position = Vector2(389, -146)
+scale = Vector2(2, 2)
+collision_mask = 15
+script = ExtResource("6_ybr3q")
+stick_to_body = 7
+
+[node name="Arrow" type="Sprite2D" parent="Arrow"]
+texture = ExtResource("7_riat4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow"]
+position = Vector2(0, -0.5)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_wc3jl")
+
+[node name="debug_ui" type="Control" parent="."]
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1205.0
+offset_top = -501.0
+offset_right = 1290.0
+offset_bottom = -427.0
+
+[node name="hurt" type="Button" parent="debug_ui"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 67.0
+offset_bottom = 68.0
+text = "Hurt 25"
+
+[node name="heal" type="Button" parent="debug_ui"]
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 31.0
+text = "Heal 25"
+
+[node name="Cacti" parent="." instance=ExtResource("9_nfiqi")]
+position = Vector2(1698, -54)
+
+[node name="CorruptedBandit" parent="." instance=ExtResource("10_wni41")]
+position = Vector2(-45.0001, -54)
+
+[node name="Bandit" parent="." instance=ExtResource("11_khnkn")]
+position = Vector2(-812, -39)
+
+[node name="PunchingBag" parent="." instance=ExtResource("12_2vsm0")]
+position = Vector2(318, -46)
+
+[node name="PunchingBag_2" parent="." instance=ExtResource("12_2vsm0")]
+position = Vector2(-275, -46)
+
+[node name="PunchingBag_4" parent="." instance=ExtResource("12_2vsm0")]
+position = Vector2(-755, -43)
+
+[node name="PunchingBag_3" parent="." instance=ExtResource("12_2vsm0")]
+position = Vector2(-1314, -48)
+collision_layer = 5
+enable_collision = true
+
+[node name="Player" parent="." instance=ExtResource("5_8q741")]
+position = Vector2(984, -242)
+
+[connection signal="pressed" from="debug_ui/hurt" to="." method="_on_hurt_pressed"]
+[connection signal="pressed" from="debug_ui/heal" to="." method="_on_heal_pressed"]
