@@ -3,7 +3,7 @@ extends Node
 
 signal AttemptMade(attempt)
 
-var maxTimeTillInput:float = 0.2
+var maxTimeTillInput:float = 0.07
 var unsolvedActionChain = []
 var isInCombo:bool
 
@@ -30,6 +30,7 @@ func StackInputEvent(event)->void:
 			##Check if the attempted combo string matches any of the move sets, if so end the function, or else carry on
 			if unsolvedActionChain == arrayMove:
 				emit_signal("AttemptMade", i)
+				print(i)
 				break
 			else:
 				pass

@@ -120,15 +120,13 @@ func StateMachineDelta(delta:float)->void:
 			jumpCount-=1
 			Jump()
 		"attack":
-			velocity.x *= decel
+			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
 			animController.travel(selectedAttack)
 		"dodge/Entry":
 			health.invincible = true
 			rollDirection = GetMoveDirection()
 			animController.travel("dodge")
 			velocity.x = rollDirection * rollSpeed
-		"dodge/rolling":
-			pass
 
 func GetMoveDirection()->float:
 	if not in_cutscene:
@@ -217,6 +215,7 @@ func _on_coyote_timer_timeout() -> void:
 
 
 func _on_attack_selector_attempt_made(attempt) -> void:
+#	if smp.get_current() == "attack": return
 	selectedAttack = attempt
 	smp.set_trigger("attackPressed")
 	pass # Replace with function body.
