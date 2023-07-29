@@ -773,7 +773,7 @@ collision_layer = 2
 collision_mask = 15
 floor_snap_length = 8.0
 script = ExtResource("1_qjkmw")
-decel = 0.8
+decel = 1.0
 accel = 1000.0
 airAccel = 800.0
 moveDecel = 0.9
@@ -781,7 +781,7 @@ airDecel = 0.99
 jumpHeight = 200
 timeToJumpPeak = 0.5
 jumpDistance = 400.0
-jumpCountMax = 2
+jumpCountMax = 1
 rollSpeed = 600.0
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
@@ -895,5 +895,4 @@ wait_time = 0.3
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="death" from="Attributes/Health" to="." method="_on_health_death"]
 [connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_health_changed"]
-[connection signal="AttemptMade" from="AttackSelector" to="." method="_on_attack_selector_attempt_made"]
 [connection signal="timeout" from="AttackSelector/Timer" to="AttackSelector" method="_on_timer_timeout"]
