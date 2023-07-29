@@ -13,10 +13,10 @@
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="9_0jhae"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="9_4j1ts"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/IntegerCondition.gd" id="10_qk8r0"]
-[ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
+[ext_resource type="PackedScene" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="13_dbvgd"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
-[ext_resource type="AnimationLibrary" uid="uid://byvn72n2234gy" path="res://entities/player/player_animations.res" id="15_kmdxt"]
+[ext_resource type="AnimationLibrary" path="res://entities/player/player_animations.res" id="15_kmdxt"]
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/AttackSelector.gd" id="16_0355k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7l68a"]
