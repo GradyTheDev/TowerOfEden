@@ -72,7 +72,6 @@ texture = ExtResource("3_bhhvf")
 flip_h = true
 hframes = 8
 vframes = 8
-frame = 7
 
 [node name="Hurtbox" type="Area2D" parent="Visuals"]
 collision_layer = 0
