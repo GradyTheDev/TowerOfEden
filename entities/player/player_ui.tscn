@@ -24,6 +24,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="Money" type="Label" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -34,6 +35,7 @@ grow_vertical = 0
 text = "Money: "
 
 [node name="Health" type="Label" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -43,6 +45,17 @@ offset_right = 113.0
 offset_bottom = -29.0
 grow_vertical = 0
 text = "Health: "
+
+[node name="Score" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_right = 113.0
+offset_bottom = -29.0
+grow_vertical = 0
+text = "Score: "
 
 [node name="PauseMenu" type="Control" parent="."]
 clip_contents = true

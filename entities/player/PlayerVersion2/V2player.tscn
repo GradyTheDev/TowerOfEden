@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=141 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="13_dbvgd"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
+[ext_resource type="Script" path="res://attributes/attribute_score.gd" id="15_gqrvl"]
 [ext_resource type="AnimationLibrary" uid="uid://byvn72n2234gy" path="res://entities/player/player_animations.res" id="15_kmdxt"]
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/AttackSelector.gd" id="16_0355k"]
 [ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="19_mk46f"]
@@ -844,6 +845,8 @@ one_shot = true
 
 [node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
 script = ExtResource("7_kfxcf")
+health = 9999
+health_max = 9999
 body = NodePath("../..")
 save = true
 
@@ -858,12 +861,19 @@ money = 50
 body = NodePath("../..")
 save = true
 
+[node name="AttributeScore" type="Node" parent="Attributes" node_paths=PackedStringArray("health", "attack", "body")]
+script = ExtResource("15_gqrvl")
+health = NodePath("../Health")
+attack = NodePath("../../Visuals/Hurtbox")
+body = NodePath("../..")
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 
-[node name="PlayerUI" parent="PlayerCamera" node_paths=PackedStringArray("atr_health", "atr_money") instance=ExtResource("13_b4afs")]
+[node name="PlayerUI" parent="PlayerCamera" node_paths=PackedStringArray("atr_health", "atr_money", "atr_score") instance=ExtResource("13_b4afs")]
 custom_minimum_size = Vector2(100, 100)
 atr_health = NodePath("../../Attributes/Health")
 atr_money = NodePath("../../Attributes/Money")
+atr_score = NodePath("../../Attributes/AttributeScore")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity", "health")]
 collision_layer = 2
