@@ -164,6 +164,7 @@ enable_collision = true
 
 [node name="V2_Player" parent="." instance=ExtResource("13_rs6nc")]
 position = Vector2(570, -181)
+decel = 0.24
 airAccel = 1000.0
 
 [connection signal="pressed" from="debug_ui/hurt" to="." method="_on_hurt_pressed"]

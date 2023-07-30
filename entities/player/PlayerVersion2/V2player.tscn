@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=139 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
@@ -94,7 +94,7 @@ transitions = {
 }
 }
 name = "dodge"
-metadata/graph_offset = Vector2(889, 143.5)
+metadata/graph_offset = Vector2(889, 123.5)
 
 [sub_resource type="Resource" id="Resource_7dpgk"]
 script = ExtResource("5_bie18")
@@ -323,6 +323,26 @@ conditions = {
 }
 priority = 0
 
+[sub_resource type="Resource" id="Resource_uuli1"]
+script = ExtResource("9_0jhae")
+name = "jump"
+
+[sub_resource type="Resource" id="Resource_jrueg"]
+script = ExtResource("8_uc3qj")
+value = true
+comparation = 0
+name = "onFloor"
+
+[sub_resource type="Resource" id="Resource_5xuht"]
+script = ExtResource("6_shm0h")
+from = "attack"
+to = "jump"
+conditions = {
+"jump": SubResource("Resource_uuli1"),
+"onFloor": SubResource("Resource_jrueg")
+}
+priority = 0
+
 [sub_resource type="Resource" id="Resource_8gwwq"]
 script = ExtResource("6_shm0h")
 from = "dodge"
@@ -541,6 +561,7 @@ transitions = {
 },
 "attack": {
 "idle": SubResource("Resource_h0anw"),
+"jump": SubResource("Resource_5xuht"),
 "move": SubResource("Resource_ekwey")
 },
 "dodge": {
@@ -600,14 +621,14 @@ animation = &"player_animations/attack_forward"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5s3wr"]
 animation = &"player_animations/attack_up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0mtu"]
-animation = &"player_animations/attack_up"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_10656"]
 animation = &"player_animations/attack_down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0u6l"]
 animation = &"player_animations/attack_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0mtu"]
+animation = &"player_animations/attack_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hy2po"]
 animation = &"player_animations/dodge"
@@ -742,14 +763,14 @@ advance_mode = 2
 states/Start/position = Vector2(91, 100)
 "states/attack forward 2/node" = SubResource("AnimationNodeAnimation_t6l8x")
 "states/attack forward 2/position" = Vector2(344, 570)
-"states/attack up/node" = SubResource("AnimationNodeAnimation_m0mtu")
-"states/attack up/position" = Vector2(480, -26)
 "states/attack up 2/node" = SubResource("AnimationNodeAnimation_5s3wr")
 "states/attack up 2/position" = Vector2(126, 468)
 states/attack_down/node = SubResource("AnimationNodeAnimation_10656")
 states/attack_down/position = Vector2(572, 468)
 states/attack_forward/node = SubResource("AnimationNodeAnimation_c0u6l")
 states/attack_forward/position = Vector2(496, 233)
+states/attack_up/node = SubResource("AnimationNodeAnimation_m0mtu")
+states/attack_up/position = Vector2(480, -26)
 states/dodge/node = SubResource("AnimationNodeAnimation_hy2po")
 states/dodge/position = Vector2(872, 185)
 states/fall/node = SubResource("AnimationNodeAnimation_buiab")
@@ -762,7 +783,7 @@ states/reset/node = SubResource("AnimationNodeAnimation_hyw54")
 states/reset/position = Vector2(209, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_5clq7")
 states/walk/position = Vector2(717, 100)
-transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_babg6"), "walk", "attack_forward", SubResource("AnimationNodeStateMachineTransition_qr4nu"), "attack_forward", "idle", SubResource("AnimationNodeStateMachineTransition_128mc"), "idle", "attack_forward", SubResource("AnimationNodeStateMachineTransition_kq1e1"), "attack_forward", "walk", SubResource("AnimationNodeStateMachineTransition_eutlh"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_wuyrm"), "Start", "reset", SubResource("AnimationNodeStateMachineTransition_2jfab"), "reset", "idle", SubResource("AnimationNodeStateMachineTransition_5xgfo"), "idle", "attack up", SubResource("AnimationNodeStateMachineTransition_eya2r"), "attack up", "walk", SubResource("AnimationNodeStateMachineTransition_jhaar"), "walk", "attack up", SubResource("AnimationNodeStateMachineTransition_uub82"), "attack up", "idle", SubResource("AnimationNodeStateMachineTransition_xhxwa"), "attack_down", "fall", SubResource("AnimationNodeStateMachineTransition_5tdwr"), "fall", "attack_down", SubResource("AnimationNodeStateMachineTransition_gj4r3"), "fall", "attack forward 2", SubResource("AnimationNodeStateMachineTransition_kmj1e"), "attack forward 2", "fall", SubResource("AnimationNodeStateMachineTransition_4aeqj"), "fall", "attack up 2", SubResource("AnimationNodeStateMachineTransition_7tmnx"), "attack up 2", "fall", SubResource("AnimationNodeStateMachineTransition_0fqsy"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_3xdnc"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_0d0kp"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_0ma1h"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_8isfw"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_nt0ht"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_awljy"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_fyo65"), "walk", "dodge", SubResource("AnimationNodeStateMachineTransition_gomlk"), "dodge", "walk", SubResource("AnimationNodeStateMachineTransition_6vx55")]
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_babg6"), "walk", "attack_forward", SubResource("AnimationNodeStateMachineTransition_qr4nu"), "attack_forward", "idle", SubResource("AnimationNodeStateMachineTransition_128mc"), "idle", "attack_forward", SubResource("AnimationNodeStateMachineTransition_kq1e1"), "attack_forward", "walk", SubResource("AnimationNodeStateMachineTransition_eutlh"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_wuyrm"), "Start", "reset", SubResource("AnimationNodeStateMachineTransition_2jfab"), "reset", "idle", SubResource("AnimationNodeStateMachineTransition_5xgfo"), "idle", "attack_up", SubResource("AnimationNodeStateMachineTransition_eya2r"), "attack_up", "walk", SubResource("AnimationNodeStateMachineTransition_jhaar"), "walk", "attack_up", SubResource("AnimationNodeStateMachineTransition_uub82"), "attack_up", "idle", SubResource("AnimationNodeStateMachineTransition_xhxwa"), "attack_down", "fall", SubResource("AnimationNodeStateMachineTransition_5tdwr"), "fall", "attack_down", SubResource("AnimationNodeStateMachineTransition_gj4r3"), "fall", "attack forward 2", SubResource("AnimationNodeStateMachineTransition_kmj1e"), "attack forward 2", "fall", SubResource("AnimationNodeStateMachineTransition_4aeqj"), "fall", "attack up 2", SubResource("AnimationNodeStateMachineTransition_7tmnx"), "attack up 2", "fall", SubResource("AnimationNodeStateMachineTransition_0fqsy"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_3xdnc"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_0d0kp"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_0ma1h"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_8isfw"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_nt0ht"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_awljy"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_fyo65"), "walk", "dodge", SubResource("AnimationNodeStateMachineTransition_gomlk"), "dodge", "walk", SubResource("AnimationNodeStateMachineTransition_6vx55")]
 graph_offset = Vector2(-54, -73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13132"]
@@ -773,7 +794,7 @@ collision_layer = 2
 collision_mask = 15
 floor_snap_length = 8.0
 script = ExtResource("1_qjkmw")
-decel = 0.8
+decel = 1.0
 accel = 1000.0
 airAccel = 800.0
 moveDecel = 0.9
@@ -781,7 +802,7 @@ airDecel = 0.99
 jumpHeight = 200
 timeToJumpPeak = 0.5
 jumpDistance = 400.0
-jumpCountMax = 2
+jumpCountMax = 1
 rollSpeed = 600.0
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
@@ -895,5 +916,4 @@ wait_time = 0.3
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="death" from="Attributes/Health" to="." method="_on_health_death"]
 [connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_health_changed"]
-[connection signal="AttemptMade" from="AttackSelector" to="." method="_on_attack_selector_attempt_made"]
 [connection signal="timeout" from="AttackSelector/Timer" to="AttackSelector" method="_on_timer_timeout"]
