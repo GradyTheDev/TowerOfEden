@@ -686,14 +686,10 @@ text = ""
 
 [node name="BanditBow" parent="AnimationPlayer/Act1" instance=ExtResource("10_qnf1p")]
 position = Vector2(509, 0)
-rotation = 3.14159
-scale = Vector2(5, -5)
 passive = true
 
 [node name="BanditSword" parent="AnimationPlayer/Act1" instance=ExtResource("9_lin5f")]
 position = Vector2(622, 0)
-rotation = 3.14159
-scale = Vector2(5, -5)
 passive = true
 
 [node name="Camera" type="Camera2D" parent="AnimationPlayer/Act1"]
