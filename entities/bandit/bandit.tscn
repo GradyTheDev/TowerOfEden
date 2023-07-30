@@ -37,6 +37,7 @@ pck_arrow = ExtResource("2_4j7ll")
 
 [node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
 script = ExtResource("1_gu288")
+health = 20
 body = NodePath("../..")
 
 [node name="Sprite" type="Sprite2D" parent="."]

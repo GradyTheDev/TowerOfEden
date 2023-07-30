@@ -29,6 +29,7 @@ sight_mask = 3
 
 [node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
 script = ExtResource("2_p2dwv")
+health = 20
 body = NodePath("../..")
 
 [node name="Sprite" type="Sprite2D" parent="."]
