@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=140 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
 [ext_resource type="AnimationLibrary" uid="uid://byvn72n2234gy" path="res://entities/player/player_animations.res" id="15_kmdxt"]
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/AttackSelector.gd" id="16_0355k"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="19_mk46f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7l68a"]
 height = 66.0
@@ -303,26 +304,6 @@ conditions = {
 }
 priority = 0
 
-[sub_resource type="Resource" id="Resource_gbuip"]
-script = ExtResource("9_0jhae")
-name = "endAttack"
-
-[sub_resource type="Resource" id="Resource_6m6k7"]
-script = ExtResource("7_7vvao")
-value = 0.0
-comparation = 1
-name = "movement"
-
-[sub_resource type="Resource" id="Resource_ekwey"]
-script = ExtResource("6_shm0h")
-from = "attack"
-to = "move"
-conditions = {
-"endAttack": SubResource("Resource_gbuip"),
-"movement": SubResource("Resource_6m6k7")
-}
-priority = 0
-
 [sub_resource type="Resource" id="Resource_uuli1"]
 script = ExtResource("9_0jhae")
 name = "jump"
@@ -340,6 +321,26 @@ to = "jump"
 conditions = {
 "jump": SubResource("Resource_uuli1"),
 "onFloor": SubResource("Resource_jrueg")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_gbuip"]
+script = ExtResource("9_0jhae")
+name = "endAttack"
+
+[sub_resource type="Resource" id="Resource_6m6k7"]
+script = ExtResource("7_7vvao")
+value = 0.0
+comparation = 1
+name = "movement"
+
+[sub_resource type="Resource" id="Resource_ekwey"]
+script = ExtResource("6_shm0h")
+from = "attack"
+to = "move"
+conditions = {
+"endAttack": SubResource("Resource_gbuip"),
+"movement": SubResource("Resource_6m6k7")
 }
 priority = 0
 
@@ -911,6 +912,13 @@ validInputActions = Array[String](["move_down", "attack", "jump"])
 
 [node name="Timer" type="Timer" parent="AttackSelector"]
 wait_time = 0.3
+
+[node name="Dialog" parent="." instance=ExtResource("19_mk46f")]
+offset_left = -133.0
+offset_top = -57.0
+offset_right = 133.0
+offset_bottom = -40.0
+text = ""
 
 [connection signal="transited" from="StateMachinePlayer" to="." method="_on_state_machine_player_transited"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

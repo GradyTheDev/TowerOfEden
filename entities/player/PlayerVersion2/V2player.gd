@@ -12,6 +12,12 @@ class_name PlayerController extends CharacterBody2D
 @export var jumpCountMax:int
 @export var rollSpeed:float
 
+@export var dialog_text: String:
+	set(new_text):
+		dialog_text = new_text
+		if dialog != null:
+			dialog.set_text(new_text)
+
 var selectedAttack:String = ""
 
 var jumpAvailability:bool = true
@@ -34,12 +40,18 @@ var in_cutscene: bool = false
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var anim_player: AnimationPlayer = $AnimPlayer
 @onready var sprite: Sprite2D = $Visuals/Sprite
+@onready var dialog: RichTextLabel = get_node("Dialog")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var MaxGravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _init():
 	add_to_group(Globals.GROUP_PLAYER)
+
+func _enter_tree():
+	if Globals.player == null:
+		Globals.player = self
+	self.dialog_text = self.dialog_text
 
 func _exit_tree():
 	if Globals.player == self:
@@ -166,11 +178,11 @@ func HandleStateTransitions()->void:
 	#Handling all the data that the state machine needs
 	smp.set_param("onFloor", GetIsOnFloor())
 	smp.set_param("movement", GetMoveDirection())
-	if Input.is_action_just_pressed("jump") : smp.set_trigger("jump")
+	if Input.is_action_just_pressed("jump") and not in_cutscene: smp.set_trigger("jump")
 	smp.set_param("coyoteAvailable", jumpAvailability)
-	if Input.is_action_just_pressed("slide") : smp.set_trigger("roll")
+	if Input.is_action_just_pressed("slide") and not in_cutscene: smp.set_trigger("roll")
 	smp.set_param("jumpCount", jumpCount)
-	if Input.is_action_just_pressed("attack"): smp.set_trigger("attackPressed")
+	if Input.is_action_just_pressed("attack") and not in_cutscene: smp.set_trigger("attackPressed")
 	pass
 
 func SetJumpSpeed()->void:

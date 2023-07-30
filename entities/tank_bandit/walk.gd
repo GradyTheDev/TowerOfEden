@@ -30,7 +30,7 @@ func _physics_process(delta):
 		return
 	
 	for body in vision_area.get_overlapping_bodies():
-		if body is Player:
+		if body is PlayerController:
 			player_last_position = body.global_position
 	
 	var player_x = player_last_position.x
@@ -54,5 +54,5 @@ func _physics_process(delta):
 	
 
 func _on_player_in_attack_range(body):
-	if body is Player:
+	if body is PlayerController:
 		emit_signal("player_entered_attack_range")

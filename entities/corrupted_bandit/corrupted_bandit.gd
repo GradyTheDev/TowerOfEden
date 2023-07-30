@@ -96,7 +96,7 @@ func _physics_process(delta):
 func refresh_sight():
 	_sight_timer = _sight_delay
 	if Globals.player != null and Globals.player.health.health > 0:
-		var player = Globals.player as Player
+		var player = Globals.player as PlayerController
 		var dis := global_position.distance_to(player.global_position)
 		
 		if dis < aggro_range:
@@ -110,7 +110,7 @@ func refresh_sight():
 
 			var dict := space.intersect_ray(query)
 			var collider = dict.get('collider')
-			if collider is Player:
+			if collider is PlayerController:
 				state = states.hunting
 				_can_hit = dis < aggro_range
 			else:

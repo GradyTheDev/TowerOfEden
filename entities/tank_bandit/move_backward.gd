@@ -25,7 +25,7 @@ func exit():
 
 func _physics_process(delta):
 	for body in vision_area.get_overlapping_bodies():
-		if body is Player:
+		if body is PlayerController:
 			player_last_position = body.global_position
 	
 	if player_last_position == null:
@@ -50,7 +50,7 @@ func _physics_process(delta):
 
 func _on_attack_reload_timeout():
 	for body in attack_trigger.get_overlapping_bodies():
-		if body is Player:
+		if body is PlayerController:
 			emit_signal("attack_reloaded", {"Position": body.global_position})
 			return
 	emit_signal("attack_reloaded", {})
