@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b5s0vffw3hdgd"]
+[gd_scene load_steps=25 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="TileSet" uid="uid://cmh2c7oc8kydj" path="res://assets/tilesets/city_floor.tres" id="1_euht7"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="3_2plir"]
 [ext_resource type="Texture2D" uid="uid://d4ndsnfe477rs" path="res://assets/levels/bridge_city_to_tower/bridge_prototype.png" id="5_sr14i"]
 [ext_resource type="PackedScene" uid="uid://dcoddllyirird" path="res://entities/player/PlayerVersion2/V2player.tscn" id="6_euram"]
+[ext_resource type="Script" path="res://levels/bridge_city_to_tower/to_credits.gd" id="6_qb4t6"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/AnimationPlayer.gd" id="7_8gvld"]
 [ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="7_her2d"]
 [ext_resource type="Script" path="res://cutscenes/intro/act0.gd" id="7_o7k3d"]
@@ -642,6 +643,10 @@ monitorable = false
 position = Vector2(202, -13)
 shape = SubResource("RectangleShape2D_bhcvv")
 
+[node name="to_credits" type="Node" parent="."]
+script = ExtResource("6_qb4t6")
+last_cutscene = "Act3"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath(".")
 speed_scale = 0.5
@@ -755,6 +760,7 @@ position = Vector2(-2406, -34)
 
 [connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_triggered" flags=6]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="to_credits" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_started"]
 [connection signal="act_ended" from="AnimationPlayer/Act1" to="." method="_on_act_1_act_ended"]
