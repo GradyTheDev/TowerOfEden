@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=139 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
@@ -94,7 +94,7 @@ transitions = {
 }
 }
 name = "dodge"
-metadata/graph_offset = Vector2(889, 143.5)
+metadata/graph_offset = Vector2(889, 123.5)
 
 [sub_resource type="Resource" id="Resource_7dpgk"]
 script = ExtResource("5_bie18")
@@ -323,6 +323,26 @@ conditions = {
 }
 priority = 0
 
+[sub_resource type="Resource" id="Resource_uuli1"]
+script = ExtResource("9_0jhae")
+name = "jump"
+
+[sub_resource type="Resource" id="Resource_jrueg"]
+script = ExtResource("8_uc3qj")
+value = true
+comparation = 0
+name = "onFloor"
+
+[sub_resource type="Resource" id="Resource_5xuht"]
+script = ExtResource("6_shm0h")
+from = "attack"
+to = "jump"
+conditions = {
+"jump": SubResource("Resource_uuli1"),
+"onFloor": SubResource("Resource_jrueg")
+}
+priority = 0
+
 [sub_resource type="Resource" id="Resource_8gwwq"]
 script = ExtResource("6_shm0h")
 from = "dodge"
@@ -541,6 +561,7 @@ transitions = {
 },
 "attack": {
 "idle": SubResource("Resource_h0anw"),
+"jump": SubResource("Resource_5xuht"),
 "move": SubResource("Resource_ekwey")
 },
 "dodge": {
