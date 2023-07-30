@@ -111,7 +111,7 @@ func StateMachineDelta(delta:float)->void:
 			MoveWithFriction(airAccel,airDecel, delta, maxSpeed)
 			Applygravity(delta)
 		"fall/attack":
-			animController.travel(selectedAttack)
+			animController.travel("attack_forward")
 			Applygravity(delta)
 		"fall/Exit":
 			jumpAvailability = true
@@ -120,15 +120,13 @@ func StateMachineDelta(delta:float)->void:
 			jumpCount-=1
 			Jump()
 		"attack":
-			velocity.x *= decel
-			animController.travel(selectedAttack)
+			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
+			animController.travel("attack_forward")
 		"dodge/Entry":
 			health.invincible = true
 			rollDirection = GetMoveDirection()
 			animController.travel("dodge")
 			velocity.x = rollDirection * rollSpeed
-		"dodge/rolling":
-			pass
 
 func GetMoveDirection()->float:
 	if not in_cutscene:
@@ -144,9 +142,9 @@ func MoveWithFriction(accelS:float, decelS:float, delta:float, maxVel:float)->vo
 	var directionVector := Vector2(GetMoveDirection(), 0)
 	if GetIsOnFloor():
 		var movementRotated := Tools.adjust_vector_to_slope(directionVector, ground_checker.get_collision_normal(0))
-		velocity.x += movementRotated.x * accelS * delta
+		velocity.x += movementRotated.x * accelS
 	else:
-		velocity.x += GetMoveDirection() * accelS * delta * 3
+		velocity.x += GetMoveDirection() * accelS
 	if GetMoveDirection() != clampVel:
 		velocity.x *= decelS
 #	else:
@@ -172,6 +170,7 @@ func HandleStateTransitions()->void:
 	smp.set_param("coyoteAvailable", jumpAvailability)
 	if Input.is_action_just_pressed("slide") : smp.set_trigger("roll")
 	smp.set_param("jumpCount", jumpCount)
+	if Input.is_action_just_pressed("attack"): smp.set_trigger("attackPressed")
 	pass
 
 func SetJumpSpeed()->void:
@@ -217,6 +216,7 @@ func _on_coyote_timer_timeout() -> void:
 
 
 func _on_attack_selector_attempt_made(attempt) -> void:
+#	if smp.get_current() == "attack": return
 	selectedAttack = attempt
 	smp.set_trigger("attackPressed")
 	pass # Replace with function body.

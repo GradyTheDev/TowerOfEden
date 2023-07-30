@@ -3,7 +3,7 @@ extends Node
 
 signal AttemptMade(attempt)
 
-var maxTimeTillInput:float = 0.2
+var maxTimeTillInput:float = 0.65
 var unsolvedActionChain = []
 var isInCombo:bool
 
