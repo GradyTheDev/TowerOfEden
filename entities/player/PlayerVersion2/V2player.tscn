@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="9_0jhae"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="9_4j1ts"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/IntegerCondition.gd" id="10_qk8r0"]
-[ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
+[ext_resource type="PackedScene" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="13_dbvgd"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
 [ext_resource type="Script" path="res://attributes/attribute_score.gd" id="15_gqrvl"]
@@ -342,6 +342,26 @@ to = "move"
 conditions = {
 "endAttack": SubResource("Resource_gbuip"),
 "movement": SubResource("Resource_6m6k7")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_uuli1"]
+script = ExtResource("9_0jhae")
+name = "jump"
+
+[sub_resource type="Resource" id="Resource_jrueg"]
+script = ExtResource("8_uc3qj")
+value = true
+comparation = 0
+name = "onFloor"
+
+[sub_resource type="Resource" id="Resource_5xuht"]
+script = ExtResource("6_shm0h")
+from = "attack"
+to = "jump"
+conditions = {
+"jump": SubResource("Resource_uuli1"),
+"onFloor": SubResource("Resource_jrueg")
 }
 priority = 0
 
