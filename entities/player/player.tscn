@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://du248qvl7jubl"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_r8oxd"]
-[ext_resource type="PackedScene" path="res://entities/player/player_ui.tscn" id="2_6yq3t"]
+[ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="2_6yq3t"]
 [ext_resource type="Texture2D" uid="uid://dgdaaiorm73js" path="res://assets/spritesheets/nym_sprite_v1.png" id="3_bhhvf"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_mwfyw"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="4_pvono"]
 [ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="4_quil2"]
 [ext_resource type="AnimationLibrary" path="res://entities/player/player_animations.res" id="5_0q7ux"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_5x0tb"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dam2d87uc0tlr" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dymccknvy0nf6" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="7_xntrw"]
 [ext_resource type="PackedScene" path="res://other/dialogbox.tscn" id="11_l0jxj"]
 
