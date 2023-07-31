@@ -1,16 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://b5s0vffw3hdgd"]
+[gd_scene load_steps=25 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
 [ext_resource type="TileSet" uid="uid://btf342mldfbya" path="res://assets/levels/city/city_floor/tilesets/city_floor-tileset-16x16.res" id="2_sqevg"]
 [ext_resource type="Script" path="res://other/portal.gd" id="2_vsfw8"]
 [ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="3_2plir"]
 [ext_resource type="Texture2D" uid="uid://d4ndsnfe477rs" path="res://assets/levels/bridge_city_to_tower/bridge_prototype.png" id="5_sr14i"]
+[ext_resource type="PackedScene" uid="uid://dcoddllyirird" path="res://entities/player/PlayerVersion2/V2player.tscn" id="6_euram"]
+[ext_resource type="Script" path="res://levels/bridge_city_to_tower/to_credits.gd" id="6_qb4t6"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/AnimationPlayer.gd" id="7_8gvld"]
-[ext_resource type="PackedScene" path="res://other/dialogbox.tscn" id="7_her2d"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="7_her2d"]
 [ext_resource type="Script" path="res://cutscenes/intro/act0.gd" id="7_o7k3d"]
 [ext_resource type="Script" path="res://cutscenes/intro/act1.gd" id="8_2dnxa"]
 [ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="9_lin5f"]
-[ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="9_ub1y7"]
 [ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="10_qnf1p"]
 [ext_resource type="Script" path="res://cutscenes/intro/act2.gd" id="12_dupbb"]
 [ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="12_m5ntc"]
@@ -45,7 +46,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = false
-tracks/1/path = NodePath("../Player:position")
+tracks/1/path = NodePath("../PlayerV2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -157,7 +158,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../Player:dialog_text")
+tracks/8/path = NodePath("../PlayerV2:dialog_text")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -233,7 +234,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Player:dialog_text")
+tracks/5/path = NodePath("../PlayerV2:dialog_text")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -397,7 +398,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../Player:dialog_text")
+tracks/10/path = NodePath("../PlayerV2:dialog_text")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -412,7 +413,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
-tracks/0/path = NodePath("../Player:position")
+tracks/0/path = NodePath("../PlayerV2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -568,7 +569,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("../Player:dialog_text")
+tracks/13/path = NodePath("../PlayerV2:dialog_text")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -633,10 +634,6 @@ texture = ExtResource("3_2plir")
 [node name="end" type="Marker2D" parent="portal_end"]
 position = Vector2(-179, -5)
 
-[node name="Player" parent="." instance=ExtResource("9_ub1y7")]
-position = Vector2(-11032, 2144)
-jump_height = 130.0
-
 [node name="CutsceneTrigger" type="Area2D" parent="."]
 position = Vector2(66, -207)
 collision_layer = 0
@@ -646,6 +643,10 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
 position = Vector2(202, -13)
 shape = SubResource("RectangleShape2D_bhcvv")
+
+[node name="to_credits" type="Node" parent="."]
+script = ExtResource("6_qb4t6")
+last_cutscene = "Act3"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath(".")
@@ -657,7 +658,7 @@ script = ExtResource("7_8gvld")
 
 [node name="Act0" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("player")]
 script = ExtResource("7_o7k3d")
-player = NodePath("../../Player")
+player = NodePath("../../PlayerV2")
 
 [node name="Act1" type="Node2D" parent="AnimationPlayer"]
 unique_name_in_owner = true
@@ -686,14 +687,10 @@ text = ""
 
 [node name="BanditBow" parent="AnimationPlayer/Act1" instance=ExtResource("10_qnf1p")]
 position = Vector2(509, 0)
-rotation = 3.14159
-scale = Vector2(5, -5)
 passive = true
 
 [node name="BanditSword" parent="AnimationPlayer/Act1" instance=ExtResource("9_lin5f")]
 position = Vector2(622, 0)
-rotation = 3.14159
-scale = Vector2(5, -5)
 passive = true
 
 [node name="Camera" type="Camera2D" parent="AnimationPlayer/Act1"]
@@ -755,8 +752,12 @@ text = ""
 [node name="Camera" type="Camera2D" parent="AnimationPlayer/Act3"]
 enabled = false
 
+[node name="PlayerV2" parent="." instance=ExtResource("6_euram")]
+position = Vector2(-2406, -34)
+
 [connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_triggered" flags=6]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="to_credits" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_started"]
 [connection signal="act_ended" from="AnimationPlayer/Act1" to="." method="_on_act_1_act_ended"]

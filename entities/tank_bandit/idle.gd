@@ -23,7 +23,7 @@ func enter(_data):
 	if vision_area.monitoring == false:
 		return
 	for body in vision_area.get_overlapping_bodies():
-		if body is Player:
+		if body is PlayerController:
 			emit_signal("player_entered_vision", {"Position": body.position})
 			return
 	anim_sprite.play("Idle")
@@ -38,7 +38,7 @@ func _process(delta):
 	if vision_area.monitoring == false:
 		return
 	for body in vision_area.get_overlapping_bodies():
-		if body is Player:
+		if body is PlayerController:
 			player_position = body.global_position
 	
 	if player_position == null:
@@ -59,10 +59,10 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body is Player:
+	if body is PlayerController:
 		emit_signal("player_entered_vision", {"Position": body.position})
 
 
 func _on_attack_triggered(body):
-	if body is Player:
+	if body is PlayerController:
 		emit_signal("player_entered_attack_range")

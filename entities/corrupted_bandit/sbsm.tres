@@ -1,34 +1,28 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=36 format=3 uid="uid://dsycnpa0cs4qf"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=36 format=3 uid="uid://chktl2kwm7hgr"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t6l8x"]
-animation = &"player_animations/attack_forward"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0u6l"]
-animation = &"bow_bandit_animations/attack_forward"
+animation = &"sbanims/attack_forward"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5s3wr"]
-animation = &"player_animations/attack_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0mtu"]
-animation = &"player_animations/attack_up"
+animation = &"sbanims/attack_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_10656"]
-animation = &"player_animations/attack_down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_buiab"]
-animation = &"player_animations/fall"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_74jfi"]
-animation = &"bow_bandit_animations/idle"
+animation = &"sbanims/idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwjqb"]
-animation = &"player_animations/jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hyw54"]
-animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5clq7"]
-animation = &"bow_bandit_animations/walk"
+animation = &"sbanims/walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_babg6"]
 advance_mode = 2
@@ -137,15 +131,15 @@ advance_mode = 2
 advance_condition = &"in_air"
 
 [resource]
-states/Start/position = Vector2(91, 100)
+states/Start/position = Vector2(92, 100)
 "states/attack forward/node" = SubResource("AnimationNodeAnimation_c0u6l")
 "states/attack forward/position" = Vector2(480, 231)
 "states/attack forward 2/node" = SubResource("AnimationNodeAnimation_t6l8x")
-"states/attack forward 2/position" = Vector2(344, 570)
+"states/attack forward 2/position" = Vector2(347, 572)
 "states/attack up/node" = SubResource("AnimationNodeAnimation_m0mtu")
 "states/attack up/position" = Vector2(480, -26)
 "states/attack up 2/node" = SubResource("AnimationNodeAnimation_5s3wr")
-"states/attack up 2/position" = Vector2(126, 468)
+"states/attack up 2/position" = Vector2(127, 468)
 states/attack_down/node = SubResource("AnimationNodeAnimation_10656")
 states/attack_down/position = Vector2(572, 468)
 states/fall/node = SubResource("AnimationNodeAnimation_buiab")
@@ -157,6 +151,6 @@ states/jump/position = Vector2(209, 296)
 states/reset/node = SubResource("AnimationNodeAnimation_hyw54")
 states/reset/position = Vector2(209, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_5clq7")
-states/walk/position = Vector2(717, 100)
+states/walk/position = Vector2(718, 100)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_babg6"), "walk", "attack forward", SubResource("AnimationNodeStateMachineTransition_qr4nu"), "attack forward", "idle", SubResource("AnimationNodeStateMachineTransition_128mc"), "idle", "attack forward", SubResource("AnimationNodeStateMachineTransition_kq1e1"), "attack forward", "walk", SubResource("AnimationNodeStateMachineTransition_eutlh"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_wuyrm"), "Start", "reset", SubResource("AnimationNodeStateMachineTransition_2jfab"), "reset", "idle", SubResource("AnimationNodeStateMachineTransition_5xgfo"), "idle", "attack up", SubResource("AnimationNodeStateMachineTransition_eya2r"), "attack up", "walk", SubResource("AnimationNodeStateMachineTransition_jhaar"), "walk", "attack up", SubResource("AnimationNodeStateMachineTransition_uub82"), "attack up", "idle", SubResource("AnimationNodeStateMachineTransition_xhxwa"), "attack_down", "fall", SubResource("AnimationNodeStateMachineTransition_5tdwr"), "fall", "attack_down", SubResource("AnimationNodeStateMachineTransition_gj4r3"), "fall", "attack forward 2", SubResource("AnimationNodeStateMachineTransition_kmj1e"), "attack forward 2", "fall", SubResource("AnimationNodeStateMachineTransition_4aeqj"), "fall", "attack up 2", SubResource("AnimationNodeStateMachineTransition_7tmnx"), "attack up 2", "fall", SubResource("AnimationNodeStateMachineTransition_0fqsy"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_3xdnc"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_0d0kp"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_0ma1h"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_8isfw"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_nt0ht"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_awljy"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_fyo65")]
-graph_offset = Vector2(-62, -60)
+graph_offset = Vector2(74, -48)

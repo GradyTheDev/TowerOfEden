@@ -21,7 +21,7 @@ func _ready():
 func _on_death():
 	if not is_inside_tree() or not is_node_ready(): return
 	anim_tree.active = false
-	anim_player.play("player_animations/death")
+	anim_player.play("bow_bandit_animations/death")
 	var af = func(a): queue_free()
 	anim_player.animation_finished.connect(af, CONNECT_ONE_SHOT)
 
@@ -43,7 +43,7 @@ func _on_health_changed(old: int, new: int):
 @export_flags_2d_physics var sight_mask: int
 @export var arrow_speed: float = 500
 
-@onready var bowr: Node2D = $bow_rotate
+# @onready var bowr: Node2D = $bow_rotate
 
 @export var pck_arrow: PackedScene
 
@@ -76,13 +76,13 @@ func _physics_process(delta):
 		state = states.idle
 
 	if state == states.idle:
-		bowr.rotation_degrees = 0
+		# bowr.rotation_degrees = 0
 		velocity = velocity.move_toward(Vector2.ZERO, speed)
 	
 	elif state == states.hunting:
 		var dis := global_position.distance_to(Globals.player.global_position)
 		var dir := global_position.direction_to(Globals.player.global_position)
-		bowr.look_at(Globals.player.global_position)
+		# bowr.look_at(Globals.player.global_position)
 
 		if dis > far:
 			velocity = dir * speed
@@ -91,10 +91,12 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2.ZERO
 
-		Tools.set_node2D_direction(self, Globals.player.global_position.x >= global_position.x)
+		Tools.set_node2D_direction(self, Globals.player.global_position.x <= global_position.x)
 		
-		if _can_hit and _attack_timer <= 0:
-			shoot()
+		if _can_hit and _attack_timer <= 0 and anim_player.current_animation != 'bow_bandit_animations/attack_forward':
+			anim_player.play("bow_bandit_animations/attack_forward")
+			anim_tree.active = false
+			# shoot()
 
 	if not is_on_floor():
 		velocity.y = gravity
@@ -110,7 +112,7 @@ func _physics_process(delta):
 func refresh_sight():
 	_sight_timer = _sight_delay
 	if Globals.player != null and Globals.player.health.alive:
-		var player = Globals.player as Player
+		var player = Globals.player as PlayerController
 		var dis := global_position.distance_to(player.global_position)
 		
 		if dis < aggro_range:
@@ -124,7 +126,7 @@ func refresh_sight():
 
 			var dict := space.intersect_ray(query)
 			var collider = dict.get('collider')
-			if collider is Player:
+			if collider is PlayerController:
 				state = states.hunting
 				_can_hit = dis < aggro_range
 			else:
@@ -136,7 +138,7 @@ func refresh_sight():
 func _on_hurtbox_area_entered(area: Area2D):
 	if passive: return
 	
-	if area is Hitbox and area.target is Player:
+	if area is Hitbox and area.target is PlayerController:
 		area.target.health -= damage
 
 
@@ -166,3 +168,8 @@ func shoot():
 #	arrow.target = Globals.player
 
 	get_tree().root.add_child(arrow)
+
+
+func _on_anim_player_animation_finished(anim_name:StringName):
+	if anim_name == "bow_bandit_animations/attack_forward":
+		anim_tree.active = true

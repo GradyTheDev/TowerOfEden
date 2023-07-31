@@ -41,7 +41,7 @@ func _ready():
 func _on_death():
 	if not is_inside_tree() or not is_node_ready(): return
 	anim_tree.active = false
-	anim_player.play("player_animations/death")
+	anim_player.play("sbanims/death")
 	var af = func(a): queue_free()
 	anim_player.animation_finished.connect(af, CONNECT_ONE_SHOT)
 
@@ -80,7 +80,7 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2.ZERO
 
-		Tools.set_node2D_direction(self, Globals.player.global_position.x >= global_position.x)
+		Tools.set_node2D_direction(self, Globals.player.global_position.x <= global_position.x)
 
 	if not is_on_floor():
 		velocity.y = gravity
@@ -96,7 +96,7 @@ func _physics_process(delta):
 func refresh_sight():
 	_sight_timer = _sight_delay
 	if Globals.player != null and Globals.player.health.health > 0:
-		var player = Globals.player as Player
+		var player = Globals.player as PlayerController
 		var dis := global_position.distance_to(player.global_position)
 		
 		if dis < aggro_range:
@@ -110,7 +110,7 @@ func refresh_sight():
 
 			var dict := space.intersect_ray(query)
 			var collider = dict.get('collider')
-			if collider is Player:
+			if collider is PlayerController:
 				state = states.hunting
 				_can_hit = dis < aggro_range
 			else:

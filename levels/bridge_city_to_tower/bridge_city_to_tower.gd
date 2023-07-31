@@ -17,7 +17,7 @@ var starting_act = ACT1
 	ACT3: %Act3,
 }
 @onready var portal = $portal_end
-@onready var player = $Player
+@onready var player = $PlayerV2
 
 
 
@@ -70,7 +70,7 @@ func prepare_player_to_cutscene():
 	player.velocity.y = 0
 	while not player.is_on_floor():
 		await get_tree().physics_frame
-	player.update_animation_parms()
+#	player.update_animation_parms()
 
 
 func open_portal():

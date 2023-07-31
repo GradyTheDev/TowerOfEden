@@ -1,52 +1,112 @@
-[gd_scene load_steps=11 format=3 uid="uid://glxdm1e2vpr4"]
+[gd_scene load_steps=13 format=3 uid="uid://glxdm1e2vpr4"]
 
 [ext_resource type="Script" path="res://entities/corrupted_bandit/corrupted_bandit.gd" id="1_7nvn5"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="2_p2dwv"]
-[ext_resource type="Texture2D" uid="uid://ygqoy67nrcau" path="res://assets/spritesheets/bandit.png" id="3_27y8q"]
-[ext_resource type="AnimationLibrary" uid="uid://ts0rgeg753et" path="res://entities/player/placeholder_animations.res" id="4_0wfjp"]
+[ext_resource type="Texture2D" uid="uid://b3ma3lo2k738y" path="res://assets/spritesheets/entities/melee_bandit_wip.png" id="3_py7h3"]
+[ext_resource type="AnimationLibrary" uid="uid://dwgx145kpdbix" path="res://entities/corrupted_bandit/sbanims.res" id="4_2crys"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://chktl2kwm7hgr" path="res://entities/corrupted_bandit/sbsm.tres" id="5_aa7mm"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_cp8er"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dsycnpa0cs4qf" path="res://entities/player/placeholder_anim_state_machine.tres" id="5_t7m8x"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_86kmx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
-radius = 2.0
-height = 14.0
+radius = 13.0
+height = 60.0
+
+[sub_resource type="Animation" id="Animation_1le36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox/Attack:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(32, 3.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hurtbox/Attack:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(64, 58.6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_34nqg"]
+_data = {
+"RESET": SubResource("Animation_1le36")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hic20"]
-size = Vector2(8, 18)
+size = Vector2(44, 66)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o3pti"]
-size = Vector2(8, 18)
+size = Vector2(64, 58.6)
 
 [node name="CorruptedBandit" type="CharacterBody2D"]
-scale = Vector2(5, 5)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_7nvn5")
+far = 60
+near = 40
 sight_mask = 3
 
 [node name="Attributes" type="Node" parent="."]
 
 [node name="Health" type="Node" parent="Attributes" node_paths=PackedStringArray("body")]
 script = ExtResource("2_p2dwv")
+health = 20
 body = NodePath("../..")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_27y8q")
-hframes = 4
-vframes = 4
-frame = 1
+texture = ExtResource("3_py7h3")
+hframes = 9
+vframes = 5
+
+[node name="Visuals" type="Node" parent="."]
 
 [node name="ColBody" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1veg0")
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"player_animations": ExtResource("4_0wfjp")
+"": SubResource("AnimationLibrary_34nqg"),
+"sbanims": ExtResource("4_2crys")
 }
 
 [node name="AnimTree" type="AnimationTree" parent="."]
-tree_root = ExtResource("5_t7m8x")
+tree_root = ExtResource("5_aa7mm")
 anim_player = NodePath("../AnimPlayer")
 parameters/conditions/attack_down = false
 parameters/conditions/attack_forward = false
@@ -73,5 +133,6 @@ collision_mask = 3
 script = ExtResource("6_86kmx")
 
 [node name="Attack" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(32, 3.9)
 shape = SubResource("RectangleShape2D_o3pti")
 disabled = true

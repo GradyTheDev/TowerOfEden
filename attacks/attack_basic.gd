@@ -1,6 +1,8 @@
 class_name AttackBasic
 extends Area2D
 
+signal delt_damage(entity: Node, old_hp: int, new_hp: int)
+
 @export var damage: int = 10
 
 ## delay between hitting the same target twice
@@ -44,7 +46,10 @@ func _physics_process(delta):
 		if not area is Hitbox or area.health == null: continue
 		var id := area.get_instance_id()
 		if id in _tmp_attack_exceptions: continue
+		var old_hp = area.health.health
 		area.health.health -= damage
+		var new_hp = area.health.health
+		delt_damage.emit(area.entity, old_hp, new_hp)
 		_tmp_attack_exceptions[id] = attack_delay
 		_pierced += 1
 		if is_disabled(): return
