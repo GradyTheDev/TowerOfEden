@@ -1,6 +1,14 @@
 class_name PlayerController extends CharacterBody2D
 
+@export_group('sounds')
+@export var run_sound: AudioStream
+@export var dash_sound: AudioStream
+@export var jump_land_sound: AudioStream
+@export var jump_sound: AudioStream
+@export var double_jump_sound: AudioStream
+@export var attack_sound: AudioStream
 
+@export_group('')
 @export_range(0,1) var decel:float
 @export var accel:float
 @export var airAccel:float
@@ -41,6 +49,9 @@ var in_cutscene: bool = false
 @onready var anim_player: AnimationPlayer = $AnimPlayer
 @onready var sprite: Sprite2D = $Visuals/Sprite
 @onready var dialog: RichTextLabel = get_node("Dialog")
+
+@onready var audio_arms = get_node("audio_arms") as AudioStreamPlayer2D
+@onready var audio_legs = get_node("audio_legs") as AudioStreamPlayer2D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var MaxGravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -104,11 +115,16 @@ func StateMachineDelta(delta:float)->void:
 			animController.travel("walk")
 			FlipCharacter(GetMoveDirection())
 			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
+			if not audio_legs.playing:
+				audio_legs.stream = run_sound
+				audio_legs.play()
 		"jump":
 			animController.travel("jump")
 			jumpAvailability=false
 			jumpCount-=1
 			Jump()
+			audio_legs.stream = jump_sound
+			audio_legs.play()
 		"fall/Entry":
 			if coyote_timer.is_stopped():
 				coyote_timer.start()
@@ -125,20 +141,30 @@ func StateMachineDelta(delta:float)->void:
 		"fall/attack":
 			animController.travel("attack_forward")
 			Applygravity(delta)
+			audio_arms.stream = attack_sound
+			audio_arms.play()
 		"fall/Exit":
 			jumpAvailability = true
 			jumpCount = jumpCountMax
+			audio_legs.stream = jump_land_sound
+			audio_legs.play()
 		"fall/doubleJump":
 			jumpCount-=1
 			Jump()
+			audio_legs.stream = double_jump_sound
+			audio_legs.play()
 		"attack":
 			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
 			animController.travel("attack_forward")
+			audio_arms.stream = attack_sound
+			audio_arms.play()
 		"dodge/Entry":
 			health.invincible = true
 			rollDirection = GetMoveDirection()
 			animController.travel("dodge")
 			velocity.x = rollDirection * rollSpeed
+			audio_legs.stream = dash_sound
+			audio_legs.play()
 
 func GetMoveDirection()->float:
 	if not in_cutscene:
