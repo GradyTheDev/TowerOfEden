@@ -2,6 +2,8 @@ extends Control
 
 @onready var lbl = get_node("Developer") as Label
 
+@onready var lbl_debug_timer = get_node("debug_timer") as Label
+
 var _exiting: bool = false
 
 var txt = ''
@@ -13,10 +15,17 @@ func _ready():
 	txt = lbl.text
 	lbl.text = ''
 
+	$AnimationPlayer.play('intro')
+
 var timer = 0
 var index = 0
 var lines = 0
+var debug_timer = 0
 func _process(delta):
+	if Globals.debug_enabled:
+		debug_timer += delta
+		lbl_debug_timer.text = str(debug_timer)
+
 	timer -= delta
 	if timer > 0:
 		return

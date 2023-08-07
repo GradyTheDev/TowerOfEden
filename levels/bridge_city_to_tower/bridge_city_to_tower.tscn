@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcoddllyirird" path="res://entities/player/PlayerVersion2/V2player.tscn" id="6_euram"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/to_credits.gd" id="6_qb4t6"]
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/AnimationPlayer.gd" id="7_8gvld"]
-[ext_resource type="PackedScene" path="res://other/dialogbox.tscn" id="7_her2d"]
+[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="7_her2d"]
 [ext_resource type="Script" path="res://cutscenes/intro/act0.gd" id="7_o7k3d"]
 [ext_resource type="Script" path="res://cutscenes/intro/act1.gd" id="8_2dnxa"]
 [ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="9_lin5f"]
