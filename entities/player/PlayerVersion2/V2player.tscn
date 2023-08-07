@@ -800,6 +800,7 @@ size = Vector2(18, 5)
 [node name="V2_Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
+floor_max_angle = 1.0472
 floor_snap_length = 8.0
 script = ExtResource("1_qjkmw")
 run_sound = ExtResource("2_l8y6t")
