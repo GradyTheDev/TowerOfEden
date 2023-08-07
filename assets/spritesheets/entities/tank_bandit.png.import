@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc03ua3t1qls3"
-path="res://.godot/imported/tank_bandit_wip.png-a487b0b814a4d794ac199e29c3deba95.ctex"
+uid="uid://bewk8cbddhlur"
+path="res://.godot/imported/tank_bandit.png-0fa80e77cd74c005fdd91da39af74165.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spritesheets/entities/tank_bandit_wip.png"
-dest_files=["res://.godot/imported/tank_bandit_wip.png-a487b0b814a4d794ac199e29c3deba95.ctex"]
+source_file="res://assets/spritesheets/entities/tank_bandit.png"
+dest_files=["res://.godot/imported/tank_bandit.png-0fa80e77cd74c005fdd91da39af74165.ctex"]
 
 [params]
 
