@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://7jkvly30i71b"
+path="res://.godot/imported/Tank_Bandit_Heavy_Walk_05.ogg-07df11539726d1dc5e19652432dc7d55.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Tank Bandit/Tank Bandit Walk/Tank_Bandit_Heavy_Walk_05.ogg"
+dest_files=["res://.godot/imported/Tank_Bandit_Heavy_Walk_05.ogg-07df11539726d1dc5e19652432dc7d55.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

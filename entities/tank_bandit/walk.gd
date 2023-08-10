@@ -12,6 +12,7 @@ const DEVIATE = 5
 @export var wall_detector: RayCast2D
 @export var anim_sprite: AnimatedSprite2D
 @export var pivot: Node2D
+@export var audio_walk: AudioStreamPlayer2D
 var player_last_position: Vector2
 var current_dir = DIR.LEFT
 
@@ -28,6 +29,9 @@ func _physics_process(delta):
 	if wall_detector.is_colliding():
 		emit_signal("wall_detected")
 		return
+	
+	if not audio_walk.playing:
+		audio_walk.play()
 	
 	for body in vision_area.get_overlapping_bodies():
 		if body is PlayerController:

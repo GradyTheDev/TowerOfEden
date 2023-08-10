@@ -12,6 +12,7 @@ const DEVIATE = 5
 @export var attack_trigger: Area2D
 @export var pivot: Node2D
 @onready var attack_reload = $AttackReload
+@export var audio_walk: AudioStreamPlayer2D
 var player_last_position = null
 var current_dir = DIR.RIGHT
 
@@ -24,6 +25,9 @@ func exit():
 	attack_reload.stop()
 
 func _physics_process(delta):
+	if not audio_walk.playing:
+		audio_walk.play()
+	
 	for body in vision_area.get_overlapping_bodies():
 		if body is PlayerController:
 			player_last_position = body.global_position

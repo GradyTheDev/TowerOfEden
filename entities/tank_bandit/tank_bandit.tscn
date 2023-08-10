@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://4xefw6lhcjh8"]
+[gd_scene load_steps=54 format=3 uid="uid://4xefw6lhcjh8"]
 
 [ext_resource type="Script" path="res://entities/tank_bandit/tank_bandit.gd" id="1_b4ho6"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="2_ue85p"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://64jw7ogbl0pm" path="res://assets/audio/Tank Bandit/Attack/v2/Tank_Bandit_Attack_04.ogg" id="14_3mfnm"]
 [ext_resource type="AudioStream" uid="uid://3rrd1wrmxr88" path="res://assets/audio/Tank Bandit/Attack/v2/Tank_Bandit_Attack_05.ogg" id="15_aab4f"]
 [ext_resource type="AudioStream" uid="uid://c1odqtsy1vxsu" path="res://assets/audio/Tank Bandit/Attack/v2/Tank_Bandit_Attack_06.ogg" id="16_npcd2"]
+[ext_resource type="AudioStream" uid="uid://dc2k7y4nhu305" path="res://assets/audio/Tank Bandit/Tank Bandit Walk/Tank_Bandit_Heavy_Walk_06.ogg" id="25_du6en"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3xi6i"]
 radius = 21.0
@@ -254,20 +255,22 @@ attack_trigger = NodePath("../../Pivot/AttackTrigger")
 wall_detector = NodePath("../../Pivot/WallDetector")
 pivot = NodePath("../../Pivot")
 
-[node name="Walk" type="Node" parent="FSM" node_paths=PackedStringArray("vision_area", "attack_trigger", "wall_detector", "anim_sprite", "pivot")]
+[node name="Walk" type="Node" parent="FSM" node_paths=PackedStringArray("vision_area", "attack_trigger", "wall_detector", "anim_sprite", "pivot", "audio_walk")]
 script = ExtResource("6_d25nh")
 vision_area = NodePath("../../Pivot/VisionBox")
 attack_trigger = NodePath("../../Pivot/AttackTrigger")
 wall_detector = NodePath("../../Pivot/WallDetector")
 anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
 pivot = NodePath("../../Pivot")
+audio_walk = NodePath("../../walk")
 
-[node name="MoveBackward" type="Node" parent="FSM" node_paths=PackedStringArray("anim_sprite", "vision_area", "attack_trigger", "pivot")]
+[node name="MoveBackward" type="Node" parent="FSM" node_paths=PackedStringArray("anim_sprite", "vision_area", "attack_trigger", "pivot", "audio_walk")]
 script = ExtResource("7_qdqg3")
 anim_sprite = NodePath("../../Pivot/AnimatedSprite2D")
 vision_area = NodePath("../../Pivot/VisionBox")
 attack_trigger = NodePath("../../Pivot/AttackTrigger")
 pivot = NodePath("../../Pivot")
+audio_walk = NodePath("../../walk")
 
 [node name="AttackReload" type="Timer" parent="FSM/MoveBackward"]
 one_shot = true
@@ -362,6 +365,11 @@ text = ""
 
 [node name="attack" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -39)
+bus = &"SFX"
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_du6en")
+bus = &"SFX"
 
 [connection signal="death" from="Attributes/Health" to="." method="_on_health_death"]
 [connection signal="health_changed" from="Attributes/Health" to="." method="_on_health_health_changed"]
