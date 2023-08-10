@@ -86,12 +86,13 @@ func _physics_process(delta):
 		var dir := global_position.direction_to(Globals.player.global_position)
 		# bowr.look_at(Globals.player.global_position)
 
-		if dis > far:
-			velocity = dir * speed
-		elif dis < near:
-			velocity = dir * -speed
-		else:
-			velocity = Vector2.ZERO
+		if anim_player.current_animation != 'bow_bandit_animations/attack_forward':
+			if dis > far:
+				velocity = dir * speed
+			elif dis < near:
+				velocity = dir * -speed
+			else:
+				velocity = Vector2.ZERO
 
 		Tools.set_node2D_direction(self, Globals.player.global_position.x <= global_position.x)
 		
