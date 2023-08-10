@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6qv07kj57ou6"]
+[gd_scene load_steps=18 format=3 uid="uid://c6qv07kj57ou6"]
 
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="1_gu288"]
 [ext_resource type="Script" path="res://entities/bandit/bandit.gd" id="1_rc08h"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_8eb6x"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_g38rl"]
 [ext_resource type="Texture2D" uid="uid://jqptwnie00mn" path="res://assets/other/bow.png" id="9_kjyfl"]
+[ext_resource type="AudioStream" uid="uid://x4xqa6lug53o" path="res://assets/audio/Ranged Bandit/Attack/Bandit_Ranged_Arrow_Attack_03.ogg" id="10_4lvqm"]
+[ext_resource type="AudioStream" uid="uid://dry75oub3cdq0" path="res://assets/audio/Nym/Run/Nym_Run_03.wav" id="11_kxdj6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
 radius = 17.0
@@ -123,5 +125,13 @@ disabled = true
 visible = false
 scale = Vector2(0.55, 0.426667)
 texture = ExtResource("9_kjyfl")
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_4lvqm")
+bus = &"SFX"
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_kxdj6")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimPlayer" to="." method="_on_anim_player_animation_finished"]

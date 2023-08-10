@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://3kgum6ta6uju"
+path="res://.godot/imported/Bandit_Ranged_Arrow_Attack_01.ogg-7b5630be5eb6ba5d39e7ac7cc6864540.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Ranged Bandit/Attack/Bandit_Ranged_Arrow_Attack_01.ogg"
+dest_files=["res://.godot/imported/Bandit_Ranged_Arrow_Attack_01.ogg-7b5630be5eb6ba5d39e7ac7cc6864540.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
