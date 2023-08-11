@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://other/hitbox.gd" id="8_rvm41"]
 [ext_resource type="Script" path="res://entities/tank_bandit/Death.gd" id="8_uh3oi"]
 [ext_resource type="AudioStream" uid="uid://mshmkhucboyi" path="res://assets/audio/Tank Bandit/Attack/v1/Tank_Bandit_Attack_05.ogg" id="9_1f4lq"]
-[ext_resource type="AudioStream" path="res://assets/audio/Tank Bandit/Attack/v1/Tank_Bandit_Attack_06.ogg" id="10_hrsa6"]
+[ext_resource type="AudioStream" uid="uid://bt8rk6ixep30v" path="res://assets/audio/Tank Bandit/Attack/v1/Tank_Bandit_Attack_06.ogg" id="10_hrsa6"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="10_pspsf"]
 [ext_resource type="AudioStream" uid="uid://bf3eovyiun8s5" path="res://assets/audio/Tank Bandit/Attack/v2/Tank_Bandit_Attack_01.ogg" id="11_4inab"]
 [ext_resource type="Texture2D" uid="uid://bewk8cbddhlur" path="res://assets/spritesheets/entities/tank_bandit.png" id="11_35vby"]
