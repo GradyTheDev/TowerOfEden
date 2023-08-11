@@ -14,6 +14,7 @@ func _init():
 
 func _ready():
 	_on_redraw_timeout()
+	$PauseMenu/Center/LevelSelect.visible = Globals.debug_enabled
 
 
 func _process(delta):
