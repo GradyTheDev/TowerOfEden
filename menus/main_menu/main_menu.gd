@@ -21,7 +21,10 @@ func _on_exit_pressed():
 
 
 func _on_continue_pressed():
-	get_tree().change_scene_to_file(Globals.SCENE_LEVEL_SELECT)
+	if Globals.debug_enabled:
+		get_tree().change_scene_to_file(Globals.SCENE_LEVEL_SELECT)
+	else:
+		get_tree().change_scene_to_file(Globals.LEVELS.bridge_city_to_tower)
 
 
 func _on_new_game_pressed():

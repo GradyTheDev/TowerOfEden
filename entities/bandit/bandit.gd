@@ -9,6 +9,8 @@ extends CharacterBody2D
 @onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
 @onready var health: AttributeHealth = get_node("Attributes/Health")
 @onready var sprite: Sprite2D = get_node("Sprite")
+@onready var audio_walk = get_node("walk") as AudioStreamPlayer2D
+@onready var audio_attack = get_node("attack") as AudioStreamPlayer2D
 
 
 func _ready():
@@ -84,16 +86,17 @@ func _physics_process(delta):
 		var dir := global_position.direction_to(Globals.player.global_position)
 		# bowr.look_at(Globals.player.global_position)
 
-		if dis > far:
-			velocity = dir * speed
-		elif dis < near:
-			velocity = dir * -speed
-		else:
-			velocity = Vector2.ZERO
+		if anim_player.current_animation != 'bow_bandit_animations/attack_forward':
+			if dis > far:
+				velocity = dir * speed
+			elif dis < near:
+				velocity = dir * -speed
+			else:
+				velocity = Vector2.ZERO
 
 		Tools.set_node2D_direction(self, Globals.player.global_position.x <= global_position.x)
 		
-		if _can_hit and _attack_timer <= 0 and anim_player.current_animation != 'bow_bandit_animations/attack_forward':
+		if velocity.x == 0 and _can_hit and _attack_timer <= 0 and anim_player.current_animation != 'bow_bandit_animations/attack_forward':
 			anim_player.play("bow_bandit_animations/attack_forward")
 			anim_tree.active = false
 			# shoot()
@@ -144,6 +147,9 @@ func _on_hurtbox_area_entered(area: Area2D):
 
 func update_animation_parms():
 	anim_tree['parameters/conditions/walk'] = velocity.x != 0
+	if velocity.x != 0 and not audio_walk.playing:
+		audio_walk.play()
+
 	anim_tree['parameters/conditions/idle'] = not anim_tree['parameters/conditions/walk']
 	anim_tree['parameters/conditions/on_ground'] = air_time < 0.5
 	anim_tree['parameters/conditions/in_air'] = not anim_tree['parameters/conditions/on_ground']
@@ -155,6 +161,7 @@ func update_animation_parms():
 
 
 func shoot():
+	audio_attack.play()
 	_attack_timer = attack_delay
 	var arrow = pck_arrow.instantiate() as AttackBasicProjectile
 

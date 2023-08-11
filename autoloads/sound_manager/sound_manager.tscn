@@ -9,8 +9,8 @@ script = ExtResource("1_g7wtr")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ypwyr")
+volume_db = -30.0
 autoplay = true
-max_polyphony = 3
 bus = &"Music"
 
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]

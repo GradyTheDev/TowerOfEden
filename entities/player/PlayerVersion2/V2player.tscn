@@ -1,19 +1,25 @@
-[gd_scene load_steps=141 format=3 uid="uid://dcoddllyirird"]
+[gd_scene load_steps=147 format=3 uid="uid://dcoddllyirird"]
 
 [ext_resource type="Script" path="res://entities/player/PlayerVersion2/V2player.gd" id="1_qjkmw"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="2_4nk45"]
 [ext_resource type="Texture2D" uid="uid://dgdaaiorm73js" path="res://assets/spritesheets/nym_sprite_v1.png" id="2_k6s7m"]
+[ext_resource type="AudioStream" uid="uid://b57i6rgbuw0c0" path="res://assets/audio/Nym/Run/Nym_Run_02.wav" id="2_l8y6t"]
+[ext_resource type="AudioStream" uid="uid://cd2njbvwc8jv5" path="res://assets/audio/Nym/Dash/Nym_Dash_02.ogg" id="3_fsb24"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="4_bdbss"]
+[ext_resource type="AudioStream" uid="uid://1vslf4e3d2wp" path="res://assets/audio/Nym/Jump Landing/Nym_Jump_Landing_06.wav" id="4_gix4a"]
+[ext_resource type="AudioStream" uid="uid://bc71efkbyqnyu" path="res://assets/audio/Nym/Jump/Nym_Jump_01.wav" id="5_3rq4b"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/State.gd" id="5_bie18"]
+[ext_resource type="AudioStream" uid="uid://fb0yh4x71g5p" path="res://assets/audio/Nym/Double Jump/Nym_Double_Jump_08.wav" id="6_ieyu6"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="6_shm0h"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/FloatCondition.gd" id="7_7vvao"]
+[ext_resource type="AudioStream" uid="uid://craqvna1apwv1" path="res://assets/audio/Nym/Double Jump/Nym_Double_Jump_02.wav" id="7_he2te"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="7_kfxcf"]
 [ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="8_mm0t4"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="8_uc3qj"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="9_0jhae"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="9_4j1ts"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/IntegerCondition.gd" id="10_qk8r0"]
-[ext_resource type="PackedScene" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
+[ext_resource type="PackedScene" uid="uid://clf8oescymyqw" path="res://entities/player/player_ui.tscn" id="13_b4afs"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="13_dbvgd"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="14_v0w7i"]
 [ext_resource type="Script" path="res://attributes/attribute_score.gd" id="15_gqrvl"]
@@ -342,26 +348,6 @@ to = "move"
 conditions = {
 "endAttack": SubResource("Resource_gbuip"),
 "movement": SubResource("Resource_6m6k7")
-}
-priority = 0
-
-[sub_resource type="Resource" id="Resource_uuli1"]
-script = ExtResource("9_0jhae")
-name = "jump"
-
-[sub_resource type="Resource" id="Resource_jrueg"]
-script = ExtResource("8_uc3qj")
-value = true
-comparation = 0
-name = "onFloor"
-
-[sub_resource type="Resource" id="Resource_5xuht"]
-script = ExtResource("6_shm0h")
-from = "attack"
-to = "jump"
-conditions = {
-"jump": SubResource("Resource_uuli1"),
-"onFloor": SubResource("Resource_jrueg")
 }
 priority = 0
 
@@ -814,8 +800,15 @@ size = Vector2(18, 5)
 [node name="V2_Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
+floor_max_angle = 1.0472
 floor_snap_length = 8.0
 script = ExtResource("1_qjkmw")
+run_sound = ExtResource("2_l8y6t")
+dash_sound = ExtResource("3_fsb24")
+jump_land_sound = ExtResource("4_gix4a")
+jump_sound = ExtResource("5_3rq4b")
+double_jump_sound = ExtResource("6_ieyu6")
+attack_sound = ExtResource("7_he2te")
 decel = 1.0
 accel = 1000.0
 airAccel = 800.0
@@ -949,6 +942,10 @@ offset_top = -57.0
 offset_right = 133.0
 offset_bottom = -40.0
 text = ""
+
+[node name="audio_arms" type="AudioStreamPlayer2D" parent="."]
+
+[node name="audio_legs" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="transited" from="StateMachinePlayer" to="." method="_on_state_machine_player_transited"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

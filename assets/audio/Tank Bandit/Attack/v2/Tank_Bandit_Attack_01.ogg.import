@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bf3eovyiun8s5"
+path="res://.godot/imported/Tank_Bandit_Attack_01.ogg-1f72d0c837d12ffb5bda6781caac9bda.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Tank Bandit/Attack/v2/Tank_Bandit_Attack_01.ogg"
+dest_files=["res://.godot/imported/Tank_Bandit_Attack_01.ogg-1f72d0c837d12ffb5bda6781caac9bda.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

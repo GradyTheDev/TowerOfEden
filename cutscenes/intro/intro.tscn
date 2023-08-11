@@ -1,7 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://baj71jxlpgohd"]
+[gd_scene load_steps=8 format=3 uid="uid://baj71jxlpgohd"]
 
 [ext_resource type="Script" path="res://cutscenes/intro/intro.gd" id="1_foeq4"]
 [ext_resource type="SystemFont" uid="uid://oltghup7lh4e" path="res://other/font_monospace_dynamic.tres" id="2_8nrge"]
+[ext_resource type="AudioStream" uid="uid://das0slpj6h8t" path="res://assets/audio/Tower_Of_Eden_Intro_Cut_Scene_LightRain_RoomAtmos.ogg" id="3_qgigr"]
+[ext_resource type="AudioStream" uid="uid://caleeyu7abxds" path="res://assets/audio/Thunderbolt.ogg" id="4_vd474"]
+
+[sub_resource type="Animation" id="Animation_jeyad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lightning:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_o7gnb"]
+resource_name = "intro"
+length = 26.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lightning:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(19.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rain:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1vmf"]
+_data = {
+"RESET": SubResource("Animation_jeyad"),
+"intro": SubResource("Animation_o7gnb")
+}
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -73,5 +124,22 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("2_8nrge")
 text = "press space to skip"
+
+[node name="rain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qgigr")
+
+[node name="lightning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vd474")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g1vmf")
+}
+
+[node name="debug_timer" type="Label" parent="."]
+layout_mode = 0
+offset_top = 71.0
+offset_right = 159.0
+offset_bottom = 94.0
 
 [connection signal="timeout" from="Continue" to="." method="_on_continue_timeout"]

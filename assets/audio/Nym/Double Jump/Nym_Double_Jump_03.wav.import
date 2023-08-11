@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4up3gnhr78jq"
+path="res://.godot/imported/Nym_Double_Jump_03.wav-11c1cc0d84734b15b58518d20235ad83.sample"
+
+[deps]
+
+source_file="res://assets/audio/Nym/Double Jump/Nym_Double_Jump_03.wav"
+dest_files=["res://.godot/imported/Nym_Double_Jump_03.wav-11c1cc0d84734b15b58518d20235ad83.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

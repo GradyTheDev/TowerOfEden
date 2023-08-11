@@ -9,10 +9,6 @@ func _ready():
 
 	# Generate buttons for each level
 	var last: Control = $Center/DebugSep
-
-	var list = []
-
-	list.append(Globals.SCENE_LEVEL_SELECT)
 	
 	for key in Globals.LEVELS:
 		var b = btn_template.duplicate()

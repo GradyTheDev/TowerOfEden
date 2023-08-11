@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://e31nane2kiw1"
+path="res://.godot/imported/Nym_Jump_Landing_05.wav-c480b3e343f5b1da70a36bfb913b373d.sample"
+
+[deps]
+
+source_file="res://assets/audio/Nym/Jump Landing/Nym_Jump_Landing_05.wav"
+dest_files=["res://.godot/imported/Nym_Jump_Landing_05.wav-c480b3e343f5b1da70a36bfb913b373d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
