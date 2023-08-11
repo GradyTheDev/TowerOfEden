@@ -40,4 +40,4 @@ func _on_redraw_timeout():
 		ui_health.text = "Health: {0} / {1}".format([atr_health.health, atr_health.health_max])
 	
 	if atr_score != null:
-		ui_score.text = "Score: {0}".format([atr_score.score])
+		ui_score.text = "Score: %0.2f" % atr_score.score
