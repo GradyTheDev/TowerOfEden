@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b5s0vffw3hdgd"]
+[gd_scene load_steps=27 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
 [ext_resource type="Texture2D" uid="uid://bd7iik16w4pvd" path="res://assets/other/background_level.png" id="2_dldmp"]
@@ -23,6 +23,9 @@ size = Vector2(96, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhcvv"]
 size = Vector2(128, 436)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mensn"]
+size = Vector2(1252, 20)
 
 [sub_resource type="Animation" id="Animation_xh3be"]
 resource_name = "Act0"
@@ -667,6 +670,12 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
 position = Vector2(202, -13)
 shape = SubResource("RectangleShape2D_bhcvv")
+
+[node name="tank_ledge" type="StaticBody2D" parent="."]
+position = Vector2(2336, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tank_ledge"]
+shape = SubResource("RectangleShape2D_mensn")
 
 [node name="to_credits" type="Node" parent="."]
 script = ExtResource("6_qb4t6")
