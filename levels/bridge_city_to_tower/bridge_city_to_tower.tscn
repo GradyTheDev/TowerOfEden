@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
-[ext_resource type="Texture2D" uid="uid://c0iobb1lmnk2e" path="res://assets/other/background_map_thumb.png" id="2_fbubi"]
+[ext_resource type="Texture2D" uid="uid://bd7iik16w4pvd" path="res://assets/other/background_level.png" id="2_dldmp"]
 [ext_resource type="TileSet" uid="uid://btf342mldfbya" path="res://assets/levels/city/city_floor/tilesets/city_floor-tileset-16x16.res" id="2_sqevg"]
 [ext_resource type="Script" path="res://other/portal.gd" id="2_vsfw8"]
 [ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="3_2plir"]
@@ -606,11 +606,11 @@ script = ExtResource("1_pbnj1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -4
-offset_left = -11842.0
-offset_top = -789.0
-offset_right = 1712.0
-offset_bottom = 4005.0
-texture = ExtResource("2_fbubi")
+offset_left = -11826.0
+offset_top = -885.0
+offset_right = 1728.0
+offset_bottom = 4025.0
+texture = ExtResource("2_dldmp")
 expand_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
