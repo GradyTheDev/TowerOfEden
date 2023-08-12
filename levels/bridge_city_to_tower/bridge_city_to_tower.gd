@@ -40,6 +40,11 @@ func _ready():
 			$CutsceneTrigger.monitoring = false
 			open_portal()
 
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		if not event.is_pressed() and event.shift_pressed and event.keycode == KEY_1 and Globals.debug_enabled:
+			Globals.player.global_position = Vector2(0, -50)
+	
 
 func start_act(act: int):
 	await act_setup(act)

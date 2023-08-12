@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b5s0vffw3hdgd"]
+[gd_scene load_steps=27 format=3 uid="uid://b5s0vffw3hdgd"]
 
 [ext_resource type="Script" path="res://levels/bridge_city_to_tower/bridge_city_to_tower.gd" id="1_pbnj1"]
 [ext_resource type="Texture2D" uid="uid://bd7iik16w4pvd" path="res://assets/other/background_level.png" id="2_dldmp"]
@@ -23,6 +23,9 @@ size = Vector2(96, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhcvv"]
 size = Vector2(128, 436)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mensn"]
+size = Vector2(1252, 20)
 
 [sub_resource type="Animation" id="Animation_xh3be"]
 resource_name = "Act0"
@@ -668,6 +671,12 @@ monitorable = false
 position = Vector2(202, -13)
 shape = SubResource("RectangleShape2D_bhcvv")
 
+[node name="tank_ledge" type="StaticBody2D" parent="."]
+position = Vector2(2336, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tank_ledge"]
+shape = SubResource("RectangleShape2D_mensn")
+
 [node name="to_credits" type="Node" parent="."]
 script = ExtResource("6_qb4t6")
 last_cutscene = "Act3"
@@ -779,6 +788,113 @@ enabled = false
 [node name="PlayerV2" parent="." instance=ExtResource("6_euram")]
 position = Vector2(-10728, 2144)
 jumpHeight = 130
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bandit" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-8063, 2388)
+
+[node name="Bandit_2" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-8688, 3383)
+
+[node name="Bandit_3" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-7244, 3537)
+
+[node name="Bandit_4" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-2950, 3405)
+
+[node name="Bandit_5" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1074, 3409)
+
+[node name="Bandit_6" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1304, 3005)
+
+[node name="Bandit_7" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1232, 2495)
+
+[node name="Bandit_8" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-4430, 2593)
+
+[node name="Bandit_9" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-4287, 2582)
+
+[node name="Bandit_10" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-4115, 2578)
+
+[node name="Bandit_11" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1451, 1101)
+
+[node name="Bandit_12" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-941, 886)
+
+[node name="Bandit_13" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1207, 257)
+
+[node name="Bandit_14" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1115, 259)
+
+[node name="Bandit_15" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-1330, -143)
+
+[node name="CorruptedBandit" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-8209, 2394)
+
+[node name="Bandit_16" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-7464, 1346)
+
+[node name="CorruptedBandit_13" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-7610, 1352)
+
+[node name="Bandit_17" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-6641, 1246)
+
+[node name="CorruptedBandit_14" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-6787, 1252)
+
+[node name="Bandit_18" parent="Enemies" instance=ExtResource("10_qnf1p")]
+position = Vector2(-5580, 923)
+
+[node name="CorruptedBandit_15" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-5726, 929)
+
+[node name="CorruptedBandit_2" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-9590, 3403)
+
+[node name="CorruptedBandit_3" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-7389, 3539)
+
+[node name="CorruptedBandit_4" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-5799, 3534)
+
+[node name="CorruptedBandit_5" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-5284, 2594)
+
+[node name="CorruptedBandit_16" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-5446, 2599)
+
+[node name="CorruptedBandit_17" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-4980, 2594)
+
+[node name="CorruptedBandit_6" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-3604, 3539)
+
+[node name="CorruptedBandit_7" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-2834, 2599)
+
+[node name="CorruptedBandit_8" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-1414, 2534)
+
+[node name="CorruptedBandit_9" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-1644, 3419)
+
+[node name="CorruptedBandit_10" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-1279, 1244)
+
+[node name="CorruptedBandit_11" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-424, 744)
+
+[node name="CorruptedBandit_12" parent="Enemies" instance=ExtResource("9_lin5f")]
+position = Vector2(-384, 266)
 
 [connection signal="body_entered" from="CutsceneTrigger" to="." method="_on_cutscene_triggered" flags=6]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
