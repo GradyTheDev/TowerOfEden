@@ -57,4 +57,10 @@ Godot licenses"
 editable = false
 metadata/_edit_use_anchors_ = true
 
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 23.0
+text = "score: "
+
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

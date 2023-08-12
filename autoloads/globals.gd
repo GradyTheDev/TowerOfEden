@@ -38,5 +38,6 @@ const CUTSCENES := {
 var debug_enabled: bool = false
 
 var player: Node = null
+var score: float = -1.123456789
 
 var is_in_cutscene: bool = false
