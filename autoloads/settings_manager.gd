@@ -24,7 +24,7 @@ var _default := {
 
 	SETTING_MASTER_VOLUME: 0,
 
-	SETTING_DEBUG: OS.is_debug_build()
+	SETTING_DEBUG: false
 }
 
 ## DON'T SET THIS DIRECTLY
