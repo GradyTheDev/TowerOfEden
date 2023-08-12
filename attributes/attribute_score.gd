@@ -57,6 +57,7 @@ func _dmg_delt(entity: Node, old: int, new: int):
 func _set_score(v):
 	var old = score
 	score = v
+	Globals.score = score
 	if not is_inside_tree(): return
 	if old > score_failure_trigger and score <= score_failure_trigger:
 		on_score_failure.emit()
