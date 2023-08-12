@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="3_mwfyw"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="4_pvono"]
 [ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="4_quil2"]
-[ext_resource type="AnimationLibrary" uid="uid://byvn72n2234gy" path="res://entities/player/player_animations.res" id="5_0q7ux"]
+[ext_resource type="AnimationLibrary" path="res://entities/player/player_animations.res" id="5_0q7ux"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="5_5x0tb"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dymccknvy0nf6" path="res://entities/player/player_anim_state_machine.tres" id="5_jrxt3"]
 [ext_resource type="Script" path="res://attributes/attribute_money.gd" id="7_xntrw"]
-[ext_resource type="PackedScene" uid="uid://bt7lpufwarf0r" path="res://other/dialogbox.tscn" id="11_l0jxj"]
+[ext_resource type="PackedScene" path="res://other/dialogbox.tscn" id="11_l0jxj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3krie"]
 size = Vector2(12, 58.4)
