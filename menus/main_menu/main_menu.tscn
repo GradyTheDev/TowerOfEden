@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://pemiprw4tau8"]
+[gd_scene load_steps=6 format=3 uid="uid://pemiprw4tau8"]
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_c4x6j"]
-[ext_resource type="Texture2D" uid="uid://4il0w1r1u6q7" path="res://assets/other/main_menu.png" id="2_yhi41"]
+[ext_resource type="Texture2D" uid="uid://1xkvu7k1jd5o" path="res://assets/other/title_screen.png" id="2_3xg1r"]
+[ext_resource type="Texture2D" uid="uid://dm57kiyvtbwp8" path="res://assets/other/title.png" id="3_tw7u2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_32igt"]
 font_size = 24
@@ -18,17 +19,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c4x6j")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_yhi41")
+texture = ExtResource("2_3xg1r")
 expand_mode = 1
 
+[node name="Title_2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 44.0
+offset_right = 286.0
+offset_bottom = 225.0
+texture = ExtResource("3_tw7u2")
+
 [node name="Title" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -89,6 +99,7 @@ layout_mode = 2
 text = "Exit"
 
 [node name="ParallaxBG" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="Layer1" type="ParallaxLayer" parent="ParallaxBG"]
 

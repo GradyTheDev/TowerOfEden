@@ -607,9 +607,9 @@ script = ExtResource("1_pbnj1")
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -4
 offset_left = -11826.0
-offset_top = -885.0
+offset_top = -909.0
 offset_right = 1728.0
-offset_bottom = 4025.0
+offset_bottom = 4049.0
 texture = ExtResource("2_dldmp")
 expand_mode = 1
 
