@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dspa64tlu4t5t"]
+[gd_scene load_steps=3 format=3 uid="uid://dspa64tlu4t5t"]
 
 [ext_resource type="Script" path="res://menus/credits/credits.gd" id="1_8od2b"]
+[ext_resource type="SystemFont" uid="uid://oltghup7lh4e" path="res://other/font_monospace_dynamic.tres" id="2_twg8j"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -47,7 +48,40 @@ anchor_right = 0.75
 anchor_bottom = 0.912963
 grow_horizontal = 2
 grow_vertical = 2
-text = "- Credits -
+theme_override_fonts/font = ExtResource("2_twg8j")
+text = "Tower of Eden - Pre-Alpha Prototype
+
+- Project Leads - 
+Brandon - Tetsu - Narrative Designer
+GradyTheDev - Project manager / Programmer
+Terrasquad - Original Lead
+
+- Art - 
+Alm4nditte
+Vulkaara
+
+- Sound - 
+HighTowerBK
+Wizcats
+Curyzito
+
+- Programming -
+Kinsei
+Wovri
+
+- Writer -
+Enderman5014
+
+- Misc -
+Andropas
+BigBellySmurf
+Honey
+
+
+
+
+"
+placeholder_text = "- Credits -
 
 - Authors -
 Name  -  Job
