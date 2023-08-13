@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LicenseLink" load_steps=2 format=3 uid="uid://b8ckbll2p6nrb"]
+
+[ext_resource type="Script" path="res://addons/simplelicense/api/LicenseLink.gd" id="1_k7to7"]
+
+[resource]
+script = ExtResource("1_k7to7")
+link_files = Array[Resource]([])
+link_dirs = Array[Resource]([])
+link_paths = ["res://addons/imjp94.yafsm/"]
+componet_name = "YAFSM"
+extra = ""
+license_identifier = "MIT"
+copyright = Array[String](["2021, Tan Jian Ping"])

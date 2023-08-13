@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LicenseLink" load_steps=2 format=3 uid="uid://cq7l536kcg8jw"]
+
+[ext_resource type="Script" path="res://addons/simplelicense/api/LicenseLink.gd" id="1_5x4y0"]
+
+[resource]
+script = ExtResource("1_5x4y0")
+link_files = Array[Resource]([])
+link_dirs = Array[Resource]([])
+link_paths = ["res://"]
+componet_name = "Tower of Eden"
+extra = ""
+license_identifier = "MIT"
+copyright = Array[String](["2023, Tower of Eden team"])

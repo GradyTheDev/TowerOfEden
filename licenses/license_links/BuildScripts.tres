@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LicenseLink" load_steps=2 format=3 uid="uid://doe6u2thxv67o"]
+
+[ext_resource type="Script" path="res://addons/simplelicense/api/LicenseLink.gd" id="1_l2eer"]
+
+[resource]
+script = ExtResource("1_l2eer")
+link_files = Array[Resource]([])
+link_dirs = Array[Resource]([])
+link_paths = ["res://addons/buildscripts/"]
+componet_name = "Build Scripts"
+extra = ""
+license_identifier = "CC0-1.0"
+copyright = Array[String](["2023, GradyTheDev"])
