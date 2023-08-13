@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://menus/main_menu/main_menu.gd" id="1_c4x6j"]
 [ext_resource type="Texture2D" uid="uid://6sb724tmo2ay" path="res://assets/other/title_screen.png" id="2_3xg1r"]
-[ext_resource type="Texture2D" uid="uid://dm57kiyvtbwp8" path="res://assets/other/title.png" id="3_tw7u2"]
+[ext_resource type="Texture2D" uid="uid://0pid0rg0qc67" path="res://assets/other/title.png" id="3_tw7u2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_32igt"]
 font_size = 24
@@ -33,9 +33,11 @@ expand_mode = 1
 layout_mode = 0
 offset_left = 44.0
 offset_top = 44.0
-offset_right = 286.0
-offset_bottom = 225.0
+offset_right = 254.0
+offset_bottom = 221.0
 texture = ExtResource("3_tw7u2")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Title" type="Label" parent="."]
 visible = false
