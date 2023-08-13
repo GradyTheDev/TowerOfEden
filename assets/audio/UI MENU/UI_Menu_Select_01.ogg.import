@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bimu64qvh258g"
+path="res://.godot/imported/UI_Menu_Select_01.ogg-87a1229d7cbe2b75b6b7ec751cd94aaa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/UI MENU/UI_Menu_Select_01.ogg"
+dest_files=["res://.godot/imported/UI_Menu_Select_01.ogg-87a1229d7cbe2b75b6b7ec751cd94aaa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

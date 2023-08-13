@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch3xec01tjrja"]
+[gd_scene load_steps=5 format=3 uid="uid://ch3xec01tjrja"]
 
 [ext_resource type="Script" path="res://autoloads/sound_manager/sound_manager.gd" id="1_g7wtr"]
 [ext_resource type="AudioStream" uid="uid://dd8qkm0lfw81n" path="res://assets/music/main-menu.ogg" id="1_ypwyr"]
+[ext_resource type="AudioStream" uid="uid://1i8vjidypk7g" path="res://assets/audio/UI MENU/UI_Menu_Move_Cursor_01.ogg" id="3_30m23"]
+[ext_resource type="AudioStream" uid="uid://bimu64qvh258g" path="res://assets/audio/UI MENU/UI_Menu_Select_01.ogg" id="3_87ri3"]
 
 [node name="SoundManager" type="Node"]
 process_mode = 3
@@ -9,8 +11,18 @@ script = ExtResource("1_g7wtr")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ypwyr")
-volume_db = -30.0
+volume_db = -20.0
 autoplay = true
 bus = &"Music"
+
+[node name="Button_Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_87ri3")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="Button_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_30m23")
+volume_db = -18.0
+bus = &"SFX"
 
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]
