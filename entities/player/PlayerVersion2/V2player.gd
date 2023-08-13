@@ -141,8 +141,9 @@ func StateMachineDelta(delta:float)->void:
 		"fall/attack":
 			animController.travel("attack_forward")
 			Applygravity(delta)
-			audio_arms.stream = attack_sound
-			audio_arms.play()
+			if not audio_arms.playing:
+				audio_arms.stream = attack_sound
+				audio_arms.play()
 		"fall/Exit":
 			jumpAvailability = true
 			jumpCount = jumpCountMax
@@ -156,8 +157,9 @@ func StateMachineDelta(delta:float)->void:
 		"attack":
 			MoveWithFriction(accel, moveDecel, delta, maxSpeed)
 			animController.travel("attack_forward")
-			audio_arms.stream = attack_sound
-			audio_arms.play()
+			if not audio_arms.playing:
+				audio_arms.stream = attack_sound
+				audio_arms.play()
 		"dodge/Entry":
 			health.invincible = true
 			rollDirection = GetMoveDirection()

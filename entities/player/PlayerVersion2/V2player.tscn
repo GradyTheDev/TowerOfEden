@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://fb0yh4x71g5p" path="res://assets/audio/Nym/Double Jump/Nym_Double_Jump_08.wav" id="6_ieyu6"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="6_shm0h"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/FloatCondition.gd" id="7_7vvao"]
-[ext_resource type="AudioStream" uid="uid://craqvna1apwv1" path="res://assets/audio/Nym/Double Jump/Nym_Double_Jump_02.wav" id="7_he2te"]
+[ext_resource type="AudioStream" uid="uid://dchaiqtys7mej" path="res://assets/audio/Ranged Bandit/Attack/Bandit_Ranged_Arrow_Attack_02.ogg" id="7_8b6xr"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="7_kfxcf"]
 [ext_resource type="Script" path="res://attributes/attribute_portal_transversal.gd" id="8_mm0t4"]
 [ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="8_uc3qj"]
@@ -808,7 +808,7 @@ dash_sound = ExtResource("3_fsb24")
 jump_land_sound = ExtResource("4_gix4a")
 jump_sound = ExtResource("5_3rq4b")
 double_jump_sound = ExtResource("6_ieyu6")
-attack_sound = ExtResource("7_he2te")
+attack_sound = ExtResource("7_8b6xr")
 decel = 1.0
 accel = 1000.0
 airAccel = 800.0
@@ -944,6 +944,7 @@ offset_bottom = -40.0
 text = ""
 
 [node name="audio_arms" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_8b6xr")
 
 [node name="audio_legs" type="AudioStreamPlayer2D" parent="."]
 
