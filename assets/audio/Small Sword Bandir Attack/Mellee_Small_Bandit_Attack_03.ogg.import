@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://du0p55y1julhc"
+path="res://.godot/imported/Mellee_Small_Bandit_Attack_03.ogg-b63e98357075e0c64cc0824f0e7f5e5d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_03.ogg"
+dest_files=["res://.godot/imported/Mellee_Small_Bandit_Attack_03.ogg-b63e98357075e0c64cc0824f0e7f5e5d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,12 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://glxdm1e2vpr4"]
+[gd_scene load_steps=22 format=3 uid="uid://glxdm1e2vpr4"]
 
 [ext_resource type="Script" path="res://entities/corrupted_bandit/corrupted_bandit.gd" id="1_7nvn5"]
+[ext_resource type="AudioStream" uid="uid://yg2cb21ga5xj" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_01.ogg" id="2_nrblk"]
 [ext_resource type="Script" path="res://attributes/attribute_health.gd" id="2_p2dwv"]
+[ext_resource type="AudioStream" uid="uid://c3lmsg8fchwyj" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_02.ogg" id="3_nln5o"]
 [ext_resource type="Texture2D" uid="uid://b3ma3lo2k738y" path="res://assets/spritesheets/entities/melee_bandit_wip.png" id="3_py7h3"]
 [ext_resource type="AnimationLibrary" uid="uid://dwgx145kpdbix" path="res://entities/corrupted_bandit/sbanims.res" id="4_2crys"]
+[ext_resource type="AudioStream" uid="uid://du0p55y1julhc" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_03.ogg" id="4_l1pwv"]
+[ext_resource type="AudioStream" uid="uid://csfrlckxbjrwj" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_04.ogg" id="5_0o1vj"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://chktl2kwm7hgr" path="res://entities/corrupted_bandit/sbsm.tres" id="5_aa7mm"]
 [ext_resource type="Script" path="res://other/hitbox.gd" id="5_cp8er"]
+[ext_resource type="AudioStream" uid="uid://dghtx4h6cycox" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_05.ogg" id="6_24ttf"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_86kmx"]
+[ext_resource type="AudioStream" uid="uid://dys3pmoa2oflh" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_06.ogg" id="7_d1gkl"]
+[ext_resource type="AudioStream" uid="uid://bq8cie61kop65" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_07.ogg" id="8_g8k58"]
+[ext_resource type="AudioStream" uid="uid://sni40ie1gjbs" path="res://assets/audio/Small Sword Bandir Attack/Mellee_Small_Bandit_Attack_08.ogg" id="9_2rpg0"]
+[ext_resource type="AudioStream" uid="uid://ndy4efvjbqmy" path="res://assets/audio/Tank Bandit/Tank Bandit Walk/Tank_Bandit_Heavy_Walk_04.ogg" id="16_jw5se"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1veg0"]
 radius = 13.0
@@ -81,6 +90,7 @@ script = ExtResource("1_7nvn5")
 far = 60
 near = 40
 sight_mask = 3
+sounds_attack = Array[AudioStream]([ExtResource("2_nrblk"), ExtResource("3_nln5o"), ExtResource("4_l1pwv"), ExtResource("5_0o1vj"), ExtResource("6_24ttf"), ExtResource("7_d1gkl"), ExtResource("8_g8k58"), ExtResource("9_2rpg0")])
 
 [node name="Attributes" type="Node" parent="."]
 
@@ -136,3 +146,11 @@ script = ExtResource("6_86kmx")
 position = Vector2(32, 3.9)
 shape = SubResource("RectangleShape2D_o3pti")
 disabled = true
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_jw5se")
+pitch_scale = 2.0
+bus = &"SFX"
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

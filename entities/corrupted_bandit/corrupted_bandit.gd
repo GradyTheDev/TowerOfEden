@@ -8,11 +8,14 @@ extends CharacterBody2D
 @export var near: int = 80
 @export var passive: bool = false
 @export_flags_2d_physics var sight_mask: int
+@export var sounds_attack: Array[AudioStream]
 
 @onready var anim_tree: AnimationTree = get_node("AnimTree")
 @onready var anim_player: AnimationPlayer = get_node("AnimPlayer")
 @onready var health: AttributeHealth = get_node("Attributes/Health")
 @onready var sprite: Sprite2D = get_node("Sprite")
+@onready var audio_attack = get_node("attack") as AudioStreamPlayer2D
+@onready var audio_walk = get_node("walk") as AudioStreamPlayer2D
 
 var _sight_delay: float = 0.2  # sec
 var _sight_timer: float = 0  # sec
@@ -121,6 +124,8 @@ func refresh_sight():
 
 func update_animation_parms():
 	anim_tree['parameters/conditions/walk'] = velocity.x != 0
+	if velocity.x != 0 and not audio_walk.playing:
+		audio_walk.play()
 	anim_tree['parameters/conditions/idle'] = not anim_tree['parameters/conditions/walk']
 	anim_tree['parameters/conditions/on_ground'] = air_time < 0.5
 	anim_tree['parameters/conditions/in_air'] = not anim_tree['parameters/conditions/on_ground']
@@ -138,6 +143,9 @@ func update_animation_parms():
 	if _can_hit and _attack_timer <= 0 and dis < 200:
 		_attack_timer = attack_delay
 		anim_tree['parameters/conditions/attack_forward'] = true
+		if not audio_attack.playing:
+			audio_attack.stream = sounds_attack[randi_range(0, len(sounds_attack)-1)]
+			audio_attack.play()
 	else:
 		anim_tree['parameters/conditions/attack_forward'] = false
 
