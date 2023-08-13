@@ -130,6 +130,7 @@ stream = ExtResource("3_qgigr")
 
 [node name="lightning" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_vd474")
+volume_db = -7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
