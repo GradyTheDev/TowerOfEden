@@ -31,7 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Authors" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Credits" type="TextEdit" parent="TabContainer/Authors"]
@@ -77,7 +76,9 @@ BigBellySmurf
 Honey
 
 
-
+- You can find the game at - 
+https://gradythedev.itch.io/tower-of-eden
+https://github.com/GradyTheDev/TowerOfEden
 
 "
 placeholder_text = "- Credits -
@@ -90,6 +91,7 @@ Godot licenses"
 editable = false
 
 [node name="Licenses" parent="TabContainer" instance=ExtResource("3_67sao")]
+visible = false
 layout_mode = 2
 load_locations = Array[String](["res://licenses"])
 export_locations = Array[String](["user://licenses/game/"])

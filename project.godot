@@ -14,9 +14,11 @@ config/name="Tower of Eden"
 config/description="Game for the SMVM 2023 by terraquad and 9 other amazing developers."
 run/main_scene="res://other/launcher/launcher.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/image="res://assets/other/title_splash_screen .png"
+boot_splash/fullsize=false
+config/icon="res://assets/other/title.png"
 config/version="v0.0.1.A"
-config/build_date="Running inside Editor"
+config/build_date="2023-08-13 16:22:02 UTC"
 
 [audio]
 
