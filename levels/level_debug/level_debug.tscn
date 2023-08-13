@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://other/portal.gd" id="3_88k48"]
 [ext_resource type="Texture2D" uid="uid://dr8y7023tv2dk" path="res://icon.svg" id="4_fvn3u"]
 [ext_resource type="Texture2D" uid="uid://7cw0xt8ufxu8" path="res://assets/other/door.png" id="4_ydhcq"]
-[ext_resource type="PackedScene" uid="uid://du248qvl7jubl" path="res://entities/player/player.tscn" id="5_8q741"]
 [ext_resource type="Script" path="res://attacks/attack_basic.gd" id="6_u744n"]
 [ext_resource type="Script" path="res://attacks/attack_basic_projectile.gd" id="6_ybr3q"]
 [ext_resource type="Texture2D" uid="uid://dtb5sak2qiok0" path="res://assets/other/arrow.png" id="7_riat4"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://glxdm1e2vpr4" path="res://entities/corrupted_bandit/corrupted_bandit.tscn" id="10_wni41"]
 [ext_resource type="PackedScene" uid="uid://c6qv07kj57ou6" path="res://entities/bandit/bandit.tscn" id="11_khnkn"]
 [ext_resource type="PackedScene" uid="uid://ctsouf77tvm1d" path="res://entities/punching_bag/punching_bag.tscn" id="12_2vsm0"]
+[ext_resource type="PackedScene" uid="uid://dcoddllyirird" path="res://entities/player/PlayerVersion2/V2player.tscn" id="13_sbftq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcovx"]
 size = Vector2(96, 132)
@@ -170,8 +170,8 @@ position = Vector2(-1314, -48)
 collision_layer = 5
 enable_collision = true
 
-[node name="Player" parent="." instance=ExtResource("5_8q741")]
-position = Vector2(984, -242)
+[node name="V2_Player" parent="." instance=ExtResource("13_sbftq")]
+position = Vector2(12, -265)
 
 [connection signal="pressed" from="debug_ui/hurt" to="." method="_on_hurt_pressed"]
 [connection signal="pressed" from="debug_ui/heal" to="." method="_on_heal_pressed"]
