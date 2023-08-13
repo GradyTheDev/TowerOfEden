@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LicenseLink" load_steps=2 format=3 uid="uid://cacjy18prs1bu"]
+
+[ext_resource type="Script" path="res://addons/simplelicense/api/LicenseLink.gd" id="1_52cyp"]
+
+[resource]
+script = ExtResource("1_52cyp")
+link_files = Array[Resource]([])
+link_dirs = Array[Resource]([])
+link_paths = ["res://addons/ldtk/"]
+componet_name = "Amano LDtk Importer"
+extra = ""
+license_identifier = "MIT"
+copyright = Array[String](["2022, afk"])
